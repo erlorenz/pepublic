@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "press-express-public-staging",
+    "production": "press-express-public"
+  }
+}

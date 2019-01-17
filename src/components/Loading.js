@@ -2,13 +2,11 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import Loader from 'react-loader-spinner';
 
-const Loading = () => {
-  return (
-    <Div>
-      <Loader type="Puff" color="#00BFFF" height="100" width="100" />
-    </Div>
-  );
-};
+const Loading = () => (
+  <Div>
+    <Loader type="Puff" color="#00BFFF" height="100" width="100" />
+  </Div>
+);
 
 export default Loading;
 
