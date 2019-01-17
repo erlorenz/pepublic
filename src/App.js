@@ -6,7 +6,9 @@ import Loading from './components/Loading';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components/macro';
 
+import theme from './styles/theme';
 const Order = React.lazy(() => import('./pages/Order/Order'));
 const NotFound = React.lazy(() => import('./components/NotFound'));
 
@@ -16,20 +18,22 @@ export const client = new ApolloClient({
 
 const App = () => {
   return (
-    <>
-      <ApolloProvider client={client}>
-        <GlobalStyle />
-        <BrowserRouter>
-          <Suspense fallback={<Loading />}>
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route path="/order" render={props => <Order {...props} />} />
-              <Route render={props => <NotFound {...props} />} />
-            </Switch>
-          </Suspense>
-        </BrowserRouter>
-      </ApolloProvider>
-    </>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <>
+          <GlobalStyle />
+          <BrowserRouter>
+            <Suspense fallback={<Loading />}>
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route path="/order" render={props => <Order {...props} />} />
+                <Route render={props => <NotFound {...props} />} />
+              </Switch>
+            </Suspense>
+          </BrowserRouter>
+        </>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 };
 

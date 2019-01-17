@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components/macro';
 import styledSanitize from 'styled-sanitize';
-import theme from '../styles/theme';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -16,7 +15,7 @@ ul
   font-weight: normal;
   font-family: "Open Sans", "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: ${theme.textColor};
+  color: ${({ theme }) => theme.textColor};
 }
 
 button,

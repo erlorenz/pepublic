@@ -1,19 +1,19 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Loading from '../../components/Loading';
 import NotFound from '../../components/NotFound';
 import Schedule from '../Schedule/Schedule';
+import Topbar from './Topbar';
 
 const Order = () => {
   return (
-    <Suspense fallback={<Loading />}>
-      <div>TOPBAR HERE</div>
+    <>
+      <Topbar />
       <Switch>
         <Route exact path="/order/schedule" component={Schedule} />
         <Route component={NotFound} />
       </Switch>
-    </Suspense>
+    </>
   );
 };
 
