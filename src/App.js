@@ -3,8 +3,6 @@ import GlobalStyle from './styles/GlobalStyle';
 import Landing from './pages/Landing/Landing';
 import { Switch, Route } from 'react-router-dom';
 import Loading from './components/Loading';
-import { ThemeProvider } from 'styled-components/macro';
-import theme from './styles/theme';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import { BrowserRouter } from 'react-router-dom';
@@ -22,7 +20,7 @@ const App = () => {
       <ApolloProvider client={client}>
         <GlobalStyle />
         <BrowserRouter>
-          <Suspense fallback={Loading}>
+          <Suspense fallback={<Loading />}>
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route path="/order" render={props => <Order {...props} />} />

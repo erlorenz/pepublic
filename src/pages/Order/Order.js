@@ -7,7 +7,7 @@ import Schedule from '../Schedule/Schedule';
 
 const Order = () => {
   return (
-    <Suspense fallback={Loading}>
+    <Suspense fallback={<Loading />}>
       <div>TOPBAR HERE</div>
       <Switch>
         <Route exact path="/order/schedule" component={Schedule} />
