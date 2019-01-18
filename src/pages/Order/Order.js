@@ -6,7 +6,7 @@ import { StripeProvider } from 'react-stripe-elements';
 import NotFound from '../../components/NotFound';
 import Schedule from '../Schedule/Schedule';
 import Garments from '../Garments/Garments';
-import Checkout from '../Checkout/Checkout';
+import Final from '../Checkout/Checkout';
 import Success from '../Success/Success';
 import Topbar from './Topbar';
 
@@ -19,7 +19,7 @@ const Order = () => {
         <Switch>
           <Route exact path="/order/schedule" component={Schedule} />
           <Route exact path="/order/garments" component={Garments} />
-          <Route exact path="/order/checkout" render={Checkout} />
+          <Route exact path="/order/checkout" component={Final} />
           <Route exact path="/order/success" component={Success} />
           <Route component={NotFound} />
         </Switch>
@@ -43,6 +43,7 @@ const Main = styled.main`
   width: 100%;
   min-height: 100vh;
   padding: 1rem;
+  background-color: ${props => props.theme.backgroundColor};
 
   @media (min-width: 1000px) {
     padding: 1.8rem;
