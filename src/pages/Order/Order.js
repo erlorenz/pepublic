@@ -6,7 +6,7 @@ import { StripeProvider } from 'react-stripe-elements';
 import NotFound from '../../components/NotFound';
 import Schedule from '../Schedule/Schedule';
 import Garments from '../Garments/Garments';
-import Final from '../Checkout/Checkout';
+import Final from '../Final/Final';
 import Success from '../Success/Success';
 import Topbar from './Topbar';
 
@@ -19,7 +19,7 @@ const Order = () => {
         <Switch>
           <Route exact path="/order/schedule" component={Schedule} />
           <Route exact path="/order/garments" component={Garments} />
-          <Route exact path="/order/checkout" component={Final} />
+          <Route exact path="/order/final" component={Final} />
           <Route exact path="/order/success" component={Success} />
           <Route component={NotFound} />
         </Switch>
