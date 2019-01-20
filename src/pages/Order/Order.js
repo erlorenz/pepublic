@@ -16,13 +16,15 @@ const Order = () => {
       <Topbar />
       <Spacer />
       <Main>
-        <Switch>
-          <Route exact path="/order/schedule" component={Schedule} />
-          <Route exact path="/order/garments" component={Garments} />
-          <Route exact path="/order/final" component={Final} />
-          <Route exact path="/order/success" component={Success} />
-          <Route component={NotFound} />
-        </Switch>
+        <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
+          <Switch>
+            <Route exact path="/order/schedule" component={Schedule} />
+            <Route exact path="/order/garments" component={Garments} />
+            <Route exact path="/order/final" component={Final} />
+            <Route exact path="/order/success" component={Success} />
+            <Route component={NotFound} />
+          </Switch>
+        </StripeProvider>
       </Main>
     </>
   );
