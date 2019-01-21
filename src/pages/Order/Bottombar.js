@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import styled from 'styled-components/macro';
 import { Button } from '../../components/UI';
 import { GarmentsContext } from '../../contexts/Garments';
-import { darken } from 'polished';
 
 const Bottombar = ({ location, history }) => {
   const garmentsContext = useContext(GarmentsContext);
