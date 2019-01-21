@@ -59,6 +59,7 @@ const ForwardAndBack = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top: 1px solid rgb(236, 239, 245);
 
   @media (min-width: 1000px) {
     height: 6rem;

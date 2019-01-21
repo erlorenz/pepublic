@@ -1,17 +1,10 @@
 import React from 'react';
-import styled from 'styled-components/macro';
 import Loader from 'react-loader-spinner';
 
-const Loading = () => (
-  <Div>
+const Loading = ({ className }) => (
+  <div className={className}>
     <Loader type="Puff" color="#00BFFF" height="100" width="100" />
-  </Div>
+  </div>
 );
 
 export default Loading;
-
-const Div = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;

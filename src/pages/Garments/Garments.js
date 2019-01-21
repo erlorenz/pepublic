@@ -7,13 +7,17 @@ import Loading from '../../components/Loading';
 import GarmentList from './GarmentList';
 import GarmentChoice from './GarmentChoice';
 import { PageTitle, PageInstructions } from '../../components/UI';
+import MessageBox from '../../components/MessageBox';
 
 const Garments = () => {
   return (
     <Query query={GET_GARMENTS}>
       {({ loading, error, data }) => {
-        if (loading) return <Loading />;
-        if (error) return <p>error</p>;
+        if (loading) return <StyledLoading />;
+        if (error)
+          return (
+            <Box>We're experiencing issues with the server right now.</Box>
+          );
         return (
           <>
             <PageTitle>Garments Page</PageTitle>
@@ -42,4 +46,14 @@ const Row = styled.div`
     flex-direction: row;
     align-items: flex-start;
   }
+`;
+
+const StyledLoading = styled(Loading)`
+  display: flex;
+  justify-content: center;
+  margin-top: 11rem;
+`;
+
+const Box = styled(MessageBox)`
+  margin-top: 10rem;
 `;
