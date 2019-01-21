@@ -15,7 +15,7 @@ import Bottombar from './Bottombar';
 const Order = props => {
   return (
     <>
-      <Topbar />
+      <Topbar location={props.location} />
       <Main>
         <GarmentsProvider>
           <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>

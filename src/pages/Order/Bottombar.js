@@ -92,8 +92,9 @@ const ForwardButton = styled(Button)`
 `;
 
 const BackButton = styled(Button)`
-  background-color: #0000000d;
-  color: ${props => props.theme.textColor};
+  background-color: transparent;
+  color: ${props => props.theme.buttonColor};
+  border: 1px solid ${props => props.theme.buttonColor};
 
   :hover {
     background-color: #00000012;

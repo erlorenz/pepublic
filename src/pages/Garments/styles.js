@@ -5,7 +5,7 @@ export const GarmentItem = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0.3rem 0;
+  padding: 0.4rem 0;
   cursor: pointer;
 
   :last-child {
