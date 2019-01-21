@@ -46,6 +46,8 @@ const Arrow = styled.span`
 
 const Text = styled.span`
   display: none;
+  font-weight: 600;
+  font-size: 0.9rem;
   color: ${props => (props.active ? props.theme.buttonColor : null)};
 
   @media (min-width: 1000px) {
