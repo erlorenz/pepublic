@@ -37,9 +37,11 @@ const Bottombar = ({ location, history }) => {
   return (
     <ForwardAndBack>
       <Container>
-        <BackButton onClick={goBack}>Back</BackButton>
+        <BackButton onClick={goBack}>
+          <SpanLeft>{'<'}</SpanLeft>Back
+        </BackButton>
         <ForwardButton onClick={goNext} disabled={disabled}>
-          Continue
+          Next <SpanRight>></SpanRight>
         </ForwardButton>
       </Container>
     </ForwardAndBack>
@@ -96,4 +98,12 @@ const BackButton = styled(Button)`
   :hover {
     background-color: #00000012;
   }
+`;
+
+const SpanLeft = styled.span`
+  margin-right: 0.6rem;
+`;
+
+const SpanRight = styled.span`
+  margin-left: 0.6rem;
 `;
