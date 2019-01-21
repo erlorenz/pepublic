@@ -6,6 +6,7 @@ import GET_GARMENTS from '../../queries/getGarments';
 import Loading from '../../components/Loading';
 import GarmentList from './GarmentList';
 import GarmentChoice from './GarmentChoice';
+import { PageTitle, PageInstructions } from '../../components/UI';
 
 const Garments = () => {
   return (
@@ -15,7 +16,10 @@ const Garments = () => {
         if (error) return <p>error</p>;
         return (
           <>
-            <h1>Garments Page</h1>
+            <PageTitle>Garments Page</PageTitle>
+            <PageInstructions>
+              Here are the instructions. Click on an item to add 1 garment.
+            </PageInstructions>
             <Row>
               <GarmentList data={data} />
               <GarmentChoice />
@@ -32,8 +36,10 @@ export default Garments;
 const Row = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 2rem;
 
   @media (min-width: 1000px) {
     flex-direction: row;
+    align-items: flex-start;
   }
 `;

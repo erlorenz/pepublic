@@ -9,37 +9,32 @@ import Garments from '../Garments/Garments';
 import Final from '../Final/Final';
 import Success from '../Success/Success';
 import Topbar from './Topbar';
+import { GarmentsProvider } from '../../contexts/Garments';
+import Bottombar from './Bottombar';
 
-const Order = () => {
+const Order = props => {
   return (
     <>
       <Topbar />
-      <Spacer />
       <Main>
-        <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
-          <Switch>
-            <Route exact path="/order/schedule" component={Schedule} />
-            <Route exact path="/order/garments" component={Garments} />
-            <Route exact path="/order/final" component={Final} />
-            <Route exact path="/order/success" component={Success} />
-            <Route component={NotFound} />
-          </Switch>
-        </StripeProvider>
+        <GarmentsProvider>
+          <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
+            <Switch>
+              <Route exact path="/order/schedule" component={Schedule} />
+              <Route exact path="/order/garments" component={Garments} />
+              <Route exact path="/order/final" component={Final} />
+              <Route exact path="/order/success" component={Success} />
+              <Route component={NotFound} />
+            </Switch>
+          </StripeProvider>
+          <Bottombar {...props} />
+        </GarmentsProvider>
       </Main>
     </>
   );
 };
 
 export default Order;
-
-const Spacer = styled.div`
-  width: 100%;
-  height: 3rem;
-
-  @media (min-width: 1000px) {
-    height: 4rem;
-  }
-`;
 
 const Main = styled.main`
   width: 100%;
