@@ -11,27 +11,25 @@ import MessageBox from '../../components/MessageBox';
 
 const Garments = () => {
   return (
-    <Query query={GET_GARMENTS}>
-      {({ loading, error, data }) => {
-        if (loading) return <StyledLoading />;
-        if (error)
-          return (
-            <Box>We're experiencing issues with the server right now.</Box>
-          );
-        return (
-          <>
-            <PageTitle>Garments Page</PageTitle>
-            <PageInstructions>
-              Here are the instructions. Click on an item to add 1 garment.
-            </PageInstructions>
-            <Row>
-              <GarmentList data={data} />
-              <GarmentChoice />
-            </Row>
-          </>
-        );
-      }}
-    </Query>
+    <>
+      <PageTitle>Garments Page</PageTitle>
+      <PageInstructions>
+        Here are the instructions. Click on an item to add 1 garment.
+      </PageInstructions>
+      <Row>
+        <Query query={GET_GARMENTS}>
+          {({ loading, error, data }) => {
+            if (loading) return <StyledLoading />;
+            if (error)
+              return (
+                <Box>We're experiencing issues with the server right now.</Box>
+              );
+            return <GarmentList data={data} />;
+          }}
+        </Query>
+        <GarmentChoice />
+      </Row>
+    </>
   );
 };
 
@@ -51,9 +49,32 @@ const Row = styled.div`
 const StyledLoading = styled(Loading)`
   display: flex;
   justify-content: center;
-  margin-top: 11rem;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: white;
+  min-height: 300px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 95px -30px;
+
+  @media (min-width: 1000px) {
+    margin-right: 1.8rem;
+    padding: 1.8rem;
+  }
 `;
 
 const Box = styled(MessageBox)`
-  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 95px -30px;
+
+  @media (min-width: 1000px) {
+    margin-right: 1.8rem;
+    padding: 1.8rem;
+  }
 `;

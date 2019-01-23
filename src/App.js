@@ -5,8 +5,9 @@ import { Switch, Route } from 'react-router-dom';
 import Loading from './components/Loading';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
-import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components/macro';
+import posed, { PoseGroup } from 'react-pose';
+import styled from 'styled-components/macro';
 
 import theme from './styles/theme';
 const Order = React.lazy(() => import('./pages/Order/Order'));
@@ -16,21 +17,23 @@ export const client = new ApolloClient({
   uri: process.env.REACT_APP_API_URL,
 });
 
-const App = () => {
+const App = ({ location }) => {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
         <>
           <GlobalStyle />
-          <BrowserRouter>
-            <Suspense fallback={<Loading />}>
-              <Switch>
-                <Route exact path="/" component={Landing} />
-                <Route path="/order" render={props => <Order {...props} />} />
-                <Route render={props => <NotFound {...props} />} />
-              </Switch>
-            </Suspense>
-          </BrowserRouter>
+          <Suspense fallback={<CenterLoading />}>
+            <Switch location={location}>
+              <Route exact path="/" component={Landing} key="1" />
+              <Route
+                path="/order"
+                render={props => <Order {...props} />}
+                key="2"
+              />
+              <Route render={props => <NotFound {...props} />} key="3" />
+            </Switch>
+          </Suspense>
         </>
       </ThemeProvider>
     </ApolloProvider>
@@ -38,3 +41,13 @@ const App = () => {
 };
 
 export default App;
+
+const CenterLoading = styled(Loading)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+`;

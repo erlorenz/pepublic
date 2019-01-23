@@ -11,21 +11,44 @@ import Success from '../Success/Success';
 import Topbar from './Topbar';
 import { GarmentsProvider } from '../../contexts/Garments';
 import Bottombar from './Bottombar';
+import posed from 'react-pose';
 
 const Order = props => {
+  const RoutesContainer = posed.div({
+    enter: { opacity: 1, delay: 2000 },
+    exit: { opacity: 0, delay: 3000 },
+  });
+
   return (
     <>
       <Topbar location={props.location} />
       <Main>
         <GarmentsProvider>
           <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
-            <Switch>
-              <Route exact path="/order/schedule" component={Schedule} />
-              <Route exact path="/order/garments" component={Garments} />
-              <Route exact path="/order/final" component={Final} />
-              <Route exact path="/order/success" component={Success} />
-              <Route component={NotFound} />
-            </Switch>
+            <RoutesContainer key={props.location.key}>
+              <Switch location={props.location}>
+                <Route
+                  exact
+                  path="/order/schedule"
+                  component={Schedule}
+                  key="1"
+                />
+                <Route
+                  exact
+                  path="/order/garments"
+                  component={Garments}
+                  key="2"
+                />
+                <Route exact path="/order/final" component={Final} key="3" />
+                <Route
+                  exact
+                  path="/order/success"
+                  component={Success}
+                  key="4"
+                />
+                <Route component={NotFound} key="5" />
+              </Switch>
+            </RoutesContainer>
           </StripeProvider>
           <Bottombar {...props} />
         </GarmentsProvider>
