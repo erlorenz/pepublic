@@ -55,6 +55,7 @@ export default GarmentChoice;
 
 const Container = styled(Card)`
   width: 100%;
+  font-size: ${props => props.theme.listFontSize};
   justify-content: space-between;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 95px -30px;
 `;

@@ -50,4 +50,7 @@ const CenterLoading = styled(Loading)`
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
+  height: 100%;
+  width: 100%;
+  background: ${props => props.theme.backgroundColor};
 `;

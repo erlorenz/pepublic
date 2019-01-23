@@ -5,7 +5,7 @@ const Landing = () => {
   return (
     <div>
       LANDING PAGE
-      <Link to="/order/schedule">Schedule Now</Link>
+      <Link to="/order/sdf">Schedule Now</Link>
     </div>
   );
 };

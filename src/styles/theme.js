@@ -11,6 +11,7 @@ const theme = {
   errorColor: '#ff3860',
   errorBackgroundColor: '#e4c6cc',
   borderWidth: '1px',
+  listFontSize: '0.9rem',
 };
 
 export default theme;

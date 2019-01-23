@@ -11,7 +11,7 @@ import Success from '../Success/Success';
 import Topbar from './Topbar';
 import { GarmentsProvider } from '../../contexts/Garments';
 import Bottombar from './Bottombar';
-import posed from 'react-pose';
+import posed, { PoseGroup } from 'react-pose';
 
 const Order = props => {
   const RoutesContainer = posed.div({
@@ -21,45 +21,31 @@ const Order = props => {
 
   return (
     <>
-      <Topbar location={props.location} />
-      <Main>
-        <GarmentsProvider>
-          <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
-            <RoutesContainer key={props.location.key}>
-              <Switch location={props.location}>
-                <Route
-                  exact
-                  path="/order/schedule"
-                  component={Schedule}
-                  key="1"
-                />
-                <Route
-                  exact
-                  path="/order/garments"
-                  component={Garments}
-                  key="2"
-                />
-                <Route exact path="/order/final" component={Final} key="3" />
-                <Route
-                  exact
-                  path="/order/success"
-                  component={Success}
-                  key="4"
-                />
-                <Route component={NotFound} key="5" />
-              </Switch>
-            </RoutesContainer>
-          </StripeProvider>
-          <Bottombar {...props} />
-        </GarmentsProvider>
-      </Main>
+      <GarmentsProvider>
+        <Topbar location={props.location} />
+        <Main>
+          <Switch location={props.location}>
+            <Route exact path="/order/schedule" component={Schedule} key="1" />
+            <Route exact path="/order/garments" component={Garments} key="2" />
+            <Route exact path="/order/final" component={Final} key="3" />
+            <Route exact path="/order/success" component={Success} key="4" />
+            <Route component={NotFound} key="5" />
+          </Switch>
+        </Main>
+        <Bottombar {...props} />
+      </GarmentsProvider>
     </>
   );
 };
 
 export default Order;
 
-const Main = styled.main`
+const PoseContainer = posed.div({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 },
+});
+
+const Main = styled(PoseContainer)`
   width: 100%;
   min-height: 100vh;
   padding: 1rem;
