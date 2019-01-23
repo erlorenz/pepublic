@@ -87,23 +87,3 @@ export const ScrollContainer = styled.div`
   overflow-x: auto;
   width: 100%;
 `;
-
-export const PageTitle = styled.h1`
-  text-align: center;
-  font-size: 2rem;
-  margin: 1rem 0 0.5rem 0;
-  color: ${props => darken(0.1, props.theme.textColor)};
-  font-weight: 700;
-`;
-
-export const PageInstructions = styled.h2`
-  text-align: center;
-  font-size: 1rem;
-  margin: 0;
-  margin-bottom: 1.5rem;
-  font-weight: 400;
-
-  @media (min-width: 1000px) {
-    margin-bottom: 2rem;
-  }
-`;

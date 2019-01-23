@@ -68,8 +68,8 @@ const TotalPrice = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  font-weight: 600;
-  margin-top: 1.8rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
   padding-top: 0.2rem;
   border-top: solid 1px lightgray;
 `;

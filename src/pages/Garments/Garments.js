@@ -6,13 +6,14 @@ import GET_GARMENTS from '../../queries/getGarments';
 import Loading from '../../components/Loading';
 import GarmentList from './GarmentList';
 import GarmentChoice from './GarmentChoice';
-import { PageTitle, PageInstructions } from '../../components/UI';
 import MessageBox from '../../components/MessageBox';
+import PageTitle from '../../components/PageTitle';
+import PageInstructions from '../../components/PageInstructions';
 
 const Garments = () => {
   return (
     <>
-      <PageTitle>Garments Page</PageTitle>
+      <PageTitle>What are we doing for you?</PageTitle>
       <PageInstructions>
         Here are the instructions. Click on an item to add 1 garment.
       </PageInstructions>
