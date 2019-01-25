@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import styled from 'styled-components/macro';
 import { Button } from '../../components/UI';
 import { GarmentsContext } from '../../contexts/Garments';
+import { ScheduleContext } from '../../contexts/Schedule';
 
 const Bottombar = ({ location, history }) => {
   const garmentsContext = useContext(GarmentsContext);
-  //   const scheduleContext = useContext(ScheduleContext);
+  const scheduleContext = useContext(ScheduleContext);
 
   if (location.pathname === '/order/final') return null;
 
@@ -31,20 +32,23 @@ const Bottombar = ({ location, history }) => {
   if (location.pathname === '/order/review') {
     backLocation = '/order/garments';
     nextLocation = '/order/final';
-    //   disabled = scheduleContext.
+    //   disabled = !scheduleContext.complete
   }
 
   return (
-    <ForwardAndBack>
-      <Container>
-        <BackButton onClick={goBack}>
-          <SpanLeft>{'<'}</SpanLeft>Back
-        </BackButton>
-        <ForwardButton onClick={goNext} disabled={disabled}>
-          Next <SpanRight>></SpanRight>
-        </ForwardButton>
-      </Container>
-    </ForwardAndBack>
+    <>
+      <ForwardAndBack>
+        <Container>
+          <BackButton onClick={goBack}>
+            <SpanLeft>{'<'}</SpanLeft>Back
+          </BackButton>
+          <ForwardButton onClick={goNext} disabled={disabled}>
+            Next <SpanRight>></SpanRight>
+          </ForwardButton>
+        </Container>
+      </ForwardAndBack>
+      <Spacer />
+    </>
   );
 };
 
@@ -107,4 +111,13 @@ const SpanLeft = styled.span`
 
 const SpanRight = styled.span`
   margin-left: 0.6rem;
+`;
+
+const Spacer = styled.div`
+  width: 100%;
+  height: 5rem;
+
+  @media (min-width: 1000px) {
+    height: 6rem;
+  }
 `;

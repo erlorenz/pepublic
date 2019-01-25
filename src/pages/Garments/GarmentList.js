@@ -3,22 +3,21 @@ import { Card } from '../../components/UI';
 import styled from 'styled-components/macro';
 import formatPrice from '../../utils/formatPrice';
 import { GarmentsContext } from '../../contexts/Garments';
-import { GarmentHeader, GarmentItem } from './styles';
+import { GarmentHeader } from './styles';
+import priceList from '../../priceList';
+import GarmentListItem from './GarmentListItem';
 
-const GarmentList = ({ data }) => {
-  const { getGarments } = data;
+const GarmentList = () => {
   const context = useContext(GarmentsContext);
 
-  const addGarmentHandler = garment => () => context.addGarment(garment);
-
-  const garmentItems = getGarments.map(garment => (
-    <GarmentItem key={garment.id} onClick={addGarmentHandler(garment)}>
-      <Div1>{garment.description}</Div1>{' '}
+  const garmentItems = priceList.map(garment => (
+    <GarmentListItem list={true} key={garment.id} garment={garment}>
+      <Div1>{garment.description}</Div1>
       <Div2>
         <span>$</span>
         {formatPrice(garment.price)}
       </Div2>
-    </GarmentItem>
+    </GarmentListItem>
   ));
 
   return (

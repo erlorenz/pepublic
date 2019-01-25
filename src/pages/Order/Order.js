@@ -12,6 +12,7 @@ import Topbar from './Topbar';
 import { GarmentsProvider } from '../../contexts/Garments';
 import Bottombar from './Bottombar';
 import posed, { PoseGroup } from 'react-pose';
+import { ScheduleProvider } from '../../contexts/Schedule';
 
 const Order = props => {
   const RoutesContainer = posed.div({
@@ -21,19 +22,31 @@ const Order = props => {
 
   return (
     <>
-      <GarmentsProvider>
-        <Topbar location={props.location} />
-        <Main>
-          <Switch location={props.location}>
-            <Route exact path="/order/schedule" component={Schedule} key="1" />
-            <Route exact path="/order/garments" component={Garments} key="2" />
-            <Route exact path="/order/final" component={Final} key="3" />
-            <Route exact path="/order/success" component={Success} key="4" />
-            <Route component={NotFound} key="5" />
-          </Switch>
-        </Main>
-        <Bottombar {...props} />
-      </GarmentsProvider>
+      <ScheduleProvider>
+        <GarmentsProvider>
+          <Topbar location={props.location} />
+          <Main>
+            <Switch location={props.location}>
+              <Route
+                exact
+                path="/order/schedule"
+                component={Schedule}
+                key="1"
+              />
+              <Route
+                exact
+                path="/order/garments"
+                component={Garments}
+                key="2"
+              />
+              <Route exact path="/order/final" component={Final} key="3" />
+              <Route exact path="/order/success" component={Success} key="4" />
+              <Route component={NotFound} key="5" />
+            </Switch>
+          </Main>
+          <Bottombar {...props} />
+        </GarmentsProvider>
+      </ScheduleProvider>
     </>
   );
 };

@@ -64,6 +64,7 @@ const Div = styled.div`
   width: 100vw;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 
   @media (min-width: 1000px) {
     height: 5rem;

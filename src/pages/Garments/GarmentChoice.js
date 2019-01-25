@@ -4,7 +4,8 @@ import styled from 'styled-components/macro';
 import { GarmentsContext } from '../../contexts/Garments';
 import { Card } from '../../components/UI';
 import formatPrice from '../../utils/formatPrice';
-import { GarmentHeader, GarmentItem } from './styles';
+import { GarmentHeader } from './styles';
+import { darken } from 'polished';
 
 const GarmentChoice = () => {
   const context = useContext(GarmentsContext);
@@ -12,14 +13,14 @@ const GarmentChoice = () => {
   const removeGarmentHandler = garment => () => context.removeGarment(garment);
 
   const garmentList = context.garments.map(garment => (
-    <GarmentItem key={garment.id} onClick={removeGarmentHandler(garment)}>
+    <Item key={garment.id} onClick={removeGarmentHandler(garment)}>
       <Div1>{garment.description}</Div1>
       <Div2>{garment.quantity}</Div2>
       <Div3>
         <span>$</span>
         {formatPrice(garment.quantity * garment.price)}
       </Div3>
-    </GarmentItem>
+    </Item>
   ));
 
   if (context.garments.length) {
@@ -105,4 +106,17 @@ const Price = styled.span`
   display: flex;
   width: 60px;
   justify-content: space-between;
+`;
+
+const Item = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  position: relative;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${darken(0.05, '#FFF')};
+  }
 `;
