@@ -1,56 +1,89 @@
-import { darken } from 'polished';
-import React from 'react';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import React, { useContext } from 'react';
 import styled from 'styled-components/macro';
+import { ReactComponent as CheckedRadio } from '../../assets/img/checkedradio.svg';
+import { ReactComponent as UncheckedRadio } from '../../assets/img/uncheckedradio.svg';
+import { ScheduleContext } from '../../contexts/Schedule';
+import {
+  Control,
+  Fieldset,
+  Help,
+  Icon,
+  Label,
+  RadioInput,
+  RadioLabel,
+} from './FieldGroupStyles';
 
-const DoubleRadio = () => {
+const DoubleRadio = ({
+  children,
+  label,
+  name,
+  val1,
+  val2,
+  single,
+  ...props
+}) => {
+  const { formikProps, values } = useContext(ScheduleContext);
+  const { errors, touched, handleChange, handleBlur } = formikProps;
+
+  const errorMessage = touched[name] && errors[name] ? errors[name] : '';
+  const icon =
+    touched[name] && errors[name] ? <Icon icon={faExclamationCircle} /> : '';
+
+  const checked1 = values[name] === val1.toString();
+  const checked2 = values[name] === val2.toString();
+
   return (
-    <Div>
-      <LeftRadio />
-      <RightRadio />
-    </Div>
+    <Fieldset>
+      {label && <Label>{label}</Label>}
+      <Control>
+        <FlexContainer>
+          <RadioLabel checked={checked1} left>
+            {checked1 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
+            {val1}
+            <RadioInput
+              name={name}
+              type="radio"
+              value={val1}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </RadioLabel>
+          {!single && (
+            <RadioLabel checked={checked2}>
+              {checked2 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
+              {val2}
+              <RadioInput
+                name={name}
+                type="radio"
+                value={val2}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </RadioLabel>
+          )}
+        </FlexContainer>
+      </Control>
+      <Help>
+        {icon}
+        {errorMessage}
+      </Help>
+    </Fieldset>
   );
 };
 
 export default DoubleRadio;
 
-const borderSize = '1px';
-const errorColor = '#ff3860';
-const borderColor = '#dbdbdb';
-const focusedBorderColor = '#389ac9';
-const focusedBoxShadow = '0 0 0 0.125em rgba(50,115,220,.25)';
-const errorBoxShadow = '0 0 0 0.125em rgba(255,56,96,.25)';
-
-const Div = styled.div`
+const FlexContainer = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
 `;
 
-const RightRadio = styled.div`
-  border: ${borderSize} solid
-    ${props => (props.error ? errorColor : borderColor)};
-  background-color: white;
-  color: inherit;
-  padding: calc(0.8rem - 1px) 1rem;
-  font-size: 0.9rem;
-  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
-  font-family: inherit;
-  width: 100%;
-  max-width: 100%;
-
-  @media (min-width: 450px) {
-    font-size: 1rem;
-  }
-  :hover {
-    border: ${borderSize} solid ${darken(0.1, borderColor)};
-  }
-
-  :focus {
-    border: ${borderSize} solid
-      ${props => (props.error ? errorColor : focusedBorderColor)};
-    outline: none;
-    box-shadow: ${props => (props.error ? errorBoxShadow : focusedBoxShadow)};
-  }
+const StyledCheckedRadio = styled(CheckedRadio)`
+  margin-right: 1rem;
 `;
 
-const LeftRadio = styled(RightRadio)`
+const StyledUncheckedRadio = styled(UncheckedRadio)`
   margin-right: 1rem;
 `;

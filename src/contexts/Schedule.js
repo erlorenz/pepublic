@@ -36,25 +36,18 @@ export const ScheduleProvider = ({ children, history }) => {
     room: Yup.string().required('Please choose a room.'),
   });
 
-  const enhancedChildren = (submitForm, isSubmitting) =>
-    React.Children.map(children, child => {
-      return React.cloneElement(child, {
-        submitScheduleForm: submitForm,
-        isSubmittingScheduleForm: isSubmitting,
-      });
-    });
-
   return (
     <Formik
       initialValues={initialState}
       validationSchema={schema}
       onSubmit={handleSubmit}>
-      {({ submitForm, values }) => (
+      {({ submitForm, values, ...formikProps }) => (
         <ScheduleContext.Provider
           value={{
             schedule,
             submitForm,
             values,
+            formikProps,
           }}>
           {children}
         </ScheduleContext.Provider>

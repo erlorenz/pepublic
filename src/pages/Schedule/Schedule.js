@@ -1,12 +1,28 @@
+import dayjs from 'dayjs';
 import { Field, Form } from 'formik';
 import React from 'react';
 import posed, { PoseGroup } from 'react-pose';
 import styled from 'styled-components/macro';
+import DoubleRadio from '../../components/FieldGroup/DoubleRadio';
 import FieldGroup from '../../components/FieldGroup/FieldGroup';
 import PageInstructions from '../../components/PageInstructions';
 import PageTitle from '../../components/PageTitle';
 import Bottombar from '../Order/Bottombar';
 import hotels from './hotels';
+
+const date1 = dayjs(Date.now()).date();
+
+const date2 = dayjs(Date.now())
+  .add(1, 'day')
+  .date();
+
+const date3 = dayjs(Date.now())
+  .add(1, 'day')
+  .date();
+
+const date4 = dayjs(Date.now())
+  .add(2, 'day')
+  .date();
 
 const Schedule = props => {
   return (
@@ -20,11 +36,20 @@ const Schedule = props => {
         <StyledForm>
           <PoseGroup>
             <Div key="1">
-              <Field component={FieldGroup} name="pickupDate" doubleRadio />
-              <Field component={FieldGroup} name="pickupTime" radio />
+              <DoubleRadio
+                val1={date1}
+                val2={date2}
+                label="Pickup Date"
+                name="pickupDate"
+              />
             </Div>
             <Div key="2">
-              <Field component={FieldGroup} name="returnDate" doubleRadio />
+              <DoubleRadio
+                val1={date3}
+                val2={date4}
+                label="Return Date"
+                name="returnDate"
+              />
               <Field component={FieldGroup} name="returnTime" radio />
             </Div>
             <Div key="3">

@@ -1,5 +1,6 @@
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
+import styled from 'styled-components/macro';
 import {
   Control,
   Fieldset,
@@ -19,7 +20,6 @@ const FieldGroup = ({ field, form, children, ...props }) => {
     textarea = false,
     select = false,
     doubleRadio = false,
-    radio = false,
   } = props;
 
   let element = (
@@ -44,12 +44,14 @@ const FieldGroup = ({ field, form, children, ...props }) => {
     element = (
       <Select
         as="select"
-        error={touched[name] && errors[name] ? 'true' : undefined}
+        error={touched[name] && errors[name] ? true : undefined}
         {...field}
         {...props}>
         {children}
       </Select>
     );
+
+  if (doubleRadio) element = <FlexContainer>{children}</FlexContainer>;
 
   const errorMessage = touched[name] && errors[name] ? errors[name] : '';
   const icon =
@@ -68,3 +70,9 @@ const FieldGroup = ({ field, form, children, ...props }) => {
 };
 
 export default FieldGroup;
+
+const FlexContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+`;
