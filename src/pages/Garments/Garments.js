@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import Bottombar from '../../components/Bottombar';
 // import MessageBox from '../../components/MessageBox';
 import PageInstructions from '../../components/PageInstructions';
 import PageTitle from '../../components/PageTitle';
-import Bottombar from '../Order/Bottombar';
 import GarmentChoice from './GarmentChoice';
 // import GET_GARMENTS from '../../queries/getGarments';
 // import Loading from '../../components/Loading';

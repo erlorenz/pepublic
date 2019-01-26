@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components/macro';
-import { Button } from '../../components/UI';
-import { GarmentsContext } from '../../contexts/Garments';
-import { ScheduleContext } from '../../contexts/Schedule';
+import { GarmentsContext } from '../contexts/Garments';
+import { ScheduleContext } from '../contexts/Schedule';
+import { Button } from './UI';
 
 const Bottombar = ({ history, garments, schedule, review, final }) => {
   const garmentsContext = useContext(GarmentsContext);
@@ -16,9 +16,9 @@ const Bottombar = ({ history, garments, schedule, review, final }) => {
     const incomplete = () => {
       if (
         scheduleContext.values.pickupDate &&
-        scheduleContext.values.pickupTime &&
+        scheduleContext.values.pickupHour &&
         scheduleContext.values.returnDate &&
-        scheduleContext.values.returnTime &&
+        scheduleContext.values.returnHour &&
         scheduleContext.values.hotel &&
         scheduleContext.values.room
       )

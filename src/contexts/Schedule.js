@@ -7,14 +7,14 @@ export const ScheduleContext = createContext();
 export const ScheduleProvider = ({ children, history }) => {
   const initialState = JSON.parse(localStorage.getItem('schedule')) || {
     pickupDate: '',
-    pickupTime: '',
+    pickupHour: '',
     returnDate: '',
-    returnTime: '',
+    returnHour: '',
     hotel: '',
     room: '',
   };
 
-  const [schedule, setSchedule] = useState('');
+  const [schedule, setSchedule] = useState(initialState);
 
   useEffect(() => localStorage.setItem('schedule', JSON.stringify(schedule)), [
     schedule,
@@ -29,9 +29,9 @@ export const ScheduleProvider = ({ children, history }) => {
 
   const schema = Yup.object().shape({
     pickupDate: Yup.string().required('Please choose a pickup date.'),
-    pickupTime: Yup.number().required('Please choose a pickup time.'),
+    pickupHour: Yup.number().required('Please choose a pickup time.'),
     returnDate: Yup.string().required('Please choose a return date.'),
-    returnTime: Yup.number().required('Please choose a return time.'),
+    returnHour: Yup.number().required('Please choose a return time.'),
     hotel: Yup.string().required('Please choose a hotel.'),
     room: Yup.string().required('Please choose a room.'),
   });

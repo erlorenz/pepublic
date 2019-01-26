@@ -5,7 +5,7 @@ import styled from 'styled-components/macro';
 const borderSize = '1px';
 const labelColor = '#666666';
 const errorColor = '#ff3860';
-const borderColor = '#dbdbdb';
+export const borderColor = '#dbdbdb';
 const focusedBorderColor = '#389ac9';
 const focusedBoxShadow = '0 0 0 0.125em rgba(50,115,220,.25)';
 const errorBoxShadow = '0 0 0 0.125em rgba(255,56,96,.25)';
@@ -72,6 +72,7 @@ export const Select = styled(Input)``;
 export const TextArea = styled(Input)``;
 
 export const RadioLabel = styled.label`
+  cursor: pointer;
   position: relative;
   height: 50px;
   display: block;
@@ -79,18 +80,18 @@ export const RadioLabel = styled.label`
     ${props => (props.checked ? props.theme.buttonColor : borderColor)};
   background-color: white;
   color: inherit;
-  padding: calc(0.8rem - 1px) 1rem;
   font-size: 0.9rem;
+  padding: calc(0.8rem - 1px) 1rem;
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   font-family: inherit;
   width: 100%;
   max-width: 100%;
-  margin-right: ${props => (props.left ? '1rem' : '0')};
+  margin-right: ${props => (props.left ? '.7rem' : '0')};
   box-shadow: ${props =>
-    props.checked ? '0px 0px 5px 2px ' + props.theme.buttonColor : null};
+    props.checked ? '0px 0px 2px 1px ' + props.theme.buttonColor : null};
 
   @media (min-width: 450px) {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   :hover {
     border: ${borderSize} solid ${darken(0.1, borderColor)};
