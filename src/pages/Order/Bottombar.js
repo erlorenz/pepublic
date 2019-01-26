@@ -4,32 +4,50 @@ import { Button } from '../../components/UI';
 import { GarmentsContext } from '../../contexts/Garments';
 import { ScheduleContext } from '../../contexts/Schedule';
 
-const Bottombar = ({ location, history }) => {
+const Bottombar = ({ history, garments, schedule, review, final }) => {
   const garmentsContext = useContext(GarmentsContext);
   const scheduleContext = useContext(ScheduleContext);
 
-  if (location.pathname === '/order/final') return null;
+  if (final) return null;
 
   let backLocation, nextLocation, disabled;
 
-  if (location.pathname === '/order/schedule') {
+  if (schedule) {
+    const incomplete = () => {
+      if (
+        scheduleContext.values.pickupDate &&
+        scheduleContext.values.pickupTime &&
+        scheduleContext.values.returnDate &&
+        scheduleContext.values.returnTime &&
+        scheduleContext.values.hotel &&
+        scheduleContext.values.room
+      )
+        return false;
+
+      return true;
+    };
+
     backLocation = '/';
     nextLocation = '/order/garments';
-    disabled = false;
-    console.log('Schedule Match');
+    disabled = incomplete();
   }
 
-  if (location.pathname === '/order/garments') {
+  if (garments) {
     backLocation = '/order/schedule';
     nextLocation = '/order/final';
     disabled = !garmentsContext.garments.length;
-    console.log('Garment match');
   }
 
   const goBack = () => history.push(backLocation);
-  const goNext = () => history.push(nextLocation);
+  const goNext = () => {
+    if (schedule) {
+      scheduleContext.submitForm();
+    } else {
+      history.push(nextLocation);
+    }
+  };
 
-  if (location.pathname === '/order/review') {
+  if (review) {
     backLocation = '/order/garments';
     nextLocation = '/order/final';
     //   disabled = !scheduleContext.complete
@@ -39,10 +57,10 @@ const Bottombar = ({ location, history }) => {
     <>
       <ForwardAndBack>
         <Container>
-          <BackButton onClick={goBack}>
+          <BackButton type="button" onClick={goBack}>
             <SpanLeft>{'<'}</SpanLeft>Back
           </BackButton>
-          <ForwardButton onClick={goNext} disabled={disabled}>
+          <ForwardButton type="button" onClick={goNext} disabled={disabled}>
             Next <SpanRight>></SpanRight>
           </ForwardButton>
         </Container>

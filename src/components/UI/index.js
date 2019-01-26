@@ -1,5 +1,6 @@
-import styled from 'styled-components/macro';
 import { darken } from 'polished';
+import posed from 'react-pose';
+import styled from 'styled-components/macro';
 
 /**
  * Export all basic UI elements
@@ -7,7 +8,12 @@ import { darken } from 'polished';
 
 export * from './table';
 
-export const Card = styled.div`
+const Posed = posed.div({
+  enter: { opacity: 1 },
+  exit: { opacity: 0 },
+});
+
+export const Card = styled(Posed)`
   background-color: white;
   padding: 0.9rem;
   margin-bottom: 0.9rem;

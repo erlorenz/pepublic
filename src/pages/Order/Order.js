@@ -1,18 +1,15 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import posed from 'react-pose';
+import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import { StripeProvider } from 'react-stripe-elements';
-
 import NotFound from '../../components/NotFound';
-import Schedule from '../Schedule/Schedule';
-import Garments from '../Garments/Garments';
+import { GarmentsProvider } from '../../contexts/Garments';
+import { ScheduleProvider } from '../../contexts/Schedule';
 import Final from '../Final/Final';
+import Garments from '../Garments/Garments';
+import Schedule from '../Schedule/Schedule';
 import Success from '../Success/Success';
 import Topbar from './Topbar';
-import { GarmentsProvider } from '../../contexts/Garments';
-import Bottombar from './Bottombar';
-import posed, { PoseGroup } from 'react-pose';
-import { ScheduleProvider } from '../../contexts/Schedule';
 
 const Order = props => {
   const RoutesContainer = posed.div({
@@ -22,7 +19,7 @@ const Order = props => {
 
   return (
     <>
-      <ScheduleProvider>
+      <ScheduleProvider history={props.history}>
         <GarmentsProvider>
           <Topbar location={props.location} />
           <Main>
@@ -44,7 +41,6 @@ const Order = props => {
               <Route component={NotFound} key="5" />
             </Switch>
           </Main>
-          <Bottombar {...props} />
         </GarmentsProvider>
       </ScheduleProvider>
     </>

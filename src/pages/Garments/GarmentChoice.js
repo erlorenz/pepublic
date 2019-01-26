@@ -25,9 +25,9 @@ const GarmentChoice = () => {
     );
   });
 
-  if (context.garments.length) {
+  if (context.garments.length)
     return (
-      <Container>
+      <Container key="1">
         <Selected>
           <GarmentHeader>
             <Div1>Item</Div1>
@@ -45,13 +45,13 @@ const GarmentChoice = () => {
         </TotalPrice>
       </Container>
     );
-  } else {
+
+  if (!context.garments.length)
     return (
-      <Container>
+      <Container key="2">
         <Centered>There are no items selected.</Centered>
       </Container>
     );
-  }
 };
 
 export default GarmentChoice;
@@ -61,6 +61,7 @@ const Container = styled(Card)`
   font-size: ${props => props.theme.listFontSize};
   justify-content: space-between;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 95px -30px;
+  overflow-x: visible;
 `;
 
 const Selected = styled.div`
@@ -116,9 +117,8 @@ const Price = styled.span`
 `;
 
 const posedItem = posed.div({
-  enter: { x: '0px', opacity: 1 },
-  exit: { x: '40px', opacity: 0 },
-  wiggle: { y: '15px' },
+  enter: { y: '0px', opacity: 1 },
+  exit: { y: '20px', opacity: 0 },
 });
 
 const Item = styled(posedItem)`

@@ -31,7 +31,7 @@ const GarmentListItem = ({ children, list, garment }) => {
 
   return (
     <>
-      <Div onClick={onClickHandler} disabled={disable}>
+      <Div type="button" onClick={onClickHandler} disabled={disable}>
         <PoseGroup>
           {showTooltip && [
             <Quantity pose={slide ? 'slide' : 'init'} key="q">

@@ -1,20 +1,26 @@
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import {
+  Control,
+  Fieldset,
+  Help,
   Icon,
   Input,
   Label,
-  TextArea,
   Select,
-  Fieldset,
-  Help,
-  Control,
+  TextArea,
 } from './FieldGroupStyles';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
-const FieldGroup = ({ field, form, ...props }) => {
+const FieldGroup = ({ field, form, children, ...props }) => {
   const { touched, errors } = form;
   const { name } = field;
-  const { label, textarea = false, select = false } = props;
+  const {
+    label,
+    textarea = false,
+    select = false,
+    doubleRadio = false,
+    radio = false,
+  } = props;
 
   let element = (
     <Input
@@ -40,8 +46,9 @@ const FieldGroup = ({ field, form, ...props }) => {
         as="select"
         error={touched[name] && errors[name] ? 'true' : undefined}
         {...field}
-        {...props}
-      />
+        {...props}>
+        {children}
+      </Select>
     );
 
   const errorMessage = touched[name] && errors[name] ? errors[name] : '';

@@ -1,15 +1,15 @@
 import React from 'react';
-// import { Query } from 'react-apollo';
 import styled from 'styled-components/macro';
 // import MessageBox from '../../components/MessageBox';
 import PageInstructions from '../../components/PageInstructions';
 import PageTitle from '../../components/PageTitle';
+import Bottombar from '../Order/Bottombar';
 import GarmentChoice from './GarmentChoice';
 // import GET_GARMENTS from '../../queries/getGarments';
 // import Loading from '../../components/Loading';
 import GarmentList from './GarmentList';
 
-const Garments = () => {
+const Garments = props => {
   return (
     <>
       <PageTitle>What are we doing for you?</PageTitle>
@@ -31,6 +31,7 @@ const Garments = () => {
         <GarmentList />
         <GarmentChoice />
       </Row>
+      <Bottombar garments {...props} />
     </>
   );
 };
