@@ -1,5 +1,5 @@
 import { darken } from 'polished';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import posed from 'react-pose';
 import styled from 'styled-components/macro';
 import { GarmentsContext } from '../../contexts/Garments';
@@ -12,27 +12,21 @@ const GarmentChoiceItem = ({ garment }) => {
   const removeGarmentHandler = garment => () => context.removeGarment(garment);
 
   console.log(context.garments);
-  //   useEffect(
-  //     () => {
-  //       setWiggle(true);
-  //       setTimeout(() => setWiggle(false), 100);
-  //     },
-  //     [garment.quantity],
-  //   );
-
-  const charPoses = {
-    wiggle: { y: '10px' },
-    init: { y: '0px' },
-  };
+  useEffect(
+    () => {
+      setWiggle(true);
+      setTimeout(() => setWiggle(false), 50);
+    },
+    [garment.quantity],
+  );
 
   return (
-    <Item onClick={removeGarmentHandler(garment)}>
+    <Item
+      pose={wiggle}
+      key={garment.quantity}
+      onClick={removeGarmentHandler(garment)}>
       <Div1>{garment.description}</Div1>
-      <Div2>
-        {/* <SplitText charPoses={charPoses} pose={wiggle ? 'wiggle' : 'init'}> */}
-        {garment.quantity.toString()}
-        {/* </SplitText> */}
-      </Div2>
+      <Div2>{garment.quantity.toString()}</Div2>
       <Div3>
         <span>$</span>
         {formatPrice(garment.quantity * garment.price)}
@@ -46,6 +40,7 @@ export default GarmentChoiceItem;
 const posedItem = posed.div({
   enter: { x: '0px', opacity: 1 },
   exit: { x: '40px', opacity: 0 },
+  wiggle: { x: '20px' },
 });
 
 const Item = styled(posedItem)`

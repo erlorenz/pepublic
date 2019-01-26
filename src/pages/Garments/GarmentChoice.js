@@ -118,8 +118,7 @@ const Price = styled.span`
 const posedItem = posed.div({
   enter: { x: '0px', opacity: 1 },
   exit: { x: '40px', opacity: 0 },
-  wiggle: { x: '10px' },
-  init: { x: '0px' },
+  wiggle: { y: '15px' },
 });
 
 const Item = styled(posedItem)`
