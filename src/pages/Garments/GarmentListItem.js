@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
-import styled from 'styled-components/macro';
 import { darken } from 'polished';
-import { GarmentsContext } from '../../contexts/Garments';
+import React, { useContext, useState } from 'react';
 import posed, { PoseGroup } from 'react-pose';
+import styled from 'styled-components/macro';
+import { GarmentsContext } from '../../contexts/Garments';
 
 const GarmentListItem = ({ children, list, garment }) => {
   const [showTooltip, setShowTooltip] = useState(false);

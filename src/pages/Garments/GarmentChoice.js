@@ -1,27 +1,29 @@
+import { darken } from 'polished';
 import React, { useContext } from 'react';
+import posed, { PoseGroup } from 'react-pose';
 import styled from 'styled-components/macro';
-
-import { GarmentsContext } from '../../contexts/Garments';
 import { Card } from '../../components/UI';
+import { GarmentsContext } from '../../contexts/Garments';
 import formatPrice from '../../utils/formatPrice';
 import { GarmentHeader } from './styles';
-import { darken } from 'polished';
 
 const GarmentChoice = () => {
   const context = useContext(GarmentsContext);
 
   const removeGarmentHandler = garment => () => context.removeGarment(garment);
 
-  const garmentList = context.garments.map(garment => (
-    <Item key={garment.id} onClick={removeGarmentHandler(garment)}>
-      <Div1>{garment.description}</Div1>
-      <Div2>{garment.quantity}</Div2>
-      <Div3>
-        <span>$</span>
-        {formatPrice(garment.quantity * garment.price)}
-      </Div3>
-    </Item>
-  ));
+  const garmentList = context.garments.map(garment => {
+    return (
+      <Item key={garment.id} onClick={removeGarmentHandler(garment)}>
+        <Div1>{garment.description}</Div1>
+        <Div2>{garment.quantity} </Div2>
+        <Div3>
+          <span>$</span>
+          {formatPrice(garment.quantity * garment.price)}
+        </Div3>
+      </Item>
+    );
+  });
 
   if (context.garments.length) {
     return (
@@ -32,7 +34,7 @@ const GarmentChoice = () => {
             <Div2>Quantity</Div2>
             <Div3 header>Subtotal</Div3>
           </GarmentHeader>
-          {garmentList}
+          <PoseGroup>{garmentList}</PoseGroup>
         </Selected>
         <TotalPrice>
           <Span>TOTAL PRICE:</Span>
@@ -79,7 +81,12 @@ const Div1 = styled.div`
   width: 60%;
 `;
 
-const Div2 = styled.div`
+const posedDiv2 = posed.div({
+  enter: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: '20px' },
+});
+
+const Div2 = styled(posedDiv2)`
   width: 70px;
 `;
 
@@ -108,7 +115,14 @@ const Price = styled.span`
   justify-content: space-between;
 `;
 
-const Item = styled.div`
+const posedItem = posed.div({
+  enter: { x: '0px', opacity: 1 },
+  exit: { x: '40px', opacity: 0 },
+  wiggle: { x: '10px' },
+  init: { x: '0px' },
+});
+
+const Item = styled(posedItem)`
   width: 100%;
   display: flex;
   justify-content: space-between;
