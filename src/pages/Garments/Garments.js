@@ -14,8 +14,8 @@ const Garments = props => {
     <>
       <PageTitle>What are we doing for you?</PageTitle>
       <PageInstructions>
-        Each click on an item adds 1 to your cart. To remove, click on the item
-        in the cart to lower the quantity.
+        Each click on an item increases the quantity added to your cart. To
+        remove items, click on them in the cart.
       </PageInstructions>
       <Row>
         {/* <Query query={GET_GARMENTS}>

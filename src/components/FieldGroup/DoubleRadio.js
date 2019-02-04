@@ -32,6 +32,7 @@ const DoubleRadio = ({ children, label, name, times, ...props }) => {
     const time = getTime(unix);
     if (time.date() === getNow().date()) return 'Today, ';
     if (time.date() - 1 === getNow().date()) return 'Tomorrow, ';
+    if (time.date() - 2 === getNow().date()) return time.format('dddd') + ', ';
     return '';
   };
 

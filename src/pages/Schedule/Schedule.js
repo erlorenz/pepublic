@@ -42,27 +42,31 @@ const Schedule = props => {
                 times={pickupTimes(context.values.pickupDate) || []}
               />
             </Div>
-            {context.values.pickupHour && (
-              <Div key="2">
-                <DoubleRadio
-                  times={returnDate(context.values.pickupHour)}
-                  label="Return Date"
-                  name="returnDate"
-                />
-                <RadioGroup
-                  label="Return Time"
-                  name="returnHour"
-                  times={
-                    returnTimes(
-                      context.values.returnDate,
-                      context.values.pickupHour,
-                    ) || []
-                  }
-                />
-              </Div>
-            )}
+            {/* {context.values.pickupHour && ( */}
+            <Div key="2">
+              <DoubleRadio
+                times={returnDate(context.values.pickupHour) || []}
+                label="Return Date"
+                name="returnDate"
+              />
+              <RadioGroup
+                label="Return Time"
+                name="returnHour"
+                times={
+                  returnTimes(
+                    context.values.returnDate,
+                    context.values.pickupHour,
+                  ) || []
+                }
+              />
+            </Div>
+            {/* )} */}
             <Div key="3">
-              <Field component={FieldGroup} label="Hotel" name="hotel" select>
+              <Field
+                component={FieldGroup}
+                label="Hotel/Casino"
+                name="hotel"
+                select>
                 <option value="" disabled />
                 {hotels.map(hotel => (
                   <option key={hotel} value={hotel}>
@@ -70,7 +74,7 @@ const Schedule = props => {
                   </option>
                 ))}
               </Field>
-              <Field component={FieldGroup} label="Room" name="room" />
+              <Field component={FieldGroup} label="Room/Suite" name="room" />
             </Div>
           </PoseGroup>
           <Bottombar schedule {...props} />

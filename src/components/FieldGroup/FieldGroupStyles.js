@@ -80,7 +80,7 @@ export const RadioLabel = styled.label`
     ${props => (props.checked ? props.theme.buttonColor : borderColor)};
   background-color: white;
   color: inherit;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   padding: calc(0.8rem - 1px) 1rem;
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   font-family: inherit;
@@ -90,7 +90,7 @@ export const RadioLabel = styled.label`
   box-shadow: ${props =>
     props.checked ? '0px 0px 2px 1px ' + props.theme.buttonColor : null};
 
-  @media (min-width: 450px) {
+  @media (min-width: 500px) {
     font-size: 0.9rem;
   }
   :hover {
