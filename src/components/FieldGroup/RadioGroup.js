@@ -1,10 +1,9 @@
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import dayjs from 'dayjs';
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro';
 import { ReactComponent as CheckedRadio } from '../../assets/img/checkedradio.svg';
 import { ReactComponent as UncheckedRadio } from '../../assets/img/uncheckedradio.svg';
-import { ScheduleContext } from '../../contexts/Schedule';
 import { getTime } from '../../utils/getDates';
 import {
   borderColor,
@@ -16,8 +15,15 @@ import {
   RadioLabel,
 } from './FieldGroupStyles';
 
-const RadioGroup = ({ children, label, name, times, ...props }) => {
-  const { formikProps, values } = useContext(ScheduleContext);
+const RadioGroup = ({
+  children,
+  label,
+  name,
+  times,
+  formikProps,
+  values,
+  ...props
+}) => {
   const { errors, touched, handleChange, handleBlur } = formikProps;
 
   const errorMessage = touched[name] && errors[name] ? errors[name] : '';

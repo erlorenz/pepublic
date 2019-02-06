@@ -1,7 +1,8 @@
-import { Field, Form } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import React, { useContext } from 'react';
-import posed, { PoseGroup } from 'react-pose';
+import posed from 'react-pose';
 import styled from 'styled-components/macro';
+import * as Yup from 'yup';
 import Bottombar from '../../components/Bottombar';
 import DoubleRadio from '../../components/FieldGroup/DoubleRadio';
 import FieldGroup from '../../components/FieldGroup/FieldGroup';
@@ -17,8 +18,23 @@ import {
 } from '../../utils/customerTimes';
 import hotels from './hotels';
 
+const schema = Yup.object().shape({
+  pickupDate: Yup.string().required('Please choose a pickup date.'),
+  pickupHour: Yup.number().required('Please choose a pickup time.'),
+  returnDate: Yup.string().required('Please choose a return date.'),
+  returnHour: Yup.number().required('Please choose a return time.'),
+  hotel: Yup.string().required('Please choose a hotel.'),
+  room: Yup.string().required('Please choose a room.'),
+});
+
 const Schedule = props => {
   const context = useContext(ScheduleContext);
+
+  const handleSubmit = (values, actions) => {
+    context.setSchedule(values);
+    actions.setSubmitting(false);
+    props.history.push('/order/garments');
+  };
 
   return (
     <>
@@ -28,57 +44,87 @@ const Schedule = props => {
         them before the selected return time.
       </PageInstructions>
       <Container>
-        <StyledForm>
-          <PoseGroup>
-            <Div key="1">
-              <DoubleRadio
-                times={pickupDate()}
-                label="Pickup Date"
-                name="pickupDate"
+        <Formik
+          initialValues={
+            context.schedule || {
+              pickupDate: '',
+              pickupHour: '',
+              returnDate: '',
+              returnHour: '',
+              hotel: '',
+              room: '',
+            }
+          }
+          validationSchema={schema}
+          onSubmit={handleSubmit}>
+          {({ submitForm, values, ...formikProps }) => (
+            <StyledForm>
+              <Div key="1">
+                <DoubleRadio
+                  times={pickupDate()}
+                  label="Pickup Date"
+                  name="pickupDate"
+                  values={values}
+                  formikProps={formikProps}
+                />
+                <RadioGroup
+                  label="Pickup Time"
+                  name="pickupHour"
+                  times={pickupTimes(values.pickupDate) || []}
+                  values={values}
+                  formikProps={formikProps}
+                />
+              </Div>
+              <Div key="2">
+                <DoubleRadio
+                  times={returnDate(values.pickupHour) || ''}
+                  label="Return Date"
+                  name="returnDate"
+                  values={values}
+                  formikProps={formikProps}
+                />
+                <RadioGroup
+                  label="Return Time"
+                  name="returnHour"
+                  times={
+                    returnTimes(values.returnDate, values.pickupHour) || []
+                  }
+                  values={values}
+                  formikProps={formikProps}
+                />
+              </Div>
+              <Div key="3">
+                <Field
+                  component={FieldGroup}
+                  label="Hotel/Casino"
+                  name="hotel"
+                  select
+                  values={values}
+                  formikProps={formikProps}>
+                  <option value="" disabled />
+                  {hotels.map(hotel => (
+                    <option key={hotel} value={hotel}>
+                      {hotel}
+                    </option>
+                  ))}
+                </Field>
+                <Field
+                  component={FieldGroup}
+                  label="Room/Suite"
+                  name="room"
+                  values={values}
+                  formikProps={formikProps}
+                />
+              </Div>
+              <Bottombar
+                schedule
+                values={values}
+                submitForm={submitForm}
+                {...props}
               />
-              <RadioGroup
-                label="Pickup Time"
-                name="pickupHour"
-                times={pickupTimes(context.values.pickupDate) || []}
-              />
-            </Div>
-            {/* {context.values.pickupHour && ( */}
-            <Div key="2">
-              <DoubleRadio
-                times={returnDate(context.values.pickupHour) || []}
-                label="Return Date"
-                name="returnDate"
-              />
-              <RadioGroup
-                label="Return Time"
-                name="returnHour"
-                times={
-                  returnTimes(
-                    context.values.returnDate,
-                    context.values.pickupHour,
-                  ) || []
-                }
-              />
-            </Div>
-            {/* )} */}
-            <Div key="3">
-              <Field
-                component={FieldGroup}
-                label="Hotel/Casino"
-                name="hotel"
-                select>
-                <option value="" disabled />
-                {hotels.map(hotel => (
-                  <option key={hotel} value={hotel}>
-                    {hotel}
-                  </option>
-                ))}
-              </Field>
-              <Field component={FieldGroup} label="Room/Suite" name="room" />
-            </Div>
-          </PoseGroup>
-          <Bottombar schedule {...props} />
-        </StyledForm>
+            </StyledForm>
+          )}
+        </Formik>
       </Container>
     </>
   );

@@ -4,7 +4,15 @@ import { GarmentsContext } from '../contexts/Garments';
 import { ScheduleContext } from '../contexts/Schedule';
 import { Button } from './UI';
 
-const Bottombar = ({ history, garments, schedule, review, final }) => {
+const Bottombar = ({
+  history,
+  garments,
+  schedule,
+  review,
+  final,
+  submitForm,
+  values,
+}) => {
   const garmentsContext = useContext(GarmentsContext);
   const scheduleContext = useContext(ScheduleContext);
 
@@ -15,12 +23,12 @@ const Bottombar = ({ history, garments, schedule, review, final }) => {
   if (schedule) {
     const incomplete = () => {
       if (
-        scheduleContext.values.pickupDate &&
-        scheduleContext.values.pickupHour &&
-        scheduleContext.values.returnDate &&
-        scheduleContext.values.returnHour &&
-        scheduleContext.values.hotel &&
-        scheduleContext.values.room
+        values.pickupDate &&
+        values.pickupHour &&
+        values.returnDate &&
+        values.returnHour &&
+        values.hotel &&
+        values.room
       )
         return false;
 
@@ -41,12 +49,12 @@ const Bottombar = ({ history, garments, schedule, review, final }) => {
   if (review) {
     const incomplete = () => {
       if (
-        scheduleContext.values.pickupDate &&
-        scheduleContext.values.pickupHour &&
-        scheduleContext.values.returnDate &&
-        scheduleContext.values.returnHour &&
-        scheduleContext.values.hotel &&
-        scheduleContext.values.room &&
+        scheduleContext.schedule.pickupDate &&
+        scheduleContext.schedule.pickupHour &&
+        scheduleContext.schedule.returnDate &&
+        scheduleContext.schedule.returnHour &&
+        scheduleContext.schedule.hotel &&
+        scheduleContext.schedule.room &&
         garmentsContext.garments.length
       )
         return false;
@@ -67,10 +75,10 @@ const Bottombar = ({ history, garments, schedule, review, final }) => {
   const goBack = () => history.push(backLocation);
   const goNext = () => {
     if (schedule) {
-      scheduleContext.submitForm();
+      submitForm();
+    } else {
+      history.push(nextLocation);
     }
-
-    history.push(nextLocation);
   };
 
   return (
