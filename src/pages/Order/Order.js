@@ -7,16 +7,12 @@ import { GarmentsProvider } from '../../contexts/Garments';
 import { ScheduleProvider } from '../../contexts/Schedule';
 import Final from '../Final/Final';
 import Garments from '../Garments/Garments';
+import Review from '../Review/Review';
 import Schedule from '../Schedule/Schedule';
 import Success from '../Success/Success';
 import Topbar from './Topbar';
 
 const Order = props => {
-  const RoutesContainer = posed.div({
-    enter: { opacity: 1, delay: 2000 },
-    exit: { opacity: 0, delay: 3000 },
-  });
-
   return (
     <>
       <ScheduleProvider history={props.history}>
@@ -36,9 +32,10 @@ const Order = props => {
                 component={Garments}
                 key="2"
               />
-              <Route exact path="/order/final" component={Final} key="3" />
-              <Route exact path="/order/success" component={Success} key="4" />
-              <Route component={NotFound} key="5" />
+              <Route exact path="/order/review" component={Review} key="3" />
+              <Route exact path="/order/final" component={Final} key="4" />
+              <Route exact path="/order/success" component={Success} key="5" />
+              <Route component={NotFound} key="6" />
             </Switch>
           </Main>
         </GarmentsProvider>

@@ -1,13 +1,15 @@
-import React from 'react';
-import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { forwardRef } from 'react';
+import styled from 'styled-components/macro';
 
-const StepItem = ({ icon, text, last, pathname, route }) => {
+const StepItem = forwardRef((props, ref) => {
+  const { icon, text, last, pathname, route } = props;
+
   let active = false;
   if (pathname === route) active = true;
 
   return (
-    <Div>
+    <Div ref={ref}>
       <Icon active={active}>
         <FontAwesomeIcon icon={icon} />
       </Icon>
@@ -15,7 +17,7 @@ const StepItem = ({ icon, text, last, pathname, route }) => {
       {!last && <Arrow>></Arrow>}
     </Div>
   );
-};
+});
 
 export default StepItem;
 

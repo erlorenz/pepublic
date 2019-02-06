@@ -24,7 +24,6 @@ export const ScheduleProvider = ({ children, history }) => {
     console.log('Submitted');
     setSchedule(values);
     actions.setSubmitting(false);
-    history.push('/order/garments');
   };
 
   const schema = Yup.object().shape({

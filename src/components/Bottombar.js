@@ -34,24 +34,44 @@ const Bottombar = ({ history, garments, schedule, review, final }) => {
 
   if (garments) {
     backLocation = '/order/schedule';
-    nextLocation = '/order/final';
+    nextLocation = '/order/review';
     disabled = !garmentsContext.garments.length;
   }
 
-  const goBack = () => history.push(backLocation);
-  const goNext = () => {
-    if (schedule) {
-      scheduleContext.submitForm();
-    } else {
-      history.push(nextLocation);
-    }
-  };
+  if (review) {
+    const incomplete = () => {
+      if (
+        scheduleContext.values.pickupDate &&
+        scheduleContext.values.pickupHour &&
+        scheduleContext.values.returnDate &&
+        scheduleContext.values.returnHour &&
+        scheduleContext.values.hotel &&
+        scheduleContext.values.room &&
+        garmentsContext.garments.length
+      )
+        return false;
+
+      return true;
+    };
+    backLocation = '/order/garments';
+    nextLocation = '/order/final';
+    disabled = incomplete();
+  }
 
   if (review) {
     backLocation = '/order/garments';
     nextLocation = '/order/final';
     //   disabled = !scheduleContext.complete
   }
+
+  const goBack = () => history.push(backLocation);
+  const goNext = () => {
+    if (schedule) {
+      scheduleContext.submitForm();
+    }
+
+    history.push(nextLocation);
+  };
 
   return (
     <>
