@@ -5,60 +5,60 @@ import {
   faTshirt,
 } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import posed, { PoseGroup } from 'react-pose';
+import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { ReactComponent as PressExpress } from '../../assets/img/pressexpresslogo.svg';
 import StepItem from '../../components/StepItem';
 
 const Topbar = ({ location }) => {
+  const divProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+
   return (
     <>
-      <Div>
+      <Div style={divProps}>
         <Logo>
           <PressExpress />
         </Logo>
-        <PoseGroup>
-          <Steps key="steps">
-            <PosedStepItem
-              text="Schedule"
-              icon={faClock}
-              pathname={location.pathname}
-              route="/order/schedule"
-              key="1"
-            />
-            <PosedStepItem
-              text="Garments"
-              icon={faTshirt}
-              pathname={location.pathname}
-              route="/order/garments"
-              key="2"
-            />
-            <PosedStepItem
-              text="Review"
-              icon={faThumbsUp}
-              pathname={location.pathname}
-              route="/order/review"
-              key="3"
-            />
-            <PosedStepItem
-              text="Final"
-              icon={faCreditCard}
-              last
-              pathname={location.pathname}
-              route="/order/final"
-              key="4"
-            />
-          </Steps>
-        </PoseGroup>
+        <Steps>
+          <StepItem
+            text="Schedule"
+            icon={faClock}
+            pathname={location.pathname}
+            route="/order/schedule"
+            key="1"
+          />
+          <StepItem
+            text="Garments"
+            icon={faTshirt}
+            pathname={location.pathname}
+            route="/order/garments"
+            key="2"
+          />
+          <StepItem
+            text="Review"
+            icon={faThumbsUp}
+            pathname={location.pathname}
+            route="/order/review"
+            key="3"
+          />
+          <StepItem
+            text="Final"
+            icon={faCreditCard}
+            last
+            pathname={location.pathname}
+            route="/order/final"
+            key="4"
+          />
+        </Steps>
       </Div>
-      <Spacer />
+      <Spacer style={divProps} />
     </>
   );
 };
 
 export default Topbar;
 
-const Div = styled.div`
+const Div = styled(animated.div)`
   height: 4rem;
   display: flex;
   background-color: white;
@@ -89,19 +89,14 @@ const Logo = styled.div`
   }
 `;
 
-const PosedSteps = posed.div({
-  enter: { opacity: 1, staggerChildren: 200, animateOnMount: true },
-  exit: { opacity: 0 },
-});
-
-const Steps = styled(PosedSteps)`
+const Steps = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   color: #b5b5b5;
 `;
 
-const Spacer = styled.div`
+const Spacer = styled(animated.div)`
   width: 100%;
   height: 4rem;
 
@@ -109,8 +104,3 @@ const Spacer = styled.div`
     height: 5rem;
   }
 `;
-
-const PosedStepItem = posed(StepItem)({
-  enter: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 50 },
-});
