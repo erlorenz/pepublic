@@ -1,15 +1,13 @@
-import React, { Suspense } from 'react';
-import GlobalStyle from './styles/GlobalStyle';
-import Landing from './pages/Landing/Landing';
-import { Switch, Route } from 'react-router-dom';
-import Loading from './components/Loading';
-import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
-import { ThemeProvider } from 'styled-components/macro';
-import posed, { PoseGroup } from 'react-pose';
-import styled from 'styled-components/macro';
-
+import React, { Suspense } from 'react';
+import { ApolloProvider } from 'react-apollo';
+import { Route, Switch } from 'react-router-dom';
+import styled, { ThemeProvider } from 'styled-components/macro';
+import Loading from './components/Loading';
+import Landing from './pages/Landing/Landing';
+import GlobalStyle from './styles/GlobalStyle';
 import theme from './styles/theme';
+
 const Order = React.lazy(() => import('./pages/Order/Order'));
 const NotFound = React.lazy(() => import('./components/NotFound'));
 

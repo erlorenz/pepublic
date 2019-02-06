@@ -1,5 +1,4 @@
 import React from 'react';
-import posed from 'react-pose';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import NotFound from '../../components/NotFound';
@@ -46,12 +45,7 @@ const Order = props => {
 
 export default Order;
 
-const PoseContainer = posed.div({
-  enter: { opacity: 1 },
-  exit: { opacity: 0 },
-});
-
-const Main = styled(PoseContainer)`
+const Main = styled.div`
   width: 100%;
   min-height: 100vh;
   padding: 1rem;

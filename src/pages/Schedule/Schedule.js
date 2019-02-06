@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import React, { useContext } from 'react';
-import posed from 'react-pose';
+import { animated } from 'react-spring';
 import styled from 'styled-components/macro';
 import * as Yup from 'yup';
 import Bottombar from '../../components/Bottombar';
@@ -132,10 +132,7 @@ const Schedule = props => {
 
 export default Schedule;
 
-const Div = posed.div({
-  enter: { y: '0px', opacity: 1 },
-  exit: { y: '20px', opacity: 0 },
-});
+const Div = animated.div;
 
 const StyledForm = styled(Form)`
   max-width: 450px;

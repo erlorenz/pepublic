@@ -1,5 +1,4 @@
 import { darken } from 'polished';
-import posed from 'react-pose';
 import styled from 'styled-components/macro';
 
 /**
@@ -8,12 +7,7 @@ import styled from 'styled-components/macro';
 
 export * from './table';
 
-const Posed = posed.div({
-  enter: { opacity: 1 },
-  exit: { opacity: 0 },
-});
-
-export const Card = styled(Posed)`
+export const Card = styled.div`
   background-color: white;
   padding: 0.9rem;
   margin-bottom: 0.9rem;

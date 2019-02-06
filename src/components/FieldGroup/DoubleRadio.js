@@ -1,5 +1,6 @@
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
+import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { ReactComponent as CheckedRadio } from '../../assets/img/checkedradio.svg';
 import { ReactComponent as UncheckedRadio } from '../../assets/img/uncheckedradio.svg';
@@ -46,16 +47,18 @@ const DoubleRadio = ({
     return '';
   };
 
+  const springProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+
   return (
     <Fieldset>
       {label && <Label>{label}</Label>}
       <Control>
         {!times.val2 ? (
-          <Placeholder />
+          <Placeholder style={springProps} />
         ) : (
-          <FlexContainer>
+          <FlexContainer style={springProps}>
             {times.val1 && (
-              <RadioLabel checked={checked1} left>
+              <RadioLabel style={springProps} checked={checked1} left>
                 {checked1 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
                 {`${description(times.val1)} ${times.val1.month() +
                   1}/${times.val1.date()}`}
@@ -71,7 +74,7 @@ const DoubleRadio = ({
             )}
 
             {times.val2 && (
-              <RadioLabel checked={checked2}>
+              <RadioLabel style={springProps} checked={checked2}>
                 {checked2 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
                 {`${description(times.val2)} ${times.val2.month() +
                   1}/${times.val2.date()}`}
@@ -98,7 +101,7 @@ const DoubleRadio = ({
 
 export default DoubleRadio;
 
-const FlexContainer = styled.div`
+const FlexContainer = styled(animated.div)`
   width: 100%;
   height: 100%;
   display: flex;
