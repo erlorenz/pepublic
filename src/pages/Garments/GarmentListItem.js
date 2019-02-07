@@ -76,7 +76,7 @@ const Quantity = animated(styled.div`
   background: #788588;
   color: white;
   border-radius: 4px;
-
+  opacity: 0.8;
   @media (min-width: 1000px) {
     display: none;
   }
