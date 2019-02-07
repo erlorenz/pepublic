@@ -1,23 +1,20 @@
 import { darken } from 'polished';
 import React, { useContext, useState } from 'react';
-import posed, { PoseGroup } from 'react-pose';
+import { animated, config, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { GarmentsContext } from '../../contexts/Garments';
 
 const GarmentListItem = ({ children, list, garment }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const [slide, setSlide] = useState(false);
   const [disable, setDisable] = useState(false);
 
   const context = useContext(GarmentsContext);
 
   const onClickHandler = () => {
     setShowTooltip(true);
-    setSlide(true);
     setDisable(true);
     setTimeout(() => {
       setShowTooltip(false);
-      setSlide(false);
       setDisable(false);
     }, 300);
     context.addGarment(garment);
@@ -29,16 +26,16 @@ const GarmentListItem = ({ children, list, garment }) => {
     return null;
   };
 
+  const driftAway = useSpring({
+    from: { opacity: 0, transform: 'scale(0)' },
+    to: { opacity: 1, transform: 'scale(3.0)' },
+    config: config.molasses,
+  });
+
   return (
     <>
       <Div type="button" onClick={onClickHandler} disabled={disable}>
-        <PoseGroup>
-          {showTooltip && [
-            <Quantity pose={slide ? 'slide' : 'init'} key="q">
-              {showQuantity()}
-            </Quantity>,
-          ]}
-        </PoseGroup>
+        {showTooltip && <Quantity style={driftAway}>{showQuantity()}</Quantity>}
         {children}
       </Div>
     </>
@@ -70,25 +67,7 @@ export const Div = styled.button`
   } */
 `;
 
-const PosedDiv = posed.div({
-  enter: {
-    opacity: 1,
-    transition: {
-      duration: 10,
-    },
-  },
-  exit: { opacity: 0 },
-  slide: {
-    x: '25px',
-    y: '-15px',
-    transition: {
-      duration: 600,
-      ease: 'easeOut',
-    },
-  },
-});
-
-const Quantity = styled(PosedDiv)`
+const Quantity = animated(styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -101,7 +80,7 @@ const Quantity = styled(PosedDiv)`
   @media (min-width: 1000px) {
     display: none;
   }
-`;
+`);
 
 // const Group = styled(PoseGroup)`
 //   display: none;
