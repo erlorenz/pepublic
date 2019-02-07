@@ -3,9 +3,8 @@ import React, { createContext, useEffect, useState } from 'react';
 export const GarmentsContext = createContext();
 
 export const GarmentsProvider = ({ children }) => {
-  const initialState = JSON.parse(localStorage.getItem('garments')) || [];
+  const initialState = () => JSON.parse(localStorage.getItem('garments')) || [];
   const [garments, setGarments] = useState(initialState);
-  const [changeID, setChangeID] = useState('');
 
   useEffect(() => localStorage.setItem('garments', JSON.stringify(garments)), [
     garments,
@@ -24,7 +23,6 @@ export const GarmentsProvider = ({ children }) => {
       setGarments(garments.concat({ ...payload, quantity: 1 }));
     }
     console.log('Garment added!', garments);
-    setChangeID(payload.id);
   };
 
   const removeGarment = payload => {
@@ -41,7 +39,6 @@ export const GarmentsProvider = ({ children }) => {
 
       setGarments(newGarments);
     }
-    setChangeID(payload.id);
   };
 
   const totalPrice = () => {
@@ -58,7 +55,6 @@ export const GarmentsProvider = ({ children }) => {
         addGarment,
         removeGarment,
         totalPrice,
-        changeID,
       }}>
       {children}
     </GarmentsContext.Provider>

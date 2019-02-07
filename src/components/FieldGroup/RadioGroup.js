@@ -1,6 +1,7 @@
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import dayjs from 'dayjs';
 import React from 'react';
+import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { ReactComponent as CheckedRadio } from '../../assets/img/checkedradio.svg';
 import { ReactComponent as UncheckedRadio } from '../../assets/img/uncheckedradio.svg';
@@ -32,10 +33,15 @@ const RadioGroup = ({
 
   const selectedHour = values[name] ? getTime(values[name]) : 0;
 
+  const slideHeight = useSpring({
+    from: { height: 0 },
+    to: { height: 'auto' },
+  });
+
   return (
     <Fieldset>
       {label && <Label>{label}</Label>}
-      <FlexContainer>
+      <FlexContainer style={slideHeight}>
         {times.map(time => (
           <RadioGroupLabel
             key={time}
@@ -67,7 +73,7 @@ const RadioGroup = ({
 
 export default RadioGroup;
 
-const FlexContainer = styled.div`
+const FlexContainer = animated(styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -75,7 +81,7 @@ const FlexContainer = styled.div`
   border-radius: ${props => props.borderRadius};
   border: 1px solid ${borderColor};
   background-color: white;
-`;
+`);
 
 const StyledCheckedRadio = styled(CheckedRadio)`
   margin-right: 0.7rem;

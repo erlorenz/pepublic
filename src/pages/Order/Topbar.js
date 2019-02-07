@@ -58,7 +58,7 @@ const Topbar = ({ location }) => {
         <Logo style={fadeIn}>
           <PressExpress />
         </Logo>
-        <Steps>{renderSteps()}</Steps>
+        <Steps style={fadeIn}>{renderSteps()}</Steps>
       </Div>
       <Spacer />
     </>
@@ -67,7 +67,7 @@ const Topbar = ({ location }) => {
 
 export default Topbar;
 
-const Div = styled(animated.div)`
+const Div = styled.div`
   height: 4rem;
   display: flex;
   background-color: white;
@@ -98,12 +98,12 @@ const Logo = animated(styled.div`
   }
 `);
 
-const Steps = styled.div`
+const Steps = animated(styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   color: #b5b5b5;
-`;
+`);
 
 const Spacer = styled.div`
   width: 100%;

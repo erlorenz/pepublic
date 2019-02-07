@@ -1,6 +1,5 @@
 import { darken } from 'polished';
 import React, { useContext } from 'react';
-import posed, { PoseGroup } from 'react-pose';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { Card } from '../../components/UI';
@@ -11,17 +10,26 @@ import { GarmentHeader } from './styles';
 
 const GarmentChoice = () => {
   const context = useContext(GarmentsContext);
+  const [belowMinPrice, setBelowMinPrice] = React.useState(false);
+
+  React.useEffect(() => {
+    if (context.totalPrice() < 3000) setBelowMinPrice(true);
+    if (context.totalPrice() >= 3000) setBelowMinPrice(false);
+  }, [context.totalPrice()]);
 
   const removeGarmentHandler = garment => () => context.removeGarment(garment);
 
-  const garmentList = context.garments.map(garment => {
+  const items = context.garments;
+  // const transitions = useTransition(items, item => item.slug, listFadeAndSlide);
+
+  const garmentList = items.map(item => {
     return (
-      <Item key={garment.id} onClick={removeGarmentHandler(garment)}>
-        <Div1>{garment.description}</Div1>
-        <Div2>{garment.quantity} </Div2>
+      <Item key={item.slug} onClick={removeGarmentHandler(item)}>
+        <Div1>{item.description}</Div1>
+        <Div2>{item.quantity} </Div2>
         <Div3>
           <span>$</span>
-          {formatPrice(garment.quantity * garment.price)}
+          {formatPrice(item.quantity * item.price)}
         </Div3>
       </Item>
     );
@@ -31,28 +39,36 @@ const GarmentChoice = () => {
 
   if (context.garments.length)
     return (
-      <Container key="1">
+      <Container style={scaleUp}>
         <Selected>
           <GarmentHeader>
             <Div1>Item</Div1>
             <Div2>Quantity</Div2>
             <Div3 header>Subtotal</Div3>
           </GarmentHeader>
-          <PoseGroup>{garmentList}</PoseGroup>
+          {garmentList}
         </Selected>
-        <TotalPrice>
+        <TotalPrice strike={belowMinPrice}>
           <Span>TOTAL PRICE:</Span>
-          <Price>
+          <Price strike={belowMinPrice}>
             <span>$</span>
             {formatPrice(context.totalPrice())}
           </Price>
         </TotalPrice>
+        {belowMinPrice && (
+          <MinPrice>
+            <Span>MIN PRICE:</Span>
+            <Price>
+              <span>$</span> 30.00
+            </Price>
+          </MinPrice>
+        )}
       </Container>
     );
 
   if (!context.garments.length)
     return (
-      <Container style={scaleUp} key="2">
+      <Container style={scaleUp}>
         <Centered>There are no items selected.</Centered>
       </Container>
     );
@@ -80,18 +96,19 @@ const TotalPrice = styled.div`
   margin-top: 0.5rem;
   padding-top: 0.2rem;
   border-top: solid 1px lightgray;
+  text-decoration: ${props => (props.strike ? 'line-through' : 'none')};
+  color: ${props => (props.strike ? '#bcbcbc' : null)};
+`;
+
+const MinPrice = styled(TotalPrice)`
+  border-top: none;
 `;
 
 const Div1 = styled.div`
   width: 60%;
 `;
 
-const posedDiv2 = posed.div({
-  enter: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: '20px' },
-});
-
-const Div2 = styled(posedDiv2)`
+const Div2 = styled.div`
   width: 70px;
 `;
 
@@ -112,6 +129,7 @@ const Centered = styled.div`
 
 const Span = styled.span`
   margin-right: 1.5rem;
+  color: inherit;
 `;
 
 const Price = styled.span`
@@ -120,12 +138,7 @@ const Price = styled.span`
   justify-content: space-between;
 `;
 
-const posedItem = posed.div({
-  enter: { y: '0px', opacity: 1 },
-  exit: { y: '20px', opacity: 0 },
-});
-
-const Item = styled(posedItem)`
+const Item = animated(styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -136,4 +149,4 @@ const Item = styled(posedItem)`
   :hover {
     background-color: ${darken(0.05, '#FFF')};
   }
-`;
+`);
