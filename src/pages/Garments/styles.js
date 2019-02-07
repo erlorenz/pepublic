@@ -1,5 +1,4 @@
 import styled from 'styled-components/macro';
-import { darken } from 'polished';
 
 export const GarmentHeader = styled.div`
   font-weight: 700;

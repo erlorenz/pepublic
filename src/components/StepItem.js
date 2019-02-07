@@ -1,40 +1,51 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { forwardRef } from 'react';
+import React from 'react';
+import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
+import theme from '../styles/theme';
 
-const StepItem = forwardRef((props, ref) => {
-  const { icon, text, last, pathname, route } = props;
+const StepItem = props => {
+  const { icon, text, last, pathname, route, delay } = props;
 
   let active = false;
   if (pathname === route) active = true;
 
+  const trailDown = useSpring({
+    transform: 'translateY(0px',
+    from: { transform: 'translateY(-20px' },
+    delay: delay * 100,
+  });
+
+  const changeColor = useSpring({
+    color: active ? theme.buttonColor : 'rgb(196, 196, 196)',
+  });
+
   return (
-    <Div ref={ref}>
-      <Icon active={active}>
+    <Div style={trailDown}>
+      <Icon style={changeColor}>
         <FontAwesomeIcon icon={icon} />
       </Icon>
-      <Text active={active}>{text}</Text>
+      <Text style={changeColor}>{text}</Text>
       {!last && <Arrow>></Arrow>}
     </Div>
   );
-});
+};
 
 export default StepItem;
 
-const Div = styled.div`
+const Div = animated(styled.div`
   display: flex;
   align-items: center;
-`;
+`);
 
-const Icon = styled.span`
-  color: ${props => (props.active ? props.theme.buttonColor : null)};
+const Icon = animated(styled.span`
   font-size: 1rem;
 
   @media (min-width: 1000px) {
     margin-right: 0.8rem;
     font-size: 1.2rem;
   }
-`;
+`);
 
 const Arrow = styled.span`
   margin-left: 1rem;
@@ -46,13 +57,12 @@ const Arrow = styled.span`
   }
 `;
 
-const Text = styled.span`
+const Text = animated(styled.span`
   display: none;
   font-weight: 400;
   font-size: 0.9rem;
-  color: ${props => (props.active ? props.theme.buttonColor : null)};
 
   @media (min-width: 1000px) {
     display: block;
   }
-`;
+`);

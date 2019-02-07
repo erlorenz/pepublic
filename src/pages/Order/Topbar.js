@@ -9,49 +9,58 @@ import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { ReactComponent as PressExpress } from '../../assets/img/pressexpresslogo.svg';
 import StepItem from '../../components/StepItem';
+import { fadeInSlow } from '../../styles/transitions';
 
 const Topbar = ({ location }) => {
-  const divProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const fadeIn = useSpring(fadeInSlow);
+
+  const steps = [
+    {
+      text: 'Schedule',
+      icon: faClock,
+      route: '/order/schedule',
+    },
+    {
+      text: 'Garments',
+      icon: faTshirt,
+      route: '/order/garments',
+    },
+    {
+      text: 'Review',
+      icon: faThumbsUp,
+      route: '/order/review',
+    },
+    {
+      text: 'Final',
+      icon: faCreditCard,
+      route: '/order/final',
+      last: true,
+    },
+  ];
+
+  const renderSteps = () => {
+    return steps.map((step, index) => (
+      <StepItem
+        text={step.text}
+        icon={step.icon}
+        pathname={location.pathname}
+        route={step.route}
+        key={index}
+        delay={index}
+        last={step.last || false}
+      />
+    ));
+  };
 
   return (
     <>
-      <Div style={divProps}>
-        <Logo>
+      <Div>
+        <Logo style={fadeIn}>
           <PressExpress />
         </Logo>
-        <Steps>
-          <StepItem
-            text="Schedule"
-            icon={faClock}
-            pathname={location.pathname}
-            route="/order/schedule"
-            key="1"
-          />
-          <StepItem
-            text="Garments"
-            icon={faTshirt}
-            pathname={location.pathname}
-            route="/order/garments"
-            key="2"
-          />
-          <StepItem
-            text="Review"
-            icon={faThumbsUp}
-            pathname={location.pathname}
-            route="/order/review"
-            key="3"
-          />
-          <StepItem
-            text="Final"
-            icon={faCreditCard}
-            last
-            pathname={location.pathname}
-            route="/order/final"
-            key="4"
-          />
-        </Steps>
+        <Steps>{renderSteps()}</Steps>
       </Div>
-      <Spacer style={divProps} />
+      <Spacer />
     </>
   );
 };
@@ -77,7 +86,7 @@ const Div = styled(animated.div)`
   }
 `;
 
-const Logo = styled.div`
+const Logo = animated(styled.div`
   position: absolute;
   left: 0;
   width: 190px;
@@ -87,7 +96,7 @@ const Logo = styled.div`
   @media (min-width: 800px) {
     display: block;
   }
-`;
+`);
 
 const Steps = styled.div`
   display: flex;
@@ -96,9 +105,10 @@ const Steps = styled.div`
   color: #b5b5b5;
 `;
 
-const Spacer = styled(animated.div)`
+const Spacer = styled.div`
   width: 100%;
   height: 4rem;
+  background-color: white;
 
   @media (min-width: 1000px) {
     height: 5rem;

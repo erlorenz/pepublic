@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import React, { useContext } from 'react';
-import { animated } from 'react-spring';
+import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import * as Yup from 'yup';
 import Bottombar from '../../components/Bottombar';
@@ -10,6 +10,7 @@ import RadioGroup from '../../components/FieldGroup/RadioGroup';
 import PageInstructions from '../../components/PageInstructions';
 import PageTitle from '../../components/PageTitle';
 import { ScheduleContext } from '../../contexts/Schedule';
+import { fadeInSlow } from '../../styles/transitions';
 import {
   pickupDate,
   pickupTimes,
@@ -36,6 +37,8 @@ const Schedule = props => {
     props.history.push('/order/garments');
   };
 
+  const fadeIn = useSpring(fadeInSlow);
+
   return (
     <>
       <PageTitle>Where are we going?</PageTitle>
@@ -43,7 +46,7 @@ const Schedule = props => {
         We will pick your garments up after the selected pickup time and return
         them before the selected return time.
       </PageInstructions>
-      <Container>
+      <Container style={fadeIn}>
         <Formik
           initialValues={
             context.schedule || {
@@ -137,7 +140,7 @@ const Div = animated.div;
 const StyledForm = styled(Form)`
   max-width: 450px;
 `;
-const Container = styled.div`
+const Container = animated(styled.div`
   display: flex;
   justify-content: center;
-`;
+`);

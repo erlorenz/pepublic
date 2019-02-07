@@ -1,9 +1,11 @@
 import { darken } from 'polished';
 import React, { useContext } from 'react';
 import posed, { PoseGroup } from 'react-pose';
+import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { Card } from '../../components/UI';
 import { GarmentsContext } from '../../contexts/Garments';
+import { scaleUpAndFadeIn } from '../../styles/transitions';
 import formatPrice from '../../utils/formatPrice';
 import { GarmentHeader } from './styles';
 
@@ -24,6 +26,8 @@ const GarmentChoice = () => {
       </Item>
     );
   });
+
+  const scaleUp = useSpring(scaleUpAndFadeIn);
 
   if (context.garments.length)
     return (
@@ -48,7 +52,7 @@ const GarmentChoice = () => {
 
   if (!context.garments.length)
     return (
-      <Container key="2">
+      <Container style={scaleUp} key="2">
         <Centered>There are no items selected.</Centered>
       </Container>
     );
@@ -56,13 +60,13 @@ const GarmentChoice = () => {
 
 export default GarmentChoice;
 
-const Container = styled(Card)`
+const Container = animated(styled(Card)`
   width: 100%;
   font-size: ${props => props.theme.listFontSize};
   justify-content: space-between;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 95px -30px;
   overflow-x: visible;
-`;
+`);
 
 const Selected = styled.div`
   width: 100%;
