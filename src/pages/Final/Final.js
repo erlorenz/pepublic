@@ -2,18 +2,16 @@ import { Field, Form, Formik } from 'formik';
 import React from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import styled from 'styled-components/macro';
+import * as Yup from 'yup';
 import FieldGroup from '../../components/FieldGroup/FieldGroup';
-import {
-  errorBoxShadow,
-  errorColor,
-  focusedBorderColor,
-  focusedBoxShadow,
-} from '../../components/FieldGroup/FieldGroupStyles';
+import { Label } from '../../components/FieldGroup/FieldGroupStyles';
 import PageInstructions from '../../components/PageInstructions';
 import PageTitle from '../../components/PageTitle';
 import FinalBottombar from './FinalBottombar';
 
 const _Final = props => {
+  const [cardComplete, setCardComplete] = React.useState(false);
+
   const handleSubmit = async (values, actions) => {
     console.log(values);
     if (props.stripe) {
@@ -26,11 +24,25 @@ const _Final = props => {
     } else {
       console.log('Stripe not loaded');
     }
+    actions.setSubmitting(false);
   };
 
-  const handleCardChange = props => {
-    console.log(props);
+  const handleCardChange = args => {
+    console.log(args, args.complete);
+    if (args.complete) {
+      setCardComplete(true);
+    } else {
+      setCardComplete(false);
+    }
   };
+
+  const schema = Yup.object().shape({
+    name: Yup.string().required('Please enter your full name.'),
+    phone: Yup.required('Please enter your 10 digit phone number.'),
+    email: Yup.email('Please enter a valid email address.').required(
+      'Please enter your email address.',
+    ),
+  });
 
   return (
     <>
@@ -41,7 +53,8 @@ const _Final = props => {
       </PageInstructions>
       <Formik
         onSubmit={handleSubmit}
-        initialValues={{ name: '', phone: '', email: '' }}>
+        initialValues={{ name: '', phone: '', email: '' }}
+        validationSchema={schema}>
         {({ values, submitForm, isSubmitting, ...formikProps }) => {
           return (
             <Container>
@@ -64,12 +77,14 @@ const _Final = props => {
                   component={FieldGroup}
                   type="text"
                 />
-                <label>Card details</label>
-                <CardElement onChange={handleCardChange} {...createOptions()} />
+                <Label>Card details</Label>
+                <StyledCardElement onChange={handleCardChange} />
                 <FinalBottombar
                   history={props.history}
+                  isSubmitting={isSubmitting}
                   submitForm={submitForm}
                   values={values}
+                  cardComplete={cardComplete}
                   {...props}
                 />
               </StyledForm>
@@ -93,27 +108,31 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const createOptions = () => {
-  return {
-    style: {
-      base: {
-        fontSize: '14px',
-        color: '#424770',
-        backgroundColor: 'white',
-        fontFamily: 'inherit',
-        padding: 'calc(0.8rem - 1px) 1rem',
-        '::placeholder': {
-          color: '#aab7c4',
-        },
-        ':focus': {
-          borderColor: focusedBorderColor,
-          boxShadow: focusedBoxShadow,
-        },
-      },
-      invalid: {
-        borderColor: errorColor,
-        boxShadow: errorBoxShadow,
-      },
-    },
-  };
-};
+const StyledCardElement = styled(CardElement)`
+  background-color: blue;
+`;
+
+// const createOptions = () => {
+//   return {
+//     style: {
+//       base: {
+//         fontSize: '14px',
+//         color: '#424770',
+//         backgroundColor: 'white',
+//         fontFamily: 'inherit',
+//         padding: 'calc(0.8rem - 1px) 1rem',
+//         '::placeholder': {
+//           color: '#aab7c4',
+//         },
+//         ':focus': {
+//           borderColor: focusedBorderColor,
+//           boxShadow: focusedBoxShadow,
+//         },
+//       },
+//       invalid: {
+//         borderColor: errorColor,
+//         boxShadow: errorBoxShadow,
+//       },
+//     },
+//   };
+// };

@@ -4,7 +4,13 @@ import { Button } from '../../components/UI';
 import { GarmentsContext } from '../../contexts/Garments';
 import { ScheduleContext } from '../../contexts/Schedule';
 
-const FinalBottombar = ({ history, submitForm, values }) => {
+const FinalBottombar = ({
+  history,
+  submitForm,
+  values,
+  isSubmitting,
+  cardComplete,
+}) => {
   const garmentsContext = useContext(GarmentsContext);
   const scheduleContext = useContext(ScheduleContext);
 
@@ -20,7 +26,9 @@ const FinalBottombar = ({ history, submitForm, values }) => {
     garmentsContext.garments.length &&
     values.name &&
     values.email &&
-    values.phone
+    values.phone &&
+    cardComplete &&
+    !isSubmitting
   ) {
     disabled = false;
   }
