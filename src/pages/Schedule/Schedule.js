@@ -4,7 +4,7 @@ import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import * as Yup from 'yup';
 import Bottombar from '../../components/Bottombar';
-import DoubleRadio from '../../components/FieldGroup/DoubleRadio';
+import DoubleRadioSchedule from '../../components/FieldGroup/DoubleRadioSchedule';
 import FieldGroup from '../../components/FieldGroup/FieldGroup';
 import RadioGroup from '../../components/FieldGroup/RadioGroup';
 import PageInstructions from '../../components/PageInstructions';
@@ -63,7 +63,7 @@ const Schedule = props => {
           {({ submitForm, values, ...formikProps }) => (
             <StyledForm>
               <Div key="1">
-                <DoubleRadio
+                <DoubleRadioSchedule
                   times={pickupDate()}
                   label="Pickup Date"
                   name="pickupDate"
@@ -79,7 +79,7 @@ const Schedule = props => {
                 />
               </Div>
               <Div key="2">
-                <DoubleRadio
+                <DoubleRadioSchedule
                   times={returnDate(values.pickupHour) || ''}
                   label="Return Date"
                   name="returnDate"

@@ -1,12 +1,12 @@
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import { animated, useSpring } from 'react-spring';
+import { animated } from 'react-spring';
 import styled from 'styled-components/macro';
 import { ReactComponent as CheckedRadio } from '../../assets/img/checkedradio.svg';
 import { ReactComponent as UncheckedRadio } from '../../assets/img/uncheckedradio.svg';
-import { getTime } from '../../utils/getDates';
 import {
   borderColor,
+  Control,
   Fieldset,
   Help,
   Icon,
@@ -15,13 +15,16 @@ import {
   RadioLabel,
 } from './FieldGroupStyles';
 
-const RadioGroup = ({
+const DoubleRadioYesNo = ({
   children,
   label,
   name,
-  times,
   formikProps,
-  values,
+  option1,
+  option2,
+  value1,
+  value2,
+  currentValue,
   ...props
 }) => {
   const { errors, touched, handleChange, handleBlur } = formikProps;
@@ -30,38 +33,46 @@ const RadioGroup = ({
   const icon =
     touched[name] && errors[name] ? <Icon icon={faExclamationCircle} /> : '';
 
-  const selectedHour = values[name] ? getTime(values[name]) : 0;
+  let checked1 = false;
+  let checked2 = false;
 
-  const slideHeight = useSpring({
-    from: { height: 0 },
-    to: { height: 'auto' },
-  });
+  if ('yes' === currentValue) checked1 = true;
+  if ('no' === currentValue) checked2 = true;
+
+  console.log('Name:', name, 'Current:', currentValue);
 
   return (
     <Fieldset>
       {label && <Label>{label}</Label>}
-      <FlexContainer style={slideHeight}>
-        {times.map(time => (
-          <RadioGroupLabel
-            key={time}
-            checked={time === selectedHour.valueOf()}
-            left>
-            {time === selectedHour.valueOf() ? (
-              <StyledCheckedRadio />
-            ) : (
-              <StyledUncheckedRadio />
-            )}
-            {getTime(time).format('h:mm a')}
+      <Control>
+        <FlexContainer>
+          <RadioLabel checked={checked1} left>
+            {checked1 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
+            {option1}
             <RadioInput
               name={name}
               type="radio"
-              value={time}
+              value="yes"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              checked={checked1}
+            />
+          </RadioLabel>
+
+          <RadioLabel checked={checked2}>
+            {checked2 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
+            {option2}
+            <RadioInput
+              name={name}
+              type="radio"
+              checked={checked2}
+              value="no"
               onChange={handleChange}
               onBlur={handleBlur}
             />
-          </RadioGroupLabel>
-        ))}
-      </FlexContainer>
+          </RadioLabel>
+        </FlexContainer>
+      </Control>
       <Help>
         {icon}
         {errorMessage}
@@ -70,17 +81,20 @@ const RadioGroup = ({
   );
 };
 
-export default RadioGroup;
+export default DoubleRadioYesNo;
 
-const FlexContainer = animated(styled.div`
+const FlexContainer = styled(animated.div)`
   width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
+`;
+
+const Placeholder = styled(FlexContainer)`
   padding: 0.5rem;
   border-radius: ${props => props.borderRadius};
   border: 1px solid ${borderColor};
   background-color: white;
-`);
+`;
 
 const StyledCheckedRadio = styled(CheckedRadio)`
   margin-right: 0.7rem;
@@ -88,11 +102,4 @@ const StyledCheckedRadio = styled(CheckedRadio)`
 
 const StyledUncheckedRadio = styled(UncheckedRadio)`
   margin-right: 0.7rem;
-`;
-
-const RadioGroupLabel = styled(RadioLabel)`
-  z-index: ${props => (props.checked ? 1 : 0)};
-  border: ${props =>
-    props.checked ? '1px solid ' + props.theme.buttonColor : 'none'};
-  box-shadow: ${props => (props.checked ? null : 'none')};
 `;

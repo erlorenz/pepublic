@@ -67,14 +67,29 @@ const Bottombar = ({
   }
 
   if (review) {
+    const incomplete = () => {
+      if (
+        scheduleContext.schedule.pickupDate &&
+        scheduleContext.schedule.pickupHour &&
+        scheduleContext.schedule.returnDate &&
+        scheduleContext.schedule.returnHour &&
+        scheduleContext.schedule.hotel &&
+        scheduleContext.schedule.room &&
+        garmentsContext.garments.length
+      )
+        return false;
+
+      return true;
+    };
+
     backLocation = '/order/garments';
     nextLocation = '/order/final';
-    //   disabled = !scheduleContext.complete
+    disabled = incomplete();
   }
 
   const goBack = () => history.push(backLocation);
   const goNext = () => {
-    if (schedule) {
+    if (schedule || review) {
       submitForm();
     } else {
       history.push(nextLocation);
