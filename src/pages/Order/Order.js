@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { Elements } from 'react-stripe-elements';
 import styled from 'styled-components/macro';
 import NotFound from '../../components/NotFound';
 import { GarmentsProvider } from '../../contexts/Garments';
@@ -34,7 +35,16 @@ const Order = props => {
                   key="2"
                 />
                 <Route exact path="/order/review" component={Review} key="3" />
-                <Route exact path="/order/final" component={Final} key="4" />
+                <Route
+                  exact
+                  path="/order/final"
+                  render={props => (
+                    <Elements>
+                      <Final {...props} />
+                    </Elements>
+                  )}
+                  key="4"
+                />
                 <Route
                   exact
                   path="/order/success"

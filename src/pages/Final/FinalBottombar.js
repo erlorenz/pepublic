@@ -34,7 +34,6 @@ const FinalBottombar = ({ history, submitForm, values }) => {
           </SubmitButton>
         </Container>
       </Bar>
-      <Spacer />
     </>
   );
 };
@@ -80,14 +79,5 @@ const SubmitButton = styled(Button)`
 
   :hover {
     background-color: ${props => (props.disabled ? '#c0e3ea' : null)};
-  }
-`;
-
-const Spacer = styled.div`
-  width: 100%;
-  height: 5rem;
-
-  @media (min-width: 1000px) {
-    height: 6rem;
   }
 `;

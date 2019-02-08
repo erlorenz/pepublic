@@ -3,12 +3,12 @@ import { darken } from 'polished';
 import styled from 'styled-components/macro';
 
 const borderSize = '1px';
-const labelColor = '#666666';
-const errorColor = '#ff3860';
+export const labelColor = '#666666';
+export const errorColor = '#ff3860';
 export const borderColor = '#dbdbdb';
-const focusedBorderColor = '#389ac9';
-const focusedBoxShadow = '0 0 0 0.125em rgba(50,115,220,.25)';
-const errorBoxShadow = '0 0 0 0.125em rgba(255,56,96,.25)';
+export const focusedBorderColor = '#389ac9';
+export const focusedBoxShadow = '0 0 0 0.125em rgba(50,115,220,.25)';
+export const errorBoxShadow = '0 0 0 0.125em rgba(255,56,96,.25)';
 
 export const Fieldset = styled.div`
   width: 100%;
