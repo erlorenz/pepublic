@@ -3,23 +3,30 @@ import React, { useContext } from 'react';
 import styled from 'styled-components/macro';
 import * as Yup from 'yup';
 import Bottombar from '../../components/Bottombar';
-import DoubleRadioTrueFalse from '../../components/FieldGroup/DoubleRadioTrueFalse';
+import DoubleRadioYesNo from '../../components/FieldGroup/DoubleRadioYesNo';
 import FieldGroup from '../../components/FieldGroup/FieldGroup';
 import PageInstructions from '../../components/PageInstructions';
 import PageTitle from '../../components/PageTitle';
 import { GarmentsContext } from '../../contexts/Garments';
+import { OptionsContext } from '../../contexts/Review';
 import ReviewGarments from './ReviewGarments';
 import ReviewSchedule from './ReviewSchedule';
 
 const Review = props => {
   const garments = useContext(GarmentsContext);
+  const options = useContext(OptionsContext);
 
   const includesShirt =
     garments.garments.findIndex(g => g.slug === 'shirt') !== -1;
 
   const handleSubmit = (values, actions) => {
-    console.log(values);
-    actions.setSubmitting(false);
+    try {
+      options.setOptions(values);
+      actions.setSubmitting(false);
+      props.history.push('/order/final');
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   const schema = Yup.object().shape({
@@ -38,11 +45,13 @@ const Review = props => {
       </PageInstructions>
       <Container>
         <Formik
-          initialValues={{
-            starch: null,
-            specialInstructions: '',
-            crease: null,
-          }}
+          initialValues={
+            options.options || {
+              starch: 'no',
+              specialInstructions: '',
+              crease: 'no',
+            }
+          }
           validationSchema={schema}
           onSubmit={handleSubmit}>
           {({ submitForm, values, ...formikProps }) => (
@@ -51,7 +60,7 @@ const Review = props => {
               <ReviewGarments history={props.history} />
 
               {includesShirt && (
-                <DoubleRadioTrueFalse
+                <DoubleRadioYesNo
                   option1="Light"
                   option2="None"
                   label="Would you like starch in your shirt?"
@@ -62,7 +71,7 @@ const Review = props => {
               )}
 
               {includesShirt && (
-                <DoubleRadioTrueFalse
+                <DoubleRadioYesNo
                   option1="Yes"
                   option2="No"
                   label="Would you like us to crease your shirt sleeves?"

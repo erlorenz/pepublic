@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import NotFound from '../../components/NotFound';
 import { GarmentsProvider } from '../../contexts/Garments';
+import { OptionsProvider } from '../../contexts/Review';
 import { ScheduleProvider } from '../../contexts/Schedule';
 import Final from '../Final/Final';
 import Garments from '../Garments/Garments';
@@ -16,27 +17,34 @@ const Order = props => {
     <>
       <ScheduleProvider history={props.history}>
         <GarmentsProvider>
-          <Topbar location={props.location} />
-          <Main>
-            <Switch location={props.location}>
-              <Route
-                exact
-                path="/order/schedule"
-                component={Schedule}
-                key="1"
-              />
-              <Route
-                exact
-                path="/order/garments"
-                component={Garments}
-                key="2"
-              />
-              <Route exact path="/order/review" component={Review} key="3" />
-              <Route exact path="/order/final" component={Final} key="4" />
-              <Route exact path="/order/success" component={Success} key="5" />
-              <Route component={NotFound} key="6" />
-            </Switch>
-          </Main>
+          <OptionsProvider>
+            <Topbar location={props.location} />
+            <Main>
+              <Switch location={props.location}>
+                <Route
+                  exact
+                  path="/order/schedule"
+                  component={Schedule}
+                  key="1"
+                />
+                <Route
+                  exact
+                  path="/order/garments"
+                  component={Garments}
+                  key="2"
+                />
+                <Route exact path="/order/review" component={Review} key="3" />
+                <Route exact path="/order/final" component={Final} key="4" />
+                <Route
+                  exact
+                  path="/order/success"
+                  component={Success}
+                  key="5"
+                />
+                <Route component={NotFound} key="6" />
+              </Switch>
+            </Main>
+          </OptionsProvider>
         </GarmentsProvider>
       </ScheduleProvider>
     </>

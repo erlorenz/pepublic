@@ -39,8 +39,6 @@ const DoubleRadioYesNo = ({
   if ('yes' === currentValue) checked1 = true;
   if ('no' === currentValue) checked2 = true;
 
-  console.log('Name:', name, 'Current:', currentValue);
-
   return (
     <Fieldset>
       {label && <Label>{label}</Label>}

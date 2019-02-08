@@ -32,9 +32,13 @@ const Schedule = props => {
   const context = useContext(ScheduleContext);
 
   const handleSubmit = (values, actions) => {
-    context.setSchedule(values);
-    actions.setSubmitting(false);
-    props.history.push('/order/garments');
+    try {
+      context.setSchedule(values);
+      actions.setSubmitting(false);
+      props.history.push('/order/garments');
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   const fadeIn = useSpring(fadeInSlow);
