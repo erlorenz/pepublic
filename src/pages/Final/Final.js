@@ -4,9 +4,14 @@ import { CardElement, injectStripe } from 'react-stripe-elements';
 import styled from 'styled-components/macro';
 import * as Yup from 'yup';
 import FieldGroup from '../../components/FieldGroup/FieldGroup';
-import { Label } from '../../components/FieldGroup/FieldGroupStyles';
+import {
+  borderColor,
+  errorColor,
+  Label,
+} from '../../components/FieldGroup/FieldGroupStyles';
 import PageInstructions from '../../components/PageInstructions';
 import PageTitle from '../../components/PageTitle';
+import theme from '../../styles/theme';
 import FinalBottombar from './FinalBottombar';
 
 const _Final = props => {
@@ -20,14 +25,16 @@ const _Final = props => {
         console.log('[Token]', token);
       } catch (e) {
         console.log('Error:', e.message);
+      } finally {
+        actions.setSubmitting(false);
       }
     } else {
       console.log('Stripe not loaded');
+      actions.setSubmitting(false);
     }
-    actions.setSubmitting(false);
   };
 
-  const handleCardChange = args => {
+  const handleCardComplete = args => {
     console.log(args, args.complete);
     if (args.complete) {
       setCardComplete(true);
@@ -36,12 +43,16 @@ const _Final = props => {
     }
   };
 
-  const schema = Yup.object().shape({
-    name: Yup.string().required('Please enter your full name.'),
-    phone: Yup.required('Please enter your 10 digit phone number.'),
-    email: Yup.email('Please enter a valid email address.').required(
-      'Please enter your email address.',
-    ),
+  const finalPageSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, 'The name you entered is too short')
+      .required('Please enter your full name.'),
+    phone: Yup.string()
+      .length(10, 'Please enter exactly 10 digits.')
+      .required('Please enter your 10 digit phone number.'),
+    email: Yup.string()
+      .email('Please enter a valid email address.')
+      .required('Please enter your email address.'),
   });
 
   return (
@@ -54,7 +65,7 @@ const _Final = props => {
       <Formik
         onSubmit={handleSubmit}
         initialValues={{ name: '', phone: '', email: '' }}
-        validationSchema={schema}>
+        validationSchema={finalPageSchema}>
         {({ values, submitForm, isSubmitting, ...formikProps }) => {
           return (
             <Container>
@@ -67,8 +78,9 @@ const _Final = props => {
                 />
                 <Field
                   name="phone"
-                  label="Phone (numbers only)"
+                  label="Phone"
                   component={FieldGroup}
+                  placeholder="10 digits (numbers only)"
                   type="number"
                 />
                 <Field
@@ -78,7 +90,10 @@ const _Final = props => {
                   type="text"
                 />
                 <Label>Card details</Label>
-                <StyledCardElement onChange={handleCardChange} />
+                <StyledCardElement
+                  onChange={handleCardComplete}
+                  {...createOptions()}
+                />
                 <FinalBottombar
                   history={props.history}
                   isSubmitting={isSubmitting}
@@ -101,6 +116,10 @@ export default Final;
 
 const StyledForm = styled(Form)`
   max-width: 450px;
+
+  input::placeholder {
+    color: #aab7c4;
+  }
 `;
 
 const Container = styled.div`
@@ -109,30 +128,31 @@ const Container = styled.div`
 `;
 
 const StyledCardElement = styled(CardElement)`
-  background-color: blue;
+  background-color: white;
+  padding: 1rem 1rem;
+  border: 1px solid ${borderColor};
+  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+  border-radius: 4px;
+
+  &.StripeElement--invalid {
+    border: 1px solid ${errorColor};
+  }
 `;
 
-// const createOptions = () => {
-//   return {
-//     style: {
-//       base: {
-//         fontSize: '14px',
-//         color: '#424770',
-//         backgroundColor: 'white',
-//         fontFamily: 'inherit',
-//         padding: 'calc(0.8rem - 1px) 1rem',
-//         '::placeholder': {
-//           color: '#aab7c4',
-//         },
-//         ':focus': {
-//           borderColor: focusedBorderColor,
-//           boxShadow: focusedBoxShadow,
-//         },
-//       },
-//       invalid: {
-//         borderColor: errorColor,
-//         boxShadow: errorBoxShadow,
-//       },
-//     },
-//   };
-// };
+const createOptions = () => {
+  return {
+    style: {
+      base: {
+        fontSize: '1rem',
+        color: theme.textColor,
+        fontFamily: 'Open Sans',
+        '::placeholder': {
+          color: '#aab7c4',
+        },
+      },
+      invalid: {
+        color: errorColor,
+      },
+    },
+  };
+};

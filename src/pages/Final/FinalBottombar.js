@@ -42,6 +42,7 @@ const FinalBottombar = ({
           </SubmitButton>
         </Container>
       </Bar>
+      <Spacer />
     </>
   );
 };
@@ -61,6 +62,14 @@ const Bar = styled.div`
   border-top: 1px solid rgb(236, 239, 245);
   z-index: 10;
 
+  @media (min-width: 1000px) {
+    height: 6rem;
+  }
+`;
+
+const Spacer = styled.div`
+  height: 5rem;
+  width: 100%;
   @media (min-width: 1000px) {
     height: 6rem;
   }
