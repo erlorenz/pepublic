@@ -11,20 +11,38 @@ import {
 } from '../../components/FieldGroup/FieldGroupStyles';
 import PageInstructions from '../../components/PageInstructions';
 import PageTitle from '../../components/PageTitle';
+import { GarmentsContext } from '../../contexts/Garments';
+import { OptionsContext } from '../../contexts/Review';
+import { ScheduleContext } from '../../contexts/Schedule';
 import theme from '../../styles/theme';
 import FinalBottombar from './FinalBottombar';
 
 const _Final = props => {
   const [cardComplete, setCardComplete] = React.useState(false);
+  const { schedule } = React.useContext(ScheduleContext);
+  const { garments } = React.useContext(GarmentsContext);
+  const { options } = React.useContext(OptionsContext);
 
   const handleSubmit = async (values, actions) => {
-    console.log(values);
+    const customerDetails = { ...values };
+    console.log('CustomerDetails:', customerDetails);
+
     if (props.stripe) {
       try {
         const token = await props.stripe.createToken();
         console.log('[Token]', token);
+
+        const response = await checkout(
+          schedule,
+          garments,
+          options,
+          customerDetails,
+          token,
+        );
+
+        console.log(response);
       } catch (e) {
-        console.log('Error:', e.message);
+        console.log('Error', e.message);
       } finally {
         actions.setSubmitting(false);
       }
@@ -35,7 +53,6 @@ const _Final = props => {
   };
 
   const handleCardComplete = args => {
-    console.log(args, args.complete);
     if (args.complete) {
       setCardComplete(true);
     } else {
