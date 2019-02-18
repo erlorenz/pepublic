@@ -32,15 +32,15 @@ const _Final = props => {
         const token = await props.stripe.createToken();
         console.log('[Token]', token);
 
-        const response = await checkout(
-          schedule,
-          garments,
-          options,
-          customerDetails,
-          token,
-        );
+        // const response = await checkout(
+        //   schedule,
+        //   garments,
+        //   options,
+        //   customerDetails,
+        //   token,
+        // );
 
-        console.log(response);
+        // console.log(response);
       } catch (e) {
         console.log('Error', e.message);
       } finally {
@@ -97,6 +97,7 @@ const _Final = props => {
                   name="phone"
                   label="Phone"
                   component={FieldGroup}
+                  max="9999999999"
                   placeholder="10 digits (numbers only)"
                   type="number"
                 />
@@ -162,7 +163,7 @@ const createOptions = () => {
       base: {
         fontSize: '1rem',
         color: theme.textColor,
-        fontFamily: 'Open Sans',
+        // fontFamily: 'Open Sans',
         '::placeholder': {
           color: '#aab7c4',
         },
