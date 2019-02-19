@@ -17,6 +17,7 @@ import { ScheduleContext } from '../../contexts/Schedule';
 import theme from '../../styles/theme';
 import FinalBottombar from './FinalBottombar';
 import checkout from './checkout';
+import { Notification } from '../../components/UI';
 
 const _Final = props => {
   const [cardComplete, setCardComplete] = React.useState(false);
@@ -43,6 +44,7 @@ const _Final = props => {
         console.log(response);
       } catch (e) {
         console.log('Error on final component', e.message);
+        actions.setStatus({ error: e.message });
       } finally {
         actions.setSubmitting(false);
       }
@@ -83,7 +85,7 @@ const _Final = props => {
         onSubmit={handleSubmit}
         initialValues={{ name: '', phone: '', email: '' }}
         validationSchema={finalPageSchema}>
-        {({ values, submitForm, isSubmitting, ...formikProps }) => {
+        {({ values, submitForm, isSubmitting, status, ...formikProps }) => {
           return (
             <Container>
               <StyledForm>
@@ -112,6 +114,9 @@ const _Final = props => {
                   onChange={handleCardComplete}
                   {...createOptions()}
                 />
+                {status && status.error && (
+                  <Notification>{status.error}</Notification>
+                )}
                 <FinalBottombar
                   history={props.history}
                   isSubmitting={isSubmitting}

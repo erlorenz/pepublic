@@ -62,7 +62,7 @@ const checkout = async (
 
     return dataToSubmit;
   } catch (e) {
-    return 'Error in checkout function ' + e.message;
+    throw new Error(e.message);
   }
 };
 
