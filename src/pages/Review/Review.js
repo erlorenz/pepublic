@@ -8,7 +8,7 @@ import FieldGroup from '../../components/FieldGroup/FieldGroup';
 import PageInstructions from '../../components/PageInstructions';
 import PageTitle from '../../components/PageTitle';
 import { GarmentsContext } from '../../contexts/Garments';
-import { OptionsContext } from '../../contexts/Review';
+import { OptionsContext } from '../../contexts/Options';
 import ReviewGarments from './ReviewGarments';
 import ReviewSchedule from './ReviewSchedule';
 

@@ -5,7 +5,6 @@ import styled from 'styled-components/macro';
 import { ReactComponent as CheckedRadio } from '../../assets/img/checkedradio.svg';
 import { ReactComponent as UncheckedRadio } from '../../assets/img/uncheckedradio.svg';
 import {
-  borderColor,
   Control,
   Fieldset,
   Help,
@@ -87,12 +86,12 @@ const FlexContainer = styled(animated.div)`
   display: flex;
 `;
 
-const Placeholder = styled(FlexContainer)`
-  padding: 0.5rem;
-  border-radius: ${props => props.borderRadius};
-  border: 1px solid ${borderColor};
-  background-color: white;
-`;
+// const Placeholder = styled(FlexContainer)`
+//   padding: 0.5rem;
+//   border-radius: ${props => props.borderRadius};
+//   border: 1px solid ${borderColor};
+//   background-color: white;
+// `;
 
 const StyledCheckedRadio = styled(CheckedRadio)`
   margin-right: 0.7rem;

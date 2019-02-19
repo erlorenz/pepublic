@@ -4,7 +4,7 @@ import { Elements } from 'react-stripe-elements';
 import styled from 'styled-components/macro';
 import NotFound from '../../components/NotFound';
 import { GarmentsProvider } from '../../contexts/Garments';
-import { OptionsProvider } from '../../contexts/Review';
+import { OptionsProvider } from '../../contexts/Options';
 import { ScheduleProvider } from '../../contexts/Schedule';
 import Final from '../Final/Final';
 import Garments from '../Garments/Garments';
