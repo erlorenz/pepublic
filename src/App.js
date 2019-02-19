@@ -43,7 +43,7 @@ const App = ({ location }) => {
 
 export default App;
 
-const CenterLoading = styled(Loading)`
+export const CenterLoading = styled(Loading)`
   display: flex;
   justify-content: center;
   align-items: center;

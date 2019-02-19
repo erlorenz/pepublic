@@ -1,17 +1,23 @@
 import dayjs from 'dayjs';
 import * as Yup from 'yup';
 
-const checkout = async (
+const checkout = async ({
   schedule,
   garments,
   totalPrice,
   options,
   customerDetails,
-  tokenID,
-) => {
+  token,
+  mutate,
+}) => {
   const { pickupHour, returnHour, hotel, room } = schedule;
   const { specialInstructions, starch, crease } = options;
   const { email, phone, name } = customerDetails;
+
+  const customerOrderItems = garments.map(garment => {
+    const { id, ...rest } = garment;
+    return rest;
+  });
 
   const schema = Yup.object().shape({
     name: Yup.string().required('Please enter your name.'),
@@ -38,7 +44,7 @@ const checkout = async (
   try {
     const dataToSubmit = {
       name,
-      phone,
+      phone: phone.toString(),
       email,
       pickup_date: dayjs(pickupHour).toISOString(),
       return_date: dayjs(returnHour).toISOString(),
@@ -48,8 +54,8 @@ const checkout = async (
       starch,
       crease,
       special_instructions: specialInstructions,
-      stripeToken: tokenID,
-      customerOrderItems: garments,
+      stripeToken: token,
+      customerOrderItems,
     };
 
     try {
@@ -60,7 +66,8 @@ const checkout = async (
       console.log(e);
     }
 
-    return dataToSubmit;
+    const serverResponse = await mutate({ variables: dataToSubmit });
+    return serverResponse;
   } catch (e) {
     throw new Error(e.message);
   }

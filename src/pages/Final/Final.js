@@ -18,6 +18,9 @@ import theme from '../../styles/theme';
 import FinalBottombar from './FinalBottombar';
 import checkout from './checkout';
 import { Notification } from '../../components/UI';
+import CHECKOUT from '../../queries/checkout';
+import { Mutation } from 'react-apollo';
+import { CenterLoading } from '../../App';
 
 const _Final = props => {
   const [cardComplete, setCardComplete] = React.useState(false);
@@ -25,21 +28,23 @@ const _Final = props => {
   const { garments, totalPrice } = React.useContext(GarmentsContext);
   const { options } = React.useContext(OptionsContext);
 
-  const handleSubmit = async (values, actions) => {
+  const handleSubmit = mutate => async (values, actions) => {
     const customerDetails = { ...values };
 
     if (props.stripe) {
       try {
         const { token } = await props.stripe.createToken();
         console.log('[Token]', token.id);
-        const response = await checkout(
+
+        const response = await checkout({
           schedule,
           garments,
           totalPrice,
           options,
           customerDetails,
-          token.id,
-        );
+          token: token.id,
+          mutate,
+        });
 
         console.log(response);
       } catch (e) {
@@ -75,62 +80,82 @@ const _Final = props => {
   });
 
   return (
-    <>
-      <PageTitle>Finalize your order</PageTitle>
-      <PageInstructions>
-        Fill out the remaining information and click "Finish". When it goes
-        through you'll receive an email receipt as well as text/SMS updates.
-      </PageInstructions>
-      <Formik
-        onSubmit={handleSubmit}
-        initialValues={{ name: '', phone: '', email: '' }}
-        validationSchema={finalPageSchema}>
-        {({ values, submitForm, isSubmitting, status, ...formikProps }) => {
-          return (
-            <Container>
-              <StyledForm>
-                <Field
-                  name="name"
-                  label="Full Name"
-                  component={FieldGroup}
-                  type="text"
-                />
-                <Field
-                  name="phone"
-                  label="Phone"
-                  component={FieldGroup}
-                  max="9999999999"
-                  placeholder="10 digits (numbers only)"
-                  type="number"
-                />
-                <Field
-                  name="email"
-                  label="Email"
-                  component={FieldGroup}
-                  type="text"
-                />
-                <Label>Card details</Label>
-                <StyledCardElement
-                  onChange={handleCardComplete}
-                  {...createOptions()}
-                />
-                {status && status.error && (
-                  <Notification>{status.error}</Notification>
-                )}
-                <FinalBottombar
-                  history={props.history}
-                  isSubmitting={isSubmitting}
-                  submitForm={submitForm}
-                  values={values}
-                  cardComplete={cardComplete}
-                  {...props}
-                />
-              </StyledForm>
-            </Container>
-          );
-        }}
-      </Formik>
-    </>
+    // Apollo Mutation
+
+    <Mutation mutation={CHECKOUT}>
+      {(mutate, { loading, error }) => {
+        // If loading
+        if (loading) return <CenterLoading />;
+
+        // Everything else
+        return (
+          <>
+            <PageTitle>Finalize your order</PageTitle>
+            <PageInstructions>
+              Fill out the remaining information and click "Finish". When it
+              goes through you'll receive an email receipt as well as text/SMS
+              updates.
+            </PageInstructions>
+            <Formik
+              onSubmit={handleSubmit(mutate)}
+              initialValues={{ name: '', phone: '', email: '' }}
+              validationSchema={finalPageSchema}>
+              {({
+                values,
+                submitForm,
+                isSubmitting,
+                status,
+                ...formikProps
+              }) => {
+                return (
+                  <Container>
+                    <StyledForm>
+                      <Field
+                        name="name"
+                        label="Full Name"
+                        component={FieldGroup}
+                        type="text"
+                      />
+                      <Field
+                        name="phone"
+                        label="Phone"
+                        component={FieldGroup}
+                        max="9999999999"
+                        placeholder="10 digits (numbers only)"
+                        type="number"
+                      />
+                      <Field
+                        name="email"
+                        label="Email"
+                        component={FieldGroup}
+                        type="text"
+                      />
+                      <Label>Card details</Label>
+                      <StyledCardElement
+                        onChange={handleCardComplete}
+                        {...createOptions()}
+                      />
+                      {status && status.error && (
+                        <Notification>{status.error}</Notification>
+                      )}
+                      {error && <Notification>Graphql Error</Notification>}
+                      <FinalBottombar
+                        history={props.history}
+                        isSubmitting={isSubmitting}
+                        submitForm={submitForm}
+                        values={values}
+                        cardComplete={cardComplete}
+                        {...props}
+                      />
+                    </StyledForm>
+                  </Container>
+                );
+              }}
+            </Formik>
+          </>
+        );
+      }}
+    </Mutation>
   );
 };
 

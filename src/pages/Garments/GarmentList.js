@@ -2,7 +2,7 @@ import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { Card } from '../../components/UI';
-import priceList from '../../priceList';
+import priceList from './priceList';
 import { scaleUpAndFadeIn } from '../../styles/transitions';
 import formatPrice from '../../utils/formatPrice';
 import GarmentListItem from './GarmentListItem';
