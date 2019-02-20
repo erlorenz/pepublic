@@ -56,12 +56,6 @@ export const returnDate = pickupHourUnixString => {
   const selectedPickupHour = getTime(pickupHourUnixString);
 
   if (selectedPickupHour.hour > 16) {
-    // console.log(
-    //   'Getting: ',
-    //   selectedPickupHour,
-    //   'Returning: ',
-    //   getZeroFollowing(selectedPickupHour),
-    // );
     return { val2: getZeroFollowing(selectedPickupHour) };
   }
 
@@ -73,11 +67,14 @@ export const returnDate = pickupHourUnixString => {
 
 /* RETURN TIMES */
 
-export const returnTimes = (selectedReturnDateUnix, selectedPickupTimeUnix) => {
-  if (!selectedReturnDateUnix) return [];
+export const returnTimes = (
+  selectedReturnDateUnixString,
+  selectedPickupTimeUnixString,
+) => {
+  if (!selectedReturnDateUnixString || !selectedPickupTimeUnixString) return [];
 
-  const selectedReturnDate = getTime(selectedReturnDateUnix);
-  const selectedPickupTime = getTime(selectedPickupTimeUnix);
+  const selectedReturnDate = getTime(selectedReturnDateUnixString);
+  const selectedPickupTime = getTime(selectedPickupTimeUnixString);
 
   const returnIsSameDay = selectedPickupTime.day === selectedReturnDate.day;
 
