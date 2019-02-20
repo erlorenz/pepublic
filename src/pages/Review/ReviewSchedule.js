@@ -13,35 +13,40 @@ const ReviewSchedule = ({ history }) => {
 
   const fadeIn = useSpring(fadeInSlow);
 
-  const description = unix => {
-    const time = getTime(unix);
-    if (time.date() === getNow().date()) return 'Today';
-    if (time.date() - 1 === getNow().date()) return 'Tomorrow';
-    if (time.date() - 2 === getNow().date()) return time.format('dddd');
+  const description = dt => {
+    if (dt.day === getNow().day) return 'Today';
+    if (dt.day - 1 === getNow().day) return 'Tomorrow';
+    if (dt.day - 2 === getNow().day) return dt.toFormat('EEEE');
     return '';
   };
 
-  const pickupHr = context.schedule.pickupHour;
+  const pickupHr = getTime(context.schedule.pickupHour);
 
-  const returnHr = context.schedule.returnHour;
+  const returnHr = getTime(context.schedule.returnHour);
 
   return (
     <Container onClick={clickHandler} style={fadeIn}>
       <Row>
         <Div1>Pickup:</Div1>
         <Div2>
-          {`${description(pickupHr)}, ${getTime(pickupHr).month()}/${getTime(
-            pickupHr,
-          ).date()} after ${getTime(pickupHr).format('h:mm a')}`}
+          {`${description(pickupHr)}, ${pickupHr.month}/${
+            pickupHr.day
+          } after ${pickupHr.toFormat('h:mm a')} PST`}
         </Div2>
       </Row>
       <Row>
         <Div1>Return:</Div1>
-        <Div2>{`${description(returnHr)}, ${getTime(
-          returnHr,
-        ).month()}/${getTime(returnHr).date()} by ${getTime(returnHr).format(
-          'h:mm a',
-        )}`}</Div2>
+        <Div2>{`${description(returnHr)}, ${returnHr.month}/${
+          returnHr.day
+        } by ${returnHr.toFormat('h:mm a')} PST`}</Div2>
+      </Row>
+      <Row>
+        <Div1>Hotel:</Div1>
+        <Div2>{context.schedule.hotel}</Div2>
+      </Row>
+      <Row>
+        <Div1>Room:</Div1>
+        <Div2>{context.schedule.room}</Div2>
       </Row>
     </Container>
   );
