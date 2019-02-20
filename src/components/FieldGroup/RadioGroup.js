@@ -43,19 +43,19 @@ const RadioGroup = ({
       <FlexContainer style={slideHeight}>
         {times.map(time => (
           <RadioGroupLabel
-            key={time}
-            checked={time.toString() === selectedHour}
+            key={time.hour}
+            checked={time.valueOf().toString() === selectedHour}
             left>
-            {time.toString() === selectedHour ? (
+            {time.valueOf().toString() === selectedHour ? (
               <StyledCheckedRadio />
             ) : (
               <StyledUncheckedRadio />
             )}
-            {getTime(time).format('h:mm a')}
+            {time.toFormat('h:mm a')}
             <RadioInput
               name={name}
               type="radio"
-              value={time}
+              value={time.valueOf().toString()}
               onChange={handleChange}
               onBlur={handleBlur}
             />

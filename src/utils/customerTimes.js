@@ -14,7 +14,7 @@ const times = {
 const pickupDelta = 2;
 const returnDelta = 4;
 
-/* PICKUP DATE */
+/* PICKUP DATE (returns DateTime objects) */
 
 export const pickupDate = () => {
   const now = getNow();
@@ -26,24 +26,24 @@ export const pickupDate = () => {
   return { val2: getZeroTomorrow };
 };
 
-/* PICKUP TIMES */
+/* PICKUP TIMES (returns DateTime objects) */
 
-export const pickupTimes = selectedPickupDateUnix => {
-  if (!selectedPickupDateUnix) return [];
+export const pickupTimes = selectedPickupDateUnixString => {
+  if (!selectedPickupDateUnixString) return [];
 
-  const selectedPickupDate = getTime(selectedPickupDateUnix);
+  const selectedPickupDate = getTime(selectedPickupDateUnixString);
 
-  const pickupIsToday = getNow().date() === selectedPickupDate.date();
+  const pickupIsToday = getNow().date === selectedPickupDate.date;
+
+  console.log('Pickup is today?', pickupIsToday);
 
   if (!pickupIsToday)
-    return times.pickup.map(hour =>
-      getZeroTomorrow.set('hour', hour).valueOf(),
-    );
+    return times.pickup.map(hour => getZeroTomorrow.set({ hour }));
 
   const filteredTimes = times.pickup.filter(
-    time => time >= getNow().hour() + pickupDelta,
+    time => time >= getNow().hour + pickupDelta,
   );
-  return filteredTimes.map(hour => getZeroToday.set('hour', hour).valueOf());
+  return filteredTimes.map(hour => getZeroToday.set({ hour }));
 };
 
 /* RETURN DATE */
