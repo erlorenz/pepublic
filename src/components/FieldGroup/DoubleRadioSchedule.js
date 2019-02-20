@@ -41,9 +41,9 @@ const DoubleRadio = ({
 
   const description = unix => {
     const time = getTime(unix);
-    if (time.date() === getNow().date()) return 'Today, ';
-    if (time.date() - 1 === getNow().date()) return 'Tomorrow, ';
-    if (time.date() - 2 === getNow().date()) return time.format('dddd') + ', ';
+    if (time.day === getNow().day) return 'Today, ';
+    if (time.day - 1 === getNow().day) return 'Tomorrow, ';
+    if (time.day - 2 === getNow().day) return time.format('dddd') + ', ';
     return '';
   };
 
@@ -60,8 +60,9 @@ const DoubleRadio = ({
             {times.val1 && (
               <RadioLabel style={springProps} checked={checked1} left>
                 {checked1 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
-                {`${description(times.val1)} ${times.val1.month() +
-                  1}/${times.val1.date()}`}
+                {`${description(times.val1)} ${times.val1.month}/${
+                  times.val1.day
+                }`}
                 <RadioInput
                   name={name}
                   type="radio"
@@ -76,8 +77,9 @@ const DoubleRadio = ({
             {times.val2 && (
               <RadioLabel style={springProps} checked={checked2}>
                 {checked2 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
-                {`${description(times.val2)} ${times.val2.month() +
-                  1}/${times.val2.date()}`}
+                {`${description(times.val2)} ${times.val2.month}/${
+                  times.val2.day
+                }`}
                 <RadioInput
                   name={name}
                   type="radio"

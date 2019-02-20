@@ -74,7 +74,7 @@ const Schedule = props => {
                   values={values}
                   formikProps={formikProps}
                 />
-                <RadioGroup
+                {/* <RadioGroup
                   label="Pickup Time"
                   name="pickupHour"
                   times={pickupTimes(values.pickupDate) || []}
@@ -98,7 +98,7 @@ const Schedule = props => {
                   }
                   values={values}
                   formikProps={formikProps}
-                />
+                /> */}
               </Div>
               <Div key="3">
                 <Field
