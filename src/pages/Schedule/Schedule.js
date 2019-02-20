@@ -48,7 +48,7 @@ const Schedule = props => {
       <PageTitle>Where are we going?</PageTitle>
       <PageInstructions>
         We will pick your garments up after the selected pickup time and return
-        them before the selected return time.
+        them before the selected return time. (All times are in Pacific Time)
       </PageInstructions>
       <Container style={fadeIn}>
         <Formik
