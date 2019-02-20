@@ -6,6 +6,7 @@ export const getNow = () => {
       timeZone: 'America/Los_Angeles',
     });
 
+    console.log(dayjs(pacificTime));
     return dayjs(pacificTime);
   } catch (e) {
     console.log(e.message);

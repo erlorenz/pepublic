@@ -30,7 +30,7 @@ const RadioGroup = ({
   const icon =
     touched[name] && errors[name] ? <Icon icon={faExclamationCircle} /> : '';
 
-  const selectedHour = values[name] ? getTime(values[name]) : 0;
+  const selectedHour = values[name] ? values[name] : 0;
 
   const slideHeight = useSpring({
     from: { height: 0 },
@@ -44,9 +44,9 @@ const RadioGroup = ({
         {times.map(time => (
           <RadioGroupLabel
             key={time}
-            checked={time === selectedHour.valueOf()}
+            checked={time.toString() === selectedHour}
             left>
-            {time === selectedHour.valueOf() ? (
+            {time.toString() === selectedHour ? (
               <StyledCheckedRadio />
             ) : (
               <StyledUncheckedRadio />
