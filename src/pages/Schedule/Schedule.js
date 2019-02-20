@@ -82,7 +82,7 @@ const Schedule = props => {
                   formikProps={formikProps}
                 />
               </Div>
-              {/* <Div key="2">
+              <Div key="2">
                 <DoubleRadioSchedule
                   times={returnDate(values.pickupHour) || ''}
                   label="Return Date"
@@ -90,7 +90,7 @@ const Schedule = props => {
                   values={values}
                   formikProps={formikProps}
                 />
-                <RadioGroup
+                {/* <RadioGroup
                   label="Return Time"
                   name="returnHour"
                   times={
@@ -98,8 +98,8 @@ const Schedule = props => {
                   }
                   values={values}
                   formikProps={formikProps}
-                />
-              </Div> */}
+                /> */}
+              </Div>
               <Div key="3">
                 <Field
                   component={FieldGroup}

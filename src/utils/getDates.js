@@ -37,5 +37,4 @@ export const getZeroToday = getZero(getNow());
 
 export const getZeroTomorrow = getZero(getNow().plus({ days: 1 }));
 
-export const getZeroFollowing = date =>
-  getZero(getTime(date)).plus({ days: 2 });
+export const getZeroFollowing = date => getZero(date).plus({ days: 1 });

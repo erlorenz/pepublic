@@ -39,11 +39,10 @@ const DoubleRadio = ({
 
   if (times.val2) checked2 = values[name] === times.val2.valueOf().toString();
 
-  const description = unix => {
-    const time = getTime(unix);
-    if (time.day === getNow().day) return 'Today, ';
-    if (time.day - 1 === getNow().day) return 'Tomorrow, ';
-    if (time.day - 2 === getNow().day) return time.format('dddd') + ', ';
+  const description = dt => {
+    if (dt.day === getNow().day) return 'Today, ';
+    if (dt.day - 1 === getNow().day) return 'Tomorrow, ';
+    if (dt.day - 2 === getNow().day) return dt.toFormat('EEEE') + ', ';
     return '';
   };
 
