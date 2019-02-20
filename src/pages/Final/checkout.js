@@ -34,7 +34,7 @@ const checkout = async ({
     crease: Yup.string().required(
       'Choose if you would like your dress shirt sleeves creased.',
     ),
-    special_instructions: Yup.string(),
+    special_instructions: Yup.string().nullable(),
     stripeToken: Yup.string().required('Token missing.'),
     customerOrderItems: Yup.array()
       .min(1, '0 items selected.')
@@ -46,8 +46,8 @@ const checkout = async ({
       name,
       phone: phone.toString(),
       email,
-      pickup_date: dayjs(pickupHour).toISOString(),
-      return_date: dayjs(returnHour).toISOString(),
+      pickup_date: pickupHour,
+      return_date: returnHour,
       total_price: totalPrice(),
       hotel,
       room,
@@ -57,6 +57,8 @@ const checkout = async ({
       stripeToken: token,
       customerOrderItems,
     };
+
+    console.log(dataToSubmit);
 
     try {
       await schema.validate(dataToSubmit);
