@@ -103,7 +103,7 @@ const Schedule = props => {
               <Div key="3">
                 <Field
                   component={FieldGroup}
-                  label="Hotel/Casino"
+                  label="Hotel/Casino/Condos"
                   name="hotel"
                   select
                   values={values}

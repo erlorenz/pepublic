@@ -28,7 +28,7 @@ const GarmentListItem = ({ children, list, garment }) => {
 
   const driftAway = useSpring({
     from: { opacity: 0, transform: 'scale(0)' },
-    to: { opacity: 1, transform: 'scale(3.0)' },
+    to: { opacity: 0.6, transform: 'scale(4.0)' },
     config: config.molasses,
   });
 
@@ -49,8 +49,8 @@ export const Div = styled.button`
   display: flex;
   justify-content: space-between;
   padding: 0.4rem 0;
-  position: relative;
   cursor: pointer;
+  position: relative;
   border: none;
   background-color: transparent;
   color: ${props => props.theme.textColor};
@@ -76,7 +76,7 @@ const Quantity = animated(styled.div`
   background: #788588;
   color: white;
   border-radius: 4px;
-  opacity: 0.8;
+  opacity: 0.6;
   @media (min-width: 1000px) {
     display: none;
   }

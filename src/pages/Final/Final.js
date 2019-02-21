@@ -21,6 +21,7 @@ import { Notification } from '../../components/UI';
 import CHECKOUT from '../../queries/checkout';
 import { Mutation } from 'react-apollo';
 import { CenterLoading } from '../../App';
+import { Redirect } from 'react-router-dom';
 
 const _Final = props => {
   const [cardComplete, setCardComplete] = React.useState(false);
@@ -83,7 +84,13 @@ const _Final = props => {
     // Apollo Mutation
 
     <Mutation mutation={CHECKOUT}>
-      {(mutate, { loading, error }) => {
+      {(mutate, { loading, error, data }) => {
+        // If it receives data (card was charged)
+        if (data)
+          return (
+            <Redirect to={{ pathname: '/order/success', state: { data } }} />
+          );
+
         // If loading
         if (loading) return <CenterLoading />;
 

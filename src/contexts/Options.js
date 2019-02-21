@@ -21,11 +21,16 @@ export const OptionsProvider = ({ children }) => {
     setOptions(values);
   };
 
+  const clearOptions = () => {
+    setOptions({});
+  };
+
   return (
     <OptionsContext.Provider
       value={{
         options,
         setOptions: updateOptions,
+        clearOptions,
       }}>
       {children}
     </OptionsContext.Provider>

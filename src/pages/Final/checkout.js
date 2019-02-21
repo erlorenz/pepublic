@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import * as Yup from 'yup';
 
 const checkout = async ({

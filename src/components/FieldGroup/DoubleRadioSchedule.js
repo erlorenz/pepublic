@@ -4,7 +4,7 @@ import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { ReactComponent as CheckedRadio } from '../../assets/img/checkedradio.svg';
 import { ReactComponent as UncheckedRadio } from '../../assets/img/uncheckedradio.svg';
-import { getNow, getTime } from '../../utils/getDates';
+import { getNow } from '../../utils/getDates';
 import {
   borderColor,
   Control,

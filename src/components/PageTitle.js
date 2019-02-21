@@ -3,10 +3,14 @@ import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { fadeInSlow } from '../styles/transitions';
 
-const PageTitle = ({ children }) => {
+const PageTitle = ({ children, className }) => {
   const fadeIn = useSpring(fadeInSlow);
 
-  return <H1 style={fadeIn}>{children}</H1>;
+  return (
+    <H1 className={className} style={fadeIn}>
+      {children}
+    </H1>
+  );
 };
 
 export default PageTitle;

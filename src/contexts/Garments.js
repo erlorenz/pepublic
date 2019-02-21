@@ -41,6 +41,10 @@ export const GarmentsProvider = ({ children }) => {
     }
   };
 
+  const clearGarments = () => {
+    setGarments([]);
+  };
+
   const totalPrice = () => {
     const initialValue = 0;
     const callback = (acc, garment) => acc + garment.price * garment.quantity;
@@ -55,6 +59,7 @@ export const GarmentsProvider = ({ children }) => {
         addGarment,
         removeGarment,
         totalPrice,
+        clearGarments,
       }}>
       {children}
     </GarmentsContext.Provider>

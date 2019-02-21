@@ -24,11 +24,16 @@ export const ScheduleProvider = ({ children, history }) => {
     setSchedule(values);
   };
 
+  const clearSchedule = () => {
+    setSchedule({});
+  };
+
   return (
     <ScheduleContext.Provider
       value={{
         schedule,
         setSchedule: updateSchedule,
+        clearSchedule,
       }}>
       {children}
     </ScheduleContext.Provider>
