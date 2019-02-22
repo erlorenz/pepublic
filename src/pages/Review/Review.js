@@ -11,13 +11,14 @@ import { GarmentsContext } from '../../contexts/Garments';
 import { OptionsContext } from '../../contexts/Options';
 import ReviewGarments from './ReviewGarments';
 import ReviewSchedule from './ReviewSchedule';
+import terms from './terms';
 
 const Review = props => {
   const garments = useContext(GarmentsContext);
   const options = useContext(OptionsContext);
 
-  const includesShirt =
-    garments.garments.findIndex(g => g.slug === 'shirt') !== -1;
+  const includesDressShirt =
+    garments.garments.findIndex(g => g.slug === 'shirtdress') !== -1;
 
   const handleSubmit = (values, actions) => {
     try {
@@ -41,7 +42,8 @@ const Review = props => {
       <PageInstructions>
         Review the selected times and garments - you can always go back to edit
         by clicking on the section. Also choose any available options and/or
-        provide special instructions.
+        provide special instructions. Our terms are conditions are below as
+        well.
       </PageInstructions>
       <Container>
         <Formik
@@ -59,7 +61,7 @@ const Review = props => {
               <ReviewSchedule history={props.history} />
               <ReviewGarments history={props.history} />
 
-              {includesShirt && (
+              {includesDressShirt && (
                 <DoubleRadioYesNo
                   option1="Light"
                   option2="None"
@@ -70,7 +72,7 @@ const Review = props => {
                 />
               )}
 
-              {includesShirt && (
+              {includesDressShirt && (
                 <DoubleRadioYesNo
                   option1="Yes"
                   option2="No"
@@ -94,6 +96,9 @@ const Review = props => {
           )}
         </Formik>
       </Container>
+      <Terms>
+        <P>{terms}</P>
+      </Terms>
     </>
   );
 };
@@ -107,4 +112,19 @@ const Container = styled.div`
 
 const StyledForm = styled(Form)`
   max-width: 450px;
+`;
+
+const Terms = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6rem;
+`;
+
+const P = styled.p`
+  font-size: 0.8rem;
+
+  @media (min-width: 500px) {
+    width: 70%;
+  }
 `;

@@ -9,8 +9,8 @@ import {
 
 // Hours available for pickup and return
 const times = {
-  pickup: [14, 16, 18, 20],
-  return: [7, 16, 18, 20],
+  pickup: [14, 15, 16, 17, 18, 19],
+  return: [7, 16, 17, 18, 19, 20],
 };
 
 // From the current hour 0 minutes to first allowed pickup time

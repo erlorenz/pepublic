@@ -93,7 +93,7 @@ const Success = ({ location }) => {
             <Instructions>
               We received your order but there may be an issue with sending text
               updates. Rest assured we are looking at it now and if necessary
-              will contact you via email.
+              will contact you via email or phone.
             </Instructions>
             <Instructions>
               You can also reach out to us at 702-620-3315 or
@@ -107,7 +107,11 @@ const Success = ({ location }) => {
             <Instructions>
               We received your order but there may be an issue sending the email
               receipt. Rest assured we are looking at it now and if necessary
-              will contact you.
+              will contact you via email or phone.
+            </Instructions>
+            <Instructions>
+              You can also reach out to us at 702-620-3315 or
+              support@pressexpresslv.com.
             </Instructions>
           </>
         )}
@@ -117,6 +121,10 @@ const Success = ({ location }) => {
               We received your order but there was an issue sending the email
               receipt and with text updates. Rest assured we are looking at it
               now and if necessary will contact you.
+            </Instructions>
+            <Instructions>
+              You can also reach out to us at 702-620-3315 or
+              support@pressexpresslv.com.
             </Instructions>
           </>
         )}

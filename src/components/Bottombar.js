@@ -88,7 +88,6 @@ const Bottombar = ({
           </ForwardButton>
         </Container>
       </ForwardAndBack>
-      <Spacer />
     </>
   );
 };
@@ -153,13 +152,4 @@ const SpanLeft = styled.span`
 
 const SpanRight = styled.span`
   margin-left: 0.6rem;
-`;
-
-const Spacer = styled.div`
-  width: 100%;
-  height: 5rem;
-
-  @media (min-width: 1000px) {
-    height: 6rem;
-  }
 `;

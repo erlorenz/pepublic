@@ -47,7 +47,7 @@ const checkout = async ({
       email,
       pickup_date: pickupHour,
       return_date: returnHour,
-      total_price: totalPrice(),
+      total_price: totalPrice > 3000 ? totalPrice() : 3000,
       hotel,
       room,
       starch,
