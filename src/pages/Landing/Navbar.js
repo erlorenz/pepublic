@@ -1,31 +1,27 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { ReactComponent as Logo } from '../../assets/img/pressexpresslogo.svg';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
-function Navbar() {
+function Navbar({ handleClick }) {
   return (
     <Div>
-      <Logo />
-      <HamburgerButton>
+      <HamburgerButton onClick={handleClick}>
         <FontAwesomeIcon icon={faBars} />
       </HamburgerButton>
+      <LogoContainer>
+        <Logo />
+      </LogoContainer>
       <Nav>
-        <NavItem>Schedule Now</NavItem>
+        <NavItem schedule>
+          <StyledLink to="/order/schedule">SCHEDULE</StyledLink>
+        </NavItem>
         <NavItem>Our Services</NavItem>
         <NavItem>About Us</NavItem>
         <NavItem>Contact</NavItem>
       </Nav>
-      <MobileMenu>
-        <CloseMenuButton>
-          <FontAwesomeIcon icon={faTimes} />
-        </CloseMenuButton>
-        <MenuItem>Schedule Now</MenuItem>
-        <MenuItem>Our Services</MenuItem>
-        <MenuItem>About Us</MenuItem>
-        <MenuItem>Contact</MenuItem>
-      </MobileMenu>
     </Div>
   );
 }
@@ -35,28 +31,51 @@ export default Navbar;
 const Div = styled.div`
   height: 4rem;
   display: flex;
-  flex-direction: column;
+  padding: 0 2rem;
+  justify-content: space-between;
 
-  @media screen and (min-width: 500px) {
+  @media screen and (min-width: 1000px) {
     height: 5rem;
-    flex-direction: row;
   }
 `;
 
 const HamburgerButton = styled.button`
-  padding-left: 1rem;
-`;
+  background-color: transparent;
+  padding: 0;
+  border: none;
 
-const CloseMenuButton = styled.button`
-  padding-left: 1rem;
+  :focus {
+    outline: none;
+  }
+
+  @media (min-width: 1000px) {
+    display: none;
+  }
 `;
 
 const Nav = styled.nav`
   display: flex;
+  align-items: center;
 `;
 
-const MenuItem = styled.div``;
+const NavItem = styled.div`
+  display: ${props => (props.schedule ? 'flex' : 'none')};
+  font-size: 0.8rem;
+  font-weight: 700;
 
-const NavItem = styled.div``;
+  @media (min-width: 1000px) {
+    display: flex;
+  }
+`;
 
-const MobileMenu = styled.nav``;
+const LogoContainer = styled.div`
+  width: 120px;
+  position: absolute;
+  left: 50%;
+  top: 2rem;
+  transform: translate(-50%, -50%);
+`;
+
+const StyledLink = styled(Link)`
+  line-height: 4rem;
+`;

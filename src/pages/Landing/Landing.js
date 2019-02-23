@@ -1,16 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
+import Navbar from './Navbar';
+import SideMenu from './SideMenu';
 
 const Landing = () => {
+  const [sideMenuOpen, setSideMenuOpen] = React.useState(true);
+
+  const handleClick = () => setSideMenuOpen(!sideMenuOpen);
+
   return (
-    <div>
-      LANDING PAGE
-      <Link to="/order/schedule">Schedule Now</Link>
-    </div>
+    <>
+      <SideMenu handleClick={handleClick} sideMenuIsOpen={sideMenuOpen} />
+      <Main>
+        <Navbar handleClick={handleClick} />
+      </Main>
+    </>
   );
 };
 
 export default Landing;
 
-const test = styled.div``;
+const Main = styled.main`
+  min-height: 100vh;
+  width: 100vw;
+`;
+
+// const Wrapper = styled.div`
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   overflow: hidden;
+// `;
