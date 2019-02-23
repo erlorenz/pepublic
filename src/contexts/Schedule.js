@@ -3,15 +3,17 @@ import React, { createContext, useEffect, useState } from 'react';
 export const ScheduleContext = createContext();
 
 export const ScheduleProvider = ({ children, history }) => {
+  const blankValues = {
+    pickupDate: '',
+    pickupHour: '',
+    returnDate: '',
+    returnHour: '',
+    hotel: '',
+    room: '',
+  };
+
   const initialState = () =>
-    JSON.parse(localStorage.getItem('schedule')) || {
-      pickupDate: '',
-      pickupHour: '',
-      returnDate: '',
-      returnHour: '',
-      hotel: '',
-      room: '',
-    };
+    JSON.parse(localStorage.getItem('schedule')) || blankValues;
 
   const [schedule, setSchedule] = useState(initialState);
 
@@ -25,7 +27,7 @@ export const ScheduleProvider = ({ children, history }) => {
   };
 
   const clearSchedule = () => {
-    setSchedule({});
+    setSchedule(blankValues);
   };
 
   return (

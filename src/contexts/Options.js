@@ -3,12 +3,14 @@ import React, { createContext, useEffect, useState } from 'react';
 export const OptionsContext = createContext();
 
 export const OptionsProvider = ({ children }) => {
+  const blankValues = {
+    crease: 'no',
+    starch: 'no',
+    specialInstructions: '',
+  };
+
   const initialState = () =>
-    JSON.parse(localStorage.getItem('options')) || {
-      crease: 'no',
-      starch: 'no',
-      specialInstructions: '',
-    };
+    JSON.parse(localStorage.getItem('options')) || blankValues;
 
   const [options, setOptions] = useState(initialState);
 
@@ -22,7 +24,7 @@ export const OptionsProvider = ({ children }) => {
   };
 
   const clearOptions = () => {
-    setOptions({});
+    setOptions(blankValues);
   };
 
   return (

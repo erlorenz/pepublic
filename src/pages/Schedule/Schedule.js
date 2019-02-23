@@ -53,14 +53,16 @@ const Schedule = props => {
       <Container style={fadeIn}>
         <Formik
           initialValues={
-            context.schedule || {
-              pickupDate: '',
-              pickupHour: '',
-              returnDate: '',
-              returnHour: '',
-              hotel: '',
-              room: '',
-            }
+            context.schedule
+              ? context.schedule
+              : {
+                  pickupDate: '',
+                  pickupHour: '',
+                  returnDate: '',
+                  returnHour: '',
+                  hotel: '',
+                  room: '',
+                }
           }
           validationSchema={schema}
           onSubmit={handleSubmit}>

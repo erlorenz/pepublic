@@ -40,6 +40,12 @@ const checkout = async ({
       .required('No items selected.'),
   });
 
+  // Make sure minimum price works
+  let total_price = totalPrice();
+  if (total_price < 3000) {
+    total_price = 3000;
+  }
+
   try {
     const dataToSubmit = {
       name,
@@ -47,7 +53,7 @@ const checkout = async ({
       email,
       pickup_date: pickupHour,
       return_date: returnHour,
-      total_price: totalPrice > 3000 ? totalPrice() : 3000,
+      total_price,
       hotel,
       room,
       starch,
