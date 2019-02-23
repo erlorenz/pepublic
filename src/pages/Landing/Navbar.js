@@ -4,6 +4,7 @@ import { ReactComponent as Logo } from '../../assets/img/pressexpresslogo.svg';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import NavItem from './NavItem';
 
 function Navbar({ handleClick }) {
   return (
@@ -15,13 +16,15 @@ function Navbar({ handleClick }) {
         <Logo />
       </LogoContainer>
       <Nav>
-        <NavItem schedule>
-          <StyledLink to="/order/schedule">SCHEDULE</StyledLink>
-        </NavItem>
-        <NavItem>Our Services</NavItem>
-        <NavItem>About Us</NavItem>
-        <NavItem>Contact</NavItem>
+        <Ul>
+          <NavItem>Our Services</NavItem>
+          <NavItem>About Us</NavItem>
+          <NavItem>Contact</NavItem>
+        </Ul>
       </Nav>
+      <Schedule schedule>
+        <StyledLink to="/order/schedule">SCHEDULE</StyledLink>
+      </Schedule>
     </Div>
   );
 }
@@ -36,6 +39,8 @@ const Div = styled.div`
 
   @media screen and (min-width: 1000px) {
     height: 5rem;
+    padding: 0 5%;
+    justify-content: flex-end;
   }
 `;
 
@@ -54,18 +59,19 @@ const HamburgerButton = styled.button`
 `;
 
 const Nav = styled.nav`
-  display: flex;
+  display: none;
   align-items: center;
-`;
-
-const NavItem = styled.div`
-  display: ${props => (props.schedule ? 'flex' : 'none')};
-  font-size: 0.8rem;
-  font-weight: 700;
 
   @media (min-width: 1000px) {
     display: flex;
   }
+`;
+
+const Schedule = styled.div`
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 700;
+  align-items: center;
 `;
 
 const LogoContainer = styled.div`
@@ -74,8 +80,30 @@ const LogoContainer = styled.div`
   left: 50%;
   top: 2rem;
   transform: translate(-50%, -50%);
+
+  @media (min-width: 1000px) {
+    width: 200px;
+    left: 5%;
+    top: 2.5rem;
+    transform: translate(0, -50%);
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const StyledLink = styled(Link)`
   line-height: 4rem;
+
+  @media (min-width: 1000px) {
+    line-height: inherit;
+    background-color: lightblue;
+    color: white;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+`;
+
+const Ul = styled.ul`
+  display: flex;
+  align-items: center;
 `;

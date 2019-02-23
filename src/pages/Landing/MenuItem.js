@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components/macro';
+import { Link as ScrollLink } from 'react-scroll';
 
 function MenuItem({ icon, schedule, children }) {
   if (schedule) {
@@ -18,12 +19,12 @@ function MenuItem({ icon, schedule, children }) {
   }
   return (
     <Li>
-      <StyledLink to="">
+      <StyledScrollLink to="">
         <Icon>
           <FontAwesomeIcon icon={icon} />
         </Icon>
         {children}
-      </StyledLink>
+      </StyledScrollLink>
     </Li>
   );
 }
@@ -49,6 +50,8 @@ const StyledLink = styled(Link)`
   width: 100%;
 `;
 
-const StyledScrollLink = styled(Link)`
+const StyledScrollLink = styled(ScrollLink)`
   padding: 0.6rem 0;
+  padding-left: 0.5rem;
+  width: 100%;
 `;
