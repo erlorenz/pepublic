@@ -13,6 +13,10 @@ const Landing = () => {
       <SideMenu handleClick={handleClick} sideMenuIsOpen={sideMenuOpen} />
       <Main>
         <Navbar handleClick={handleClick} />
+        <Section id="howitworks" />
+        <Section id="services" />
+        <Section id="about" />
+        <Section id="contact" />
       </Main>
     </>
   );
@@ -33,3 +37,9 @@ const Main = styled.main`
 //   right: 0;
 //   overflow: hidden;
 // `;
+
+const Section = styled.section`
+  background-color: lightgray;
+  border-bottom: 3px solid blue;
+  height: 500px;
+`;

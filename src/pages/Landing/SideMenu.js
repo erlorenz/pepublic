@@ -22,12 +22,18 @@ function SideMenu({ handleClick, sideMenuIsOpen }) {
         <FontAwesomeIcon icon={faTimes} />
       </CloseMenuButton>
       <Ul>
-        <MenuItem schedule icon={faClock}>
+        <MenuItem handleClick={handleClick} schedule icon={faClock}>
           Schedule Now
         </MenuItem>
-        <MenuItem icon={faTshirt}>Our Services</MenuItem>
-        <MenuItem icon={faEllipsisH}>About Us</MenuItem>
-        <MenuItem icon={faPhone}>Contact</MenuItem>
+        <MenuItem handleClick={handleClick} icon={faTshirt} to="services">
+          Our Services
+        </MenuItem>
+        <MenuItem handleClick={handleClick} icon={faEllipsisH} to="about">
+          About Us
+        </MenuItem>
+        <MenuItem handleClick={handleClick} icon={faPhone} to="contact">
+          Contact
+        </MenuItem>
       </Ul>
     </MobileMenu>
   );

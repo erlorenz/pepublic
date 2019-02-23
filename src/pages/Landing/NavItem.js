@@ -2,10 +2,17 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { Link } from 'react-scroll';
 
-function NavItem({ children }) {
+function NavItem({ children, section }) {
   return (
     <li>
-      <StyledLink>{children}</StyledLink>
+      <StyledLink
+        to={section}
+        spy={true}
+        smooth={true}
+        duration={300}
+        offset={-70}>
+        {children}
+      </StyledLink>
     </li>
   );
 }

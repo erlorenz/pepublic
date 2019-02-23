@@ -17,9 +17,9 @@ function Navbar({ handleClick }) {
       </LogoContainer>
       <Nav>
         <Ul>
-          <NavItem>Our Services</NavItem>
-          <NavItem>About Us</NavItem>
-          <NavItem>Contact</NavItem>
+          <NavItem section="services">Our Services</NavItem>
+          <NavItem section="about">About Us</NavItem>
+          <NavItem section="contact">Contact</NavItem>
         </Ul>
       </Nav>
       <Schedule schedule>
@@ -36,6 +36,11 @@ const Div = styled.div`
   display: flex;
   padding: 0 2rem;
   justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: white;
 
   @media screen and (min-width: 1000px) {
     height: 5rem;

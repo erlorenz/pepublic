@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components/macro';
 import { Link as ScrollLink } from 'react-scroll';
 
-function MenuItem({ icon, schedule, children }) {
+function MenuItem({ icon, schedule, children, to, handleClick }) {
   if (schedule) {
     return (
       <Li>
@@ -19,7 +19,13 @@ function MenuItem({ icon, schedule, children }) {
   }
   return (
     <Li>
-      <StyledScrollLink to="">
+      <StyledScrollLink
+        onClick={handleClick}
+        to={to}
+        spy={true}
+        smooth={true}
+        duration={300}
+        offset={-70}>
         <Icon>
           <FontAwesomeIcon icon={icon} />
         </Icon>
