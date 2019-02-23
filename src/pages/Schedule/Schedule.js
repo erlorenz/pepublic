@@ -123,6 +123,7 @@ const Schedule = props => {
                   formikProps={formikProps}
                 />
               </Div>
+              <Spacer />
               <Bottombar
                 schedule
                 values={values}
@@ -148,3 +149,11 @@ const Container = animated(styled.div`
   display: flex;
   justify-content: center;
 `);
+
+const Spacer = styled.div`
+  height: 5rem;
+  width: 100%;
+  @media (min-width: 1000px) {
+    height: 6rem;
+  }
+`;

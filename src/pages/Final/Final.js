@@ -198,7 +198,7 @@ const createOptions = () => {
   return {
     style: {
       base: {
-        fontSize: '1rem',
+        fontSize: '14px',
         color: theme.textColor,
         // fontFamily: 'Open Sans',
         '::placeholder': {

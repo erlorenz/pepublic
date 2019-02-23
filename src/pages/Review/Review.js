@@ -65,7 +65,7 @@ const Review = props => {
                 <DoubleRadioYesNo
                   option1="Light"
                   option2="None"
-                  label="Would you like starch in your shirt?"
+                  label="Would you like starch in your dress shirt(s)?"
                   currentValue={values.starch}
                   formikProps={formikProps}
                   name="starch"
@@ -76,7 +76,7 @@ const Review = props => {
                 <DoubleRadioYesNo
                   option1="Yes"
                   option2="No"
-                  label="Would you like us to crease your shirt sleeves?"
+                  label="Would you like us to crease your dress shirt sleeves?"
                   currentValue={values.crease}
                   formikProps={formikProps}
                   name="crease"

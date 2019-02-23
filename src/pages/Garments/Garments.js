@@ -31,6 +31,7 @@ const Garments = props => {
         <GarmentList />
         <GarmentChoice />
       </Row>
+      <Spacer />
       <Bottombar garments {...props} />
     </>
   );
@@ -48,35 +49,10 @@ const Row = styled.div`
   }
 `;
 
-// const StyledLoading = styled(Loading)`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   margin-bottom: 1rem;
-//   padding: 1rem;
-//   background: white;
-//   min-height: 300px;
-//   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 95px -30px;
-
-//   @media (min-width: 1000px) {
-//     margin-right: 1.8rem;
-//     padding: 1.8rem;
-//   }
-// `;
-
-// const Box = styled(MessageBox)`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   margin-bottom: 1rem;
-//   padding: 1rem;
-//   background: white;
-//   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 95px -30px;
-
-//   @media (min-width: 1000px) {
-//     margin-right: 1.8rem;
-//     padding: 1.8rem;
-//   }
-// `;
+const Spacer = styled.div`
+  height: 5rem;
+  width: 100%;
+  @media (min-width: 1000px) {
+    height: 6rem;
+  }
+`;
