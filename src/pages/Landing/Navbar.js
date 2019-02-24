@@ -41,6 +41,7 @@ const Div = styled.div`
   top: 0;
   left: 0;
   background-color: white;
+  z-index: 5;
 
   @media screen and (min-width: 1000px) {
     height: 5rem;
@@ -74,7 +75,7 @@ const Nav = styled.nav`
 
 const Schedule = styled.div`
   display: flex;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 700;
   align-items: center;
 `;
@@ -98,10 +99,11 @@ const LogoContainer = styled.div`
 
 const StyledLink = styled(Link)`
   line-height: 4rem;
+  border-radius: 4px;
 
   @media (min-width: 1000px) {
     line-height: inherit;
-    background-color: lightblue;
+    background-color: ${props => props.theme.buttonColor};
     color: white;
     padding: 1rem 1.5rem;
     font-size: 1rem;

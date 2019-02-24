@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import Navbar from './Navbar';
 import SideMenu from './SideMenu';
+import Hero from './Hero';
 
 const Landing = () => {
   const [sideMenuOpen, setSideMenuOpen] = React.useState(true);
@@ -13,6 +14,7 @@ const Landing = () => {
       <SideMenu handleClick={handleClick} sideMenuIsOpen={sideMenuOpen} />
       <Main>
         <Navbar handleClick={handleClick} />
+        <Hero />
         <Section id="howitworks" />
         <Section id="services" />
         <Section id="about" />
@@ -25,8 +27,11 @@ const Landing = () => {
 export default Landing;
 
 const Main = styled.main`
-  min-height: 100vh;
-  width: 100vw;
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 // const Wrapper = styled.div`

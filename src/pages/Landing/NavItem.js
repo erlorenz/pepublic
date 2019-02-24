@@ -22,4 +22,5 @@ export default NavItem;
 const StyledLink = styled(Link)`
   line-height: 5rem;
   padding-right: 2rem;
+  cursor: pointer;
 `;
