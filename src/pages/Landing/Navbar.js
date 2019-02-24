@@ -1,5 +1,3 @@
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { darken } from 'polished';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -9,6 +7,7 @@ import styled from 'styled-components/macro';
 import { ReactComponent as Logo } from '../../assets/img/pressexpresslogo.svg';
 import { ReactComponent as MenuIcon } from '../../assets/img/menuicon.svg';
 import NavItem from './NavItem';
+import { fadeInSlow } from '../../styles/transitions';
 
 function Navbar({ handleClick }) {
   const [transparent, setTransparent] = React.useState(true);
@@ -31,17 +30,20 @@ function Navbar({ handleClick }) {
     backgroundColor: transparent ? '#1d7a8c00' : '#1d7a8ce6',
   });
 
+  //Fade In
+  const fade = useSpring(fadeInSlow);
+
   const handleScrollToTop = () => animateScroll.scrollToTop({ duration: 300 });
 
   return (
     <Div style={fadeColor}>
-      <MenuButton transparent={transparent} onClick={handleClick}>
+      <MenuButton onClick={handleClick} style={fade}>
         <MenuIcon />
       </MenuButton>
-      <LogoContainer onClick={handleScrollToTop}>
+      <LogoContainer onClick={handleScrollToTop} style={fade}>
         <Logo />
       </LogoContainer>
-      <Nav>
+      <Nav style={fade}>
         <Ul transparent={transparent}>
           <NavItem section="howitworks">How It Works</NavItem>
           <NavItem section="ourservices">Our Services</NavItem>
@@ -49,7 +51,7 @@ function Navbar({ handleClick }) {
           <NavItem section="contact">Contact</NavItem>
         </Ul>
       </Nav>
-      <Schedule schedule>
+      <Schedule style={fade}>
         <StyledLink to="/order/schedule">SCHEDULE</StyledLink>
       </Schedule>
     </Div>
@@ -77,7 +79,7 @@ const Div = styled(animated.div)`
   }
 `;
 
-const MenuButton = styled.button`
+const MenuButton = styled(animated.button)`
   background-color: transparent;
   padding: 0;
   border: none;
@@ -96,7 +98,7 @@ const MenuButton = styled.button`
   }
 `;
 
-const Nav = styled.nav`
+const Nav = styled(animated.nav)`
   display: none;
   align-items: center;
 
@@ -105,14 +107,14 @@ const Nav = styled.nav`
   }
 `;
 
-const Schedule = styled.div`
+const Schedule = styled(animated.div)`
   display: flex;
   font-size: 0.7rem;
   font-weight: 700;
   align-items: center;
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled(animated.div)`
   width: 120px;
   position: absolute;
   left: 50%;

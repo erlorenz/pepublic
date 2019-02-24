@@ -1,8 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components/macro';
+import { useInView } from 'react-intersection-observer';
+import { useSpring, animated } from 'react-spring';
 
 function HowItWorksItem({ description, title, icon }) {
+  // const [ref, inView, entry] = useInView();
+
+  // const spring = useSpring();
+
   return (
     <Div>
       <Icon>
@@ -16,7 +22,7 @@ function HowItWorksItem({ description, title, icon }) {
 
 export default HowItWorksItem;
 
-const Div = styled.div`
+const Div = styled(animated.div)`
   display: flex;
   flex-direction: column;
   text-align: center;

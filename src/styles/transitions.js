@@ -19,3 +19,25 @@ export const scaleUpAndFadeIn = {
 //   enter: { opacity: 1 },
 //   leave: { opacity: 0 },
 // };
+
+export const fadeToLeft = {
+  to: {
+    opacity: 1,
+    transform: 'translateX(0px)',
+  },
+  from: {
+    opacity: 0,
+    transform: 'translateX(20px)',
+  },
+};
+
+export const fadeToRight = {
+  to: {
+    opacity: 1,
+    transform: 'translateX(0px)',
+  },
+  from: {
+    opacity: 0,
+    transform: 'translateX(-20px)',
+  },
+};

@@ -3,15 +3,24 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import fullSize from '../../assets/img/suitsfullsize.jpeg';
 import phoneSize from '../../assets/img/suitsphonesize.jpg';
+import { useSpring, animated } from 'react-spring';
+import { fadeToLeft, fadeToRight } from '../../styles/transitions';
 
 function Hero({ history }) {
   const handleClick = () => history.push('/order/schedule');
 
+  const fadeLeft = useSpring(fadeToLeft);
+  const fadeRight = useSpring(fadeToRight);
+
   return (
     <Section id="hero" phoneSize={phoneSize} fullSize={fullSize}>
       <Wrapper>
-        <H1>Professionally pressed clothing, same or next day return.</H1>
-        <Button onClick={handleClick}>Let's Get Started</Button>
+        <H1 style={fadeLeft}>
+          Professionally pressed clothing to look your best.
+        </H1>
+        <Button onClick={handleClick} style={fadeRight}>
+          Let's Get Started
+        </Button>
       </Wrapper>
     </Section>
   );
@@ -44,7 +53,7 @@ const Section = styled.section`
   }
 `;
 
-const H1 = styled.h1`
+const H1 = styled(animated.h1)`
   font-size: 2rem;
   font-weight: 500;
   color: white;
@@ -55,7 +64,7 @@ const H1 = styled.h1`
   }
 `;
 
-const Button = styled.button`
+const Button = styled(animated.button)`
   border: none;
   border-radius: 4px;
   background-color: ${props => props.theme.buttonColor};
