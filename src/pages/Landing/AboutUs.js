@@ -4,33 +4,31 @@ import SectionTitle from './SectionTitle';
 
 const description = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin volutpat sem molestie lacinia. Nullam et tortor nisi. Suspendisse dictum convallis velit. Nulla facilisi. Fusce enim felis, accumsan vitae tellus eget, ultrices luctus augue. Duis porta purus sem. Sed mattis enim ante, sit amet imperdiet metus cursus nec. Nunc nec luctus eros, finibus placerat est. Vivamus turpis dui, ullamcorper ut enim at, sagittis interdum urna. Sed nec nisi sem.
 
-
-
 `;
 
-function OurServices() {
+function AboutUs() {
   return (
-    <Section id="ourservices">
-      <SectionTitle>Our Services</SectionTitle>
+    <Section id="aboutus">
+      <SectionTitle>About Us</SectionTitle>
       <Container>
-        <Images>Images Here</Images>
         <Description>
           <p> {description}</p>
           <p> {description}</p>
         </Description>
+        <Images>Images Here</Images>
       </Container>
     </Section>
   );
 }
 
-export default OurServices;
+export default AboutUs;
 
 const Section = styled.section`
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #efefef;
+  background-color: white;
 
   @media (min-width: 1000px) {
     padding: 2.5rem 10%;
