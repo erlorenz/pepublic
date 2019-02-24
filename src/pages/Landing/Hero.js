@@ -1,7 +1,8 @@
+import { darken } from 'polished';
 import React from 'react';
 import styled from 'styled-components/macro';
-import phoneSize from '../../assets/img/suitsphonesize.jpg';
 import fullSize from '../../assets/img/suitsfullsize.jpeg';
+import phoneSize from '../../assets/img/suitsphonesize.jpg';
 
 function Hero({ history }) {
   const handleClick = () => history.push('schedule');
@@ -34,20 +35,14 @@ const Section = styled.section`
     url(${props => props.phoneSize});
 
   @media (min-width: 450px) {
-    padding: 2rem;
-    padding-top: 7rem;
     height: 90vh;
     background-image: linear-gradient(#165f6dd9, #165f6dd9),
       url(${props => props.fullSize});
   }
-`;
 
-const Overlay = styled.img`
-  z-index: -1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
+  @media (min-width: 1000px) {
+    padding-top: 8rem;
+  }
 `;
 
 const H1 = styled.h1`
@@ -69,11 +64,16 @@ const Button = styled.button`
   color: white;
   padding: 1.5rem 3rem;
   margin-top: 1.5rem;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   cursor: pointer;
 
   @media (min-width: 1000px) {
     /* padding: 1.5rem 3rem; */
+    font-size: 1.3rem;
+  }
+
+  :hover {
+    background-color: ${props => darken(0.1, props.theme.buttonColor)};
   }
 `;
 

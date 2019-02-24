@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components/macro';
 import { Link } from 'react-scroll';
+import styled from 'styled-components/macro';
 
 function NavItem({ children, section }) {
   return (
@@ -20,7 +20,14 @@ function NavItem({ children, section }) {
 export default NavItem;
 
 const StyledLink = styled(Link)`
-  line-height: 5rem;
-  padding-right: 2rem;
+  padding-right: 3rem;
   cursor: pointer;
+  color: white;
+  font-size: 1.2rem;
+  display: block;
+  line-height: 4rem;
+
+  :hover {
+    color: lightgray;
+  }
 `;

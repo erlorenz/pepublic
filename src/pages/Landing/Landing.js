@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import Hero from './Hero';
 import Navbar from './Navbar';
 import SideMenu from './SideMenu';
-import Hero from './Hero';
 
 const Landing = () => {
-  const [sideMenuOpen, setSideMenuOpen] = React.useState(true);
+  const [sideMenuOpen, setSideMenuOpen] = React.useState(false);
 
   const handleClick = () => setSideMenuOpen(!sideMenuOpen);
 
@@ -34,14 +34,14 @@ const Main = styled.main`
   left: 0;
 `;
 
-// const Wrapper = styled.div`
-//   position: absolute;
-//   top: 0;
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-//   overflow: hidden;
-// `;
+const Wrapper = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+`;
 
 const Section = styled.section`
   background-color: lightgray;

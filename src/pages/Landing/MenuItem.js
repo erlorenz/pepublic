@@ -1,8 +1,8 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styled from 'styled-components/macro';
 import { Link as ScrollLink } from 'react-scroll';
+import styled from 'styled-components/macro';
 
 function MenuItem({ icon, schedule, children, to, handleClick }) {
   if (schedule) {
@@ -52,12 +52,12 @@ const Icon = styled.span`
 
 const StyledLink = styled(Link)`
   padding: 0.6rem 0;
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   width: 100%;
 `;
 
 const StyledScrollLink = styled(ScrollLink)`
   padding: 0.6rem 0;
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   width: 100%;
 `;

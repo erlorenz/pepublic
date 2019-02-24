@@ -1,22 +1,47 @@
-import React from 'react';
-import styled from 'styled-components/macro';
-import { ReactComponent as Logo } from '../../assets/img/pressexpresslogo.svg';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { darken } from 'polished';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { animateScroll } from 'react-scroll';
+import { animated, useSpring } from 'react-spring';
+import styled from 'styled-components/macro';
+import { ReactComponent as Logo } from '../../assets/img/pressexpresslogo.svg';
 import NavItem from './NavItem';
 
 function Navbar({ handleClick }) {
+  const [transparent, setTransparent] = React.useState(true);
+
+  // Check if scrolled past 60px and remove/add transparency
+  const updateTransparent = () => {
+    if (window.scrollY > 60) setTransparent(false);
+
+    if (window.scrollY <= 60) setTransparent(true);
+  };
+
+  // Set event listener on mount and remove on unmount
+  React.useEffect(() => {
+    window.addEventListener('scroll', updateTransparent);
+    return () => window.removeEventListener('scroll', updateTransparent);
+  }, []);
+
+  // Fading color change
+  const fadeColor = useSpring({
+    backgroundColor: transparent ? '#1d7a8c00' : '#1d7a8ce6',
+  });
+
+  const handleScrollToTop = () => animateScroll.scrollToTop({ duration: 300 });
+
   return (
-    <Div>
-      <HamburgerButton onClick={handleClick}>
+    <Div style={fadeColor}>
+      <HamburgerButton transparent={transparent} onClick={handleClick}>
         <FontAwesomeIcon icon={faBars} />
       </HamburgerButton>
-      <LogoContainer>
+      <LogoContainer onClick={handleScrollToTop}>
         <Logo />
       </LogoContainer>
       <Nav>
-        <Ul>
+        <Ul transparent={transparent}>
           <NavItem section="services">Our Services</NavItem>
           <NavItem section="about">About Us</NavItem>
           <NavItem section="contact">Contact</NavItem>
@@ -31,7 +56,7 @@ function Navbar({ handleClick }) {
 
 export default Navbar;
 
-const Div = styled.div`
+const Div = styled(animated.div)`
   height: 4rem;
   display: flex;
   padding: 0 2rem;
@@ -44,7 +69,7 @@ const Div = styled.div`
   z-index: 5;
 
   @media screen and (min-width: 1000px) {
-    height: 5rem;
+    height: 6rem;
     padding: 0 5%;
     justify-content: flex-end;
   }
@@ -54,6 +79,8 @@ const HamburgerButton = styled.button`
   background-color: transparent;
   padding: 0;
   border: none;
+  color: white;
+  font-size: 1.2rem;
 
   :focus {
     outline: none;
@@ -86,27 +113,44 @@ const LogoContainer = styled.div`
   left: 50%;
   top: 2rem;
   transform: translate(-50%, -50%);
+  cursor: pointer;
 
   @media (min-width: 1000px) {
     width: 200px;
     left: 5%;
-    top: 2.5rem;
+    top: 3rem;
     transform: translate(0, -50%);
     display: flex;
     align-items: center;
   }
+
+  path {
+    fill: white;
+  }
 `;
 
 const StyledLink = styled(Link)`
-  line-height: 4rem;
+  line-height: 30px;
   border-radius: 4px;
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 500;
+
+  @media (min-width: 350px) {
+    font-size: 0.8rem;
+  }
 
   @media (min-width: 1000px) {
     line-height: inherit;
     background-color: ${props => props.theme.buttonColor};
     color: white;
-    padding: 1rem 1.5rem;
+    padding: 1rem 2rem;
     font-size: 1rem;
+    font-weight: 500;
+
+    :hover {
+      background-color: ${props => darken(0.1, props.theme.buttonColor)};
+    }
   }
 `;
 
