@@ -42,6 +42,7 @@ function Navbar({ handleClick }) {
       </LogoContainer>
       <Nav>
         <Ul transparent={transparent}>
+          <NavItem section="howitworks">How It Works</NavItem>
           <NavItem section="services">Our Services</NavItem>
           <NavItem section="about">About Us</NavItem>
           <NavItem section="contact">Contact</NavItem>
