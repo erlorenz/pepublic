@@ -29,10 +29,10 @@ function SideMenu({ handleClick, sideMenuIsOpen }) {
         <MenuItem handleClick={handleClick} icon={faCogs} to="howitworks">
           How It Works
         </MenuItem>
-        <MenuItem handleClick={handleClick} icon={faTshirt} to="services">
+        <MenuItem handleClick={handleClick} icon={faTshirt} to="ourservices">
           Our Services
         </MenuItem>
-        <MenuItem handleClick={handleClick} icon={faEllipsisH} to="about">
+        <MenuItem handleClick={handleClick} icon={faEllipsisH} to="aboutus">
           About Us
         </MenuItem>
         <MenuItem handleClick={handleClick} icon={faPhone} to="contact">

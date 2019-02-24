@@ -2,15 +2,16 @@ import { faClock, faSmile, faTruck } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import styled from 'styled-components/macro';
 import HowItWorksItem from './HowItWorksItem';
+import SectionTitle from './SectionTitle';
 
 const step1 = `Simply create your order by walking through our interactive web app. Schedule your pickup and return, select the items you'll be giving us, and finalize your order in a few easy steps.`;
 const step2 = `Leave your garmenets at the pickup location before the chosen pickup time.`;
 const step3 = `We do the rest! We will have it freshly pressed and returned by the selected return time at the same location. You will be updated via text each step of the way!`;
 
-function howItWorks() {
+function HowItWorks() {
   return (
     <Section id="howitworks">
-      <Title>How It Works</Title>
+      <SectionTitle>How It Works</SectionTitle>
       <Container>
         <HowItWorksItem
           title="Schedule your order"
@@ -32,7 +33,7 @@ function howItWorks() {
   );
 }
 
-export default howItWorks;
+export default HowItWorks;
 
 const Section = styled.section`
   padding: 2.5rem;
@@ -58,8 +59,4 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: flex-start;
   }
-`;
-
-const Title = styled.h2`
-  text-align: center;
 `;

@@ -4,6 +4,7 @@ import Hero from './Hero';
 import HowItWorks from './HowItWorks';
 import Navbar from './Navbar';
 import SideMenu from './SideMenu';
+import OurServices from './OurServices';
 
 const Landing = ({ history }) => {
   const [sideMenuOpen, setSideMenuOpen] = React.useState(false);
@@ -16,8 +17,8 @@ const Landing = ({ history }) => {
       <Main>
         <Navbar handleClick={handleClick} />
         <Hero history={history} />
-        <HowItWorks id="howitworks" />
-        <Section id="services" />
+        <HowItWorks />
+        <OurServices />
         <Section id="about" />
         <Section id="contact" />
       </Main>
