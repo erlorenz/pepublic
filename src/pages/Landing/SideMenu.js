@@ -1,14 +1,15 @@
-import React from 'react';
-import styled from 'styled-components/macro';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faTimes,
   faClock,
+  faCogs,
   faEllipsisH,
-  faTshirt,
   faPhone,
+  faTimes,
+  faTshirt,
 } from '@fortawesome/free-solid-svg-icons';
-import { useSpring, animated } from 'react-spring';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { animated, useSpring } from 'react-spring';
+import styled from 'styled-components/macro';
 import MenuItem from './MenuItem';
 
 function SideMenu({ handleClick, sideMenuIsOpen }) {
@@ -24,6 +25,9 @@ function SideMenu({ handleClick, sideMenuIsOpen }) {
       <Ul>
         <MenuItem handleClick={handleClick} schedule icon={faClock}>
           Schedule Now
+        </MenuItem>
+        <MenuItem handleClick={handleClick} icon={faCogs} to="howitworks">
+          How It Works
         </MenuItem>
         <MenuItem handleClick={handleClick} icon={faTshirt} to="services">
           Our Services

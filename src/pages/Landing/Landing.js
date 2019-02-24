@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import Hero from './Hero';
+import HowItWorks from './HowItWorks';
 import Navbar from './Navbar';
 import SideMenu from './SideMenu';
 
@@ -15,7 +16,7 @@ const Landing = () => {
       <Main>
         <Navbar handleClick={handleClick} />
         <Hero />
-        <Section id="howitworks" />
+        <HowItWorks id="howitworks" />
         <Section id="services" />
         <Section id="about" />
         <Section id="contact" />
