@@ -41,3 +41,15 @@ export const fadeToRight = {
     transform: 'translateX(-20px)',
   },
 };
+
+export const fadeInAndLeftWhenInView = inView => ({
+  opacity: inView ? 1 : 0,
+  transform: inView ? 'translateX(0)' : 'translateX(20px)',
+  config: config.molasses,
+});
+
+export const fadeInAndRightWhenInView = inView => ({
+  opacity: inView ? 1 : 0,
+  transform: inView ? 'translateX(0)' : 'translateX(-20px)',
+  config: config.molasses,
+});

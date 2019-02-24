@@ -83,7 +83,7 @@ const Container = styled.div`
   margin-top: 2rem;
   align-items: center;
   width: 100%;
-  max-width: 1100px;
+  max-width: 800px;
 
   @media (min-width: 1000px) {
     flex-direction: row;

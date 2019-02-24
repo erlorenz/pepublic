@@ -1,22 +1,48 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import SectionTitle from './SectionTitle';
+import { useInView } from 'react-intersection-observer';
+import { useSpring, animated } from 'react-spring';
+import { fadeInAndRightWhenInView } from '../../styles/transitions';
 
-const description = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin volutpat sem molestie lacinia. Nullam et tortor nisi. Suspendisse dictum convallis velit. Nulla facilisi. Fusce enim felis, accumsan vitae tellus eget, ultrices luctus augue. Duis porta purus sem. Sed mattis enim ante, sit amet imperdiet metus cursus nec. Nunc nec luctus eros, finibus placerat est. Vivamus turpis dui, ullamcorper ut enim at, sagittis interdum urna. Sed nec nisi sem.
-
-
-
+const description1 = `
+Press Express will refresh your clothing and return your garments beautifully finished, while eliminating 90% of odors, smoke, etc.
 `;
 
+const description2 = `
+  In addition we can carry out minor repairs if requested, such as resewing buttons or resealing hems.
+`;
+
+const description3 = `
+Finally, we do all this with the quickest turnaround in the city, making sure you have your garments back either same day or the following morning.
+`;
+
+const description4 = `
+Pickup and delivery is always included in the price and we aim to make everything as simple as possible for you.`;
+
+const description5 = `
+**We do not dryclean garments, they are steam pressed only.`;
+
 function OurServices() {
+  const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [ref2, inView2] = useInView({ threshold: 0.2, triggerOnce: true });
+
+  const spring1 = useSpring(fadeInAndRightWhenInView(inView1));
+  const spring2 = useSpring(fadeInAndRightWhenInView(inView2));
+
   return (
     <Section id="ourservices">
       <SectionTitle>Our Services</SectionTitle>
       <Container>
-        <Images>Images Here</Images>
-        <Description>
-          <p> {description}</p>
-          <p> {description}</p>
+        <Images ref={ref1} style={spring1}>
+          Images Here
+        </Images>
+        <Description ref={ref2} style={spring2}>
+          <P>{description1}</P>
+          <P>{description2}</P>
+          <P>{description3}</P>
+          <P>{description4}</P>
+          <P>{description5}</P>
         </Description>
       </Container>
     </Section>
@@ -52,14 +78,19 @@ const Container = styled.div`
   }
 `;
 
-const Images = styled.div`
+const Images = styled(animated.div)`
   width: 100%;
   max-width: 500px;
   margin-bottom: 4rem;
 `;
 
-const Description = styled.div`
+const Description = styled(animated.div)`
   width: 100%;
   max-width: 500px;
   margin-bottom: 4rem;
+`;
+
+const P = styled.p`
+  margin-top: 0;
+  margin-bottom: 1rem;
 `;

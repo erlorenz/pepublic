@@ -3,14 +3,15 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
+import { fadeInAndLeftWhenInView } from '../../styles/transitions';
 
 function HowItWorksItem({ description, title, icon }) {
-  // const [ref, inView, entry] = useInView();
+  const [ref, inView] = useInView({ threshold: 0.2, triggerOnce: true });
 
-  // const spring = useSpring();
+  const spring = useSpring(fadeInAndLeftWhenInView(inView));
 
   return (
-    <Div>
+    <Div ref={ref} style={spring}>
       <Icon>
         <StyledFontAwesomeIcon icon={icon} />
       </Icon>
