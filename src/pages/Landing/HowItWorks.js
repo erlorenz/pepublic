@@ -1,4 +1,4 @@
-import { faClock, faSmile, faTruck } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faTruck, faTshirt } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import styled from 'styled-components/macro';
 import HowItWorksItem from './HowItWorksItem';
@@ -26,7 +26,7 @@ function HowItWorks() {
         <HowItWorksItem
           title="Let us do the rest"
           description={step3}
-          icon={faSmile}
+          icon={faTshirt}
         />
       </Container>
     </Section>

@@ -11,12 +11,12 @@ Press Express was founded in 2018 as a new concept with the goal of providing a 
 
 const description2 = `
   Although this business is young, the owners have over 30 years of experience in the industry and the know how to provide the best possible service.
-  Our location only 1/2 a mile from The Strip allows us to pickup and return garments faster than any other service in the city.
+  Our location only 1/2 a mile from The Strip and less than 1 mile from Downtown allows us to pickup and return garments faster than any other service in the city.
 `;
 
 function AboutUs() {
-  const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
-  const [ref2, inView2] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [ref1, inView1] = useInView({ threshold: 0.3, triggerOnce: true });
+  const [ref2, inView2] = useInView({ threshold: 0.3, triggerOnce: true });
 
   const spring1 = useSpring(fadeInAndLeftWhenInView(inView1));
   const spring2 = useSpring(fadeInAndLeftWhenInView(inView2));

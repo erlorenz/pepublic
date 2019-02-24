@@ -25,8 +25,8 @@ const description5 = `
 **We do not dryclean garments, they are steam pressed only.`;
 
 function OurServices() {
-  const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
-  const [ref2, inView2] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [ref1, inView1] = useInView({ threshold: 0.3, triggerOnce: true });
+  const [ref2, inView2] = useInView({ threshold: 0.3, triggerOnce: true });
 
   const spring1 = useSpring(fadeInAndRightWhenInView(inView1));
   const spring2 = useSpring(fadeInAndRightWhenInView(inView2));

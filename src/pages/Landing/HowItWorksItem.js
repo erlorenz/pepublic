@@ -4,9 +4,10 @@ import styled from 'styled-components/macro';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
 import { fadeInAndLeftWhenInView } from '../../styles/transitions';
+import { ReactComponent as HangerIcon } from '../../assets/img/hanger.svg';
 
 function HowItWorksItem({ description, title, icon }) {
-  const [ref, inView] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true });
 
   const spring = useSpring(fadeInAndLeftWhenInView(inView));
 
@@ -54,4 +55,10 @@ const Description = styled.p`
 
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   filter: drop-shadow(4px 4px 2px #0000003d);
+`;
+
+const StyledHangerIcon = styled(HangerIcon)`
+  svg {
+    fill: blue;
+  }
 `;

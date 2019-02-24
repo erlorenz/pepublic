@@ -10,7 +10,7 @@ function NavItem({ children, section }) {
         spy={true}
         smooth={true}
         duration={300}
-        offset={-100}
+        offset={-115}
         activeClass="active">
         {children}
       </StyledLink>
