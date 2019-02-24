@@ -18,7 +18,6 @@ import {
 function Contact() {
   return (
     <Section id="contact">
-      <SectionTitle white>Contact</SectionTitle>
       <Container>
         <List>
           <ListItem>
@@ -65,7 +64,7 @@ function Contact() {
 export default Contact;
 
 const Section = styled.section`
-  padding: 2.5rem;
+  padding: 4rem 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,26 +82,26 @@ const Container = styled.div`
   margin-top: 2rem;
   align-items: center;
   width: 100%;
-  max-width: 800px;
+  max-width: 700px;
 
   @media (min-width: 1000px) {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: flex-start;
   }
 `;
 
 const MediaIcons = styled.div`
   width: 100%;
-  max-width: 500px;
+  max-width: 280px;
   margin-bottom: 2rem;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   font-size: 2.5rem;
 `;
 
 const List = styled.ul`
-  max-width: 500px;
+  max-width: 280px;
   margin-top: 0;
   margin-bottom: 4rem;
   color: inherit;
@@ -112,6 +111,8 @@ const List = styled.ul`
 
   @media (min-width: 500px) {
     font-size: 1rem;
+    width: 100%;
+    max-width: 500;
   }
 `;
 

@@ -4,9 +4,14 @@ import SectionTitle from './SectionTitle';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
 import { fadeInAndLeftWhenInView } from '../../styles/transitions';
+import vegasSign from '../../assets/img/vegassign.png';
 
-const description = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin volutpat sem molestie lacinia. Nullam et tortor nisi. Suspendisse dictum convallis velit. Nulla facilisi. Fusce enim felis, accumsan vitae tellus eget, ultrices luctus augue. Duis porta purus sem. Sed mattis enim ante, sit amet imperdiet metus cursus nec. Nunc nec luctus eros, finibus placerat est. Vivamus turpis dui, ullamcorper ut enim at, sagittis interdum urna. Sed nec nisi sem.
+const description1 = `
+Press Express was founded in 2018 as a new concept with the goal of providing a much needed service for business travelers, groups, as well as anyone looking for a quick and easy way to get their garments looking good in Las Vegas.`;
 
+const description2 = `
+  Although this business is young, the owners have over 30 years of experience in the industry and the know how to provide the best possible service.
+  Our location only 1/2 a mile from The Strip allows us to pickup and return garments faster than any other service in the city.
 `;
 
 function AboutUs() {
@@ -21,11 +26,11 @@ function AboutUs() {
       <SectionTitle>About Us</SectionTitle>
       <Container>
         <Description ref={ref1} style={spring1}>
-          <p> {description}</p>
-          <p> {description}</p>
+          <P>{description1}</P>
+          <P>{description2}</P>
         </Description>
         <Images ref={ref2} style={spring2}>
-          Images Here
+          <img src={vegasSign} alt="Las Vegas sign" />
         </Images>
       </Container>
     </Section>
@@ -48,7 +53,7 @@ const Section = styled.section`
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   margin-top: 3rem;
   align-items: center;
   width: 100%;
@@ -57,7 +62,7 @@ const Container = styled.div`
   @media (min-width: 1000px) {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
   }
 `;
 
@@ -71,4 +76,9 @@ const Description = styled(animated.div)`
   width: 100%;
   max-width: 500px;
   margin-bottom: 4rem;
+`;
+
+const P = styled.p`
+  margin-top: 0;
+  margin-bottom: 1rem;
 `;

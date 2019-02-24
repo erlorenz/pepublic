@@ -4,6 +4,7 @@ import SectionTitle from './SectionTitle';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
 import { fadeInAndRightWhenInView } from '../../styles/transitions';
+import Image from '../../assets/img/ourservices.png';
 
 const description1 = `
 Press Express will refresh your clothing and return your garments beautifully finished, while eliminating 90% of odors, smoke, etc.
@@ -35,7 +36,7 @@ function OurServices() {
       <SectionTitle>Our Services</SectionTitle>
       <Container>
         <Images ref={ref1} style={spring1}>
-          Images Here
+          <img src={Image} alt="Garments and buttons" />
         </Images>
         <Description ref={ref2} style={spring2}>
           <P>{description1}</P>
@@ -74,7 +75,7 @@ const Container = styled.div`
   @media (min-width: 1000px) {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
   }
 `;
 
