@@ -69,6 +69,12 @@ const CloseMenuButton = styled.button`
   justify-content: flex-end;
   font-size: 1.2rem;
   color: white;
+  align-self: flex-end;
+
+  :active {
+    background-color: #ffffff40;
+    border-radius: 50%;
+  }
 `;
 
 const Ul = styled.ul`

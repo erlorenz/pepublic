@@ -4,16 +4,17 @@ import styled from 'styled-components/macro';
 
 function NavItem({ children, section }) {
   return (
-    <li>
+    <Li>
       <StyledLink
         to={section}
         spy={true}
         smooth={true}
         duration={300}
-        offset={-100}>
+        offset={-100}
+        activeClass="active">
         {children}
       </StyledLink>
-    </li>
+    </Li>
   );
 }
 
@@ -25,9 +26,14 @@ const StyledLink = styled(Link)`
   color: white;
   font-size: 1.2rem;
   display: block;
-  line-height: 4rem;
-
+  line-height: 6rem;
   :hover {
     color: lightgray;
+  }
+`;
+
+const Li = styled.li`
+  .active {
+    text-shadow: 0 0 15px #ffffffb3;
   }
 `;
