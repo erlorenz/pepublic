@@ -1,6 +1,7 @@
 {
   "projects": {
-    "staging": "press-express-public-staging",
-    "production": "press-express-public"
+    "default": "press-express-public-staging",
+    "production": "press-express-public",
+    "staging": "press-express-public-staging"
   }
 }
