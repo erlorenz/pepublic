@@ -5,7 +5,7 @@ import HowItWorks from './HowItWorks';
 import Navbar from './Navbar';
 import SideMenu from './SideMenu';
 
-const Landing = () => {
+const Landing = ({ history }) => {
   const [sideMenuOpen, setSideMenuOpen] = React.useState(false);
 
   const handleClick = () => setSideMenuOpen(!sideMenuOpen);
@@ -15,7 +15,7 @@ const Landing = () => {
       <SideMenu handleClick={handleClick} sideMenuIsOpen={sideMenuOpen} />
       <Main>
         <Navbar handleClick={handleClick} />
-        <Hero />
+        <Hero history={history} />
         <HowItWorks id="howitworks" />
         <Section id="services" />
         <Section id="about" />

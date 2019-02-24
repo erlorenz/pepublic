@@ -5,12 +5,11 @@ import fullSize from '../../assets/img/suitsfullsize.jpeg';
 import phoneSize from '../../assets/img/suitsphonesize.jpg';
 
 function Hero({ history }) {
-  const handleClick = () => history.push('schedule');
+  const handleClick = () => history.push('/order/schedule');
 
   return (
     <Section id="hero" phoneSize={phoneSize} fullSize={fullSize}>
       <Wrapper>
-        {/* <BackgroundImage src={screen.width > 480 ? fullSize : phoneSize} /> */}
         <H1>Professionally pressed clothing, same or next day return.</H1>
         <Button onClick={handleClick}>Let's Get Started</Button>
       </Wrapper>

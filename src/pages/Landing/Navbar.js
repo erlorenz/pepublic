@@ -7,6 +7,7 @@ import { animateScroll } from 'react-scroll';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { ReactComponent as Logo } from '../../assets/img/pressexpresslogo.svg';
+import { ReactComponent as MenuIcon } from '../../assets/img/menuicon.svg';
 import NavItem from './NavItem';
 
 function Navbar({ handleClick }) {
@@ -34,9 +35,9 @@ function Navbar({ handleClick }) {
 
   return (
     <Div style={fadeColor}>
-      <HamburgerButton transparent={transparent} onClick={handleClick}>
-        <FontAwesomeIcon icon={faBars} />
-      </HamburgerButton>
+      <MenuButton transparent={transparent} onClick={handleClick}>
+        <MenuIcon />
+      </MenuButton>
       <LogoContainer onClick={handleScrollToTop}>
         <Logo />
       </LogoContainer>
@@ -76,11 +77,10 @@ const Div = styled(animated.div)`
   }
 `;
 
-const HamburgerButton = styled.button`
+const MenuButton = styled.button`
   background-color: transparent;
   padding: 0;
   border: none;
-  color: white;
   font-size: 1.2rem;
 
   :focus {
@@ -89,6 +89,10 @@ const HamburgerButton = styled.button`
 
   @media (min-width: 1000px) {
     display: none;
+  }
+
+  rect {
+    fill: white;
   }
 `;
 
@@ -113,7 +117,7 @@ const LogoContainer = styled.div`
   position: absolute;
   left: 50%;
   top: 2rem;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -45%);
   cursor: pointer;
 
   @media (min-width: 1000px) {

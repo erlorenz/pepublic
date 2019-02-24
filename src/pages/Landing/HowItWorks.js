@@ -36,6 +36,9 @@ export default howItWorks;
 
 const Section = styled.section`
   padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @media (min-width: 1000px) {
     padding: 2.5rem 10%;
@@ -47,6 +50,8 @@ const Container = styled.div`
   flex-direction: column;
   margin-top: 3rem;
   align-items: center;
+  width: 100%;
+  max-width: 1100px;
 
   @media (min-width: 1000px) {
     flex-direction: row;
