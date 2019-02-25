@@ -49,8 +49,12 @@ const Title = styled.h3`
 `;
 
 const Description = styled.p`
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin: 0;
+
+  @media (min-width: 1000px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`

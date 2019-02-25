@@ -22,7 +22,7 @@ const returnDelta = 4;
 
 export const pickupDate = () => {
   const now = getNow();
-  if (now.hour < 19)
+  if (now.hour < 18)
     return {
       val1: getZeroToday,
       val2: getZeroTomorrow,

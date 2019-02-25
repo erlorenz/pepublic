@@ -1,9 +1,9 @@
 import { darken } from 'polished';
 import React from 'react';
+import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import fullSize from '../../assets/img/suitsfullsize.jpeg';
 import phoneSize from '../../assets/img/suitsphonesize.jpg';
-import { useSpring, animated } from 'react-spring';
 import { fadeToLeft, fadeToRight } from '../../styles/transitions';
 
 function Hero({ history }) {
@@ -89,7 +89,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 25%;
+  margin-bottom: 35%;
   max-width: 600px;
 
   @media (min-width: 1000px) {

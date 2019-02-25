@@ -106,6 +106,7 @@ const ForwardAndBack = styled.div`
   align-items: center;
   border-top: 1px solid rgb(236, 239, 245);
   z-index: 10;
+  font-size: 0.8rem;
 
   @media (min-width: 1000px) {
     height: 6rem;
@@ -147,9 +148,9 @@ const BackButton = styled(Button)`
 `;
 
 const SpanLeft = styled.span`
-  margin-right: 0.6rem;
+  margin-right: 0.3rem;
 `;
 
 const SpanRight = styled.span`
-  margin-left: 0.6rem;
+  margin-left: 0.3rem;
 `;

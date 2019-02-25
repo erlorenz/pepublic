@@ -146,6 +146,7 @@ const Div = animated.div;
 
 const StyledForm = styled(Form)`
   max-width: 450px;
+  font-size: 0.8rem;
 `;
 const Container = animated(styled.div`
   display: flex;
