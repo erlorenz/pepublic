@@ -8,6 +8,7 @@ const checkout = async ({
   options,
   customerDetails,
   token,
+  setError,
 }) => {
   const { pickupHour, returnHour, hotel, room } = schedule;
   const { specialInstructions, starch, crease } = options;
@@ -69,8 +70,9 @@ const checkout = async ({
       await schema.validate(dataToSubmit);
       console.log('validated');
     } catch (e) {
-      if (e.errors) throw new Error(e.errors);
-      console.log(e);
+      if (e.errors) {
+        throw new Error(e.errors);
+      }
     }
 
     const { data } = await axios.post(
@@ -81,14 +83,18 @@ const checkout = async ({
   } catch (e) {
     if (e.errors) {
       console.log('[Validation error]', e.errors);
+      setError({ type: 'clientValidation', message: e.errors });
       throw new Error('Validation error.');
     } else if (e.response) {
       console.log('[Server error]', e.response.data);
+      setError({ type: 'response', message: e.response.data });
       throw new Error('Server errror: ' + e.response.data);
     } else if (e.request) {
+      setError({ type: 'request', message: 'Server is not responding.' });
       throw new Error('No response from server.');
     } else {
       console.log(e);
+      setError({ type: 'unknown', message: e.message });
       throw new Error('Something strange happened when creating the request.');
     }
   }

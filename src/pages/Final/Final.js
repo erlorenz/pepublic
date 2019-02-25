@@ -23,6 +23,9 @@ import { Redirect } from 'react-router-dom';
 
 const _Final = props => {
   const [cardComplete, setCardComplete] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState({ type: '', message: '' });
+
   const { schedule } = React.useContext(ScheduleContext);
   const { garments, totalPrice } = React.useContext(GarmentsContext);
   const { options } = React.useContext(OptionsContext);
@@ -35,6 +38,7 @@ const _Final = props => {
         const { token } = await props.stripe.createToken();
         console.log('[Token]', token.id);
 
+        setLoading(true);
         const response = await checkout({
           schedule,
           garments,
@@ -42,17 +46,18 @@ const _Final = props => {
           options,
           customerDetails,
           token: token.id,
+          setError,
+          setLoading,
         });
-
-        console.log(response);
+        console.log('[Data Returned]', response);
       } catch (e) {
         console.log('Error on final component', e.message);
-        actions.setStatus({ error: e.message });
       } finally {
+        setLoading(false);
         actions.setSubmitting(false);
       }
     } else {
-      console.log('Stripe not loaded');
+      console.log('ERROR: Stripe not loaded');
       actions.setSubmitting(false);
     }
   };
@@ -76,6 +81,8 @@ const _Final = props => {
       .email('Please enter a valid email address.')
       .required('Please enter your email address.'),
   });
+
+  if (loading) return <CenterLoading />;
 
   return (
     <>
@@ -117,8 +124,8 @@ const _Final = props => {
                   onChange={handleCardComplete}
                   {...createOptions()}
                 />
-                {status && status.error && (
-                  <Notification>{status.error}</Notification>
+                {error.type && error.message && (
+                  <Notification>{error.message}</Notification>
                 )}
                 <FinalBottombar
                   history={props.history}
