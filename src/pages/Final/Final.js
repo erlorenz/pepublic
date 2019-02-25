@@ -35,8 +35,19 @@ const _Final = props => {
 
     if (props.stripe) {
       try {
-        const { token } = await props.stripe.createToken();
-        console.log('[Token]', token.id);
+        let token = '';
+        try {
+          const response = await props.stripe.createToken();
+          token = response.token;
+          console.log('[Token]', token.id);
+        } catch (e) {
+          console.log('[Token Error', e.message);
+          setError({
+            type: 'token',
+            message: 'Error verifying card with Stripe Payments.',
+          });
+          throw new Error('Token error');
+        }
 
         setLoading(true);
         const response = await checkout({
@@ -51,7 +62,7 @@ const _Final = props => {
         });
         console.log('[Data Returned]', response);
       } catch (e) {
-        console.log('Error on final component', e.message);
+        console.log('[Checkout Error]', e.message);
       } finally {
         setLoading(false);
         actions.setSubmitting(false);
