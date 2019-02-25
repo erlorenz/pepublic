@@ -7,7 +7,6 @@ import SideMenu from './SideMenu';
 import OurServices from './OurServices';
 import AboutUs from './AboutUs';
 import Contact from './Contact';
-import 'intersection-observer';
 
 const Landing = ({ history }) => {
   const [sideMenuOpen, setSideMenuOpen] = React.useState(false);

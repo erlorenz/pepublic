@@ -4,6 +4,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import 'babel-polyfill';
+import 'intersection-observer';
 import ScrollToTop from './components/ScrollToTop';
 
 const rootElement = document.getElementById('root');
