@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const emailAndText = async (setError, dataToSubmit) => {
+const emailAndText = async dataToSubmit => {
   try {
-    const paymentResponse = await axios.post(
+    const response = await axios.post(
       process.env.REACT_APP_API_URL + '/checkout/emailandtext',
       dataToSubmit,
     );
-
-    return paymentResponse.data;
+    console.log('[ETResponse]', response.data);
+    return response.data;
   } catch (e) {
     if (e.response) {
       console.log('[Email and Text]', e.response.data);

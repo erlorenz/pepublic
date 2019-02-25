@@ -12,16 +12,10 @@ import { GarmentsContext } from '../../contexts/Garments';
 import { OptionsContext } from '../../contexts/Options';
 
 const Success = ({ location }) => {
-  const {
-    twilio,
-    receiptEmail,
-    errorEmail,
-    database,
-  } = location.state.data.checkout;
+  const { text, receipt, database } = location.state;
 
   let error = false;
-  if (!twilio.success || !receiptEmail.success || !database.success)
-    error = true;
+  if (!text || !receipt || !database) error = true;
 
   const { clearSchedule } = React.useContext(ScheduleContext);
   const { clearGarments } = React.useContext(GarmentsContext);
@@ -66,7 +60,7 @@ const Success = ({ location }) => {
             </Instructions>
           </>
         )}
-        {!database.success && !errorEmail.success && (
+        {!database && (
           <>
             <Instructions>
               Your order did not go through correctly but your card may have
@@ -75,7 +69,7 @@ const Success = ({ location }) => {
             </Instructions>
           </>
         )}
-        {!database.success && errorEmail.success && (
+        {/* {!database.success && errorEmail.success && (
           <>
             <Instructions>
               We received your order but you may not receive text updates or an
@@ -87,8 +81,8 @@ const Success = ({ location }) => {
               support@pressexpresslv.com.
             </Instructions>
           </>
-        )}
-        {!twilio.success && receiptEmail.success && database.success && (
+        )} */}
+        {!text && receipt && database && (
           <>
             <Instructions>
               We received your order but there may be an issue with sending text
@@ -102,7 +96,7 @@ const Success = ({ location }) => {
           </>
         )}
 
-        {database.success && twilio.success && !receiptEmail.success && (
+        {database && text && !receipt && (
           <>
             <Instructions>
               We received your order but there may be an issue sending the email
@@ -115,7 +109,7 @@ const Success = ({ location }) => {
             </Instructions>
           </>
         )}
-        {database.success && !twilio.success && !receiptEmail.success && (
+        {database && !text && !receipt && (
           <>
             <Instructions>
               We received your order but there was an issue sending the email

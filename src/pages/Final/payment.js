@@ -19,15 +19,15 @@ const payment = async (setError, dataToSubmit) => {
   } catch (e) {
     if (e.response) {
       console.log('[Payment/Validation]', e.response.data);
-      setError({ type: 'payment', message: 'Error with payment.' });
-      throw new Error('Payment response error');
+      throw new Error(
+        'There was an error with payment. Your card has not been charged.',
+      );
     } else if (e.request) {
       console.log('[Payment/validation]', e.request);
-      setError({ type: 'payment', message: 'Error with payment.' });
-      throw new Error('Payment request error');
+      throw new Error('There was an error reaching the server.');
     } else {
       console.log('[Payment/validation]', e);
-      throw new Error('Payment error');
+      throw new Error('There was an error with payment.');
     }
   }
 };

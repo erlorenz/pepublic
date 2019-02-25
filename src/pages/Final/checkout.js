@@ -1,5 +1,7 @@
 import * as Yup from 'yup';
 import payment from './payment';
+import emailAndText from './emailAndText';
+import dbTransaction from './dbTransaction';
 
 const checkout = async ({
   schedule,
@@ -9,6 +11,9 @@ const checkout = async ({
   customerDetails,
   token,
   setError,
+  setDbResponse,
+  setReceiptResponse,
+  setTextResponse,
 }) => {
   const { pickupHour, returnHour, hotel, room } = schedule;
   const { specialInstructions, starch, crease } = options;
@@ -72,7 +77,25 @@ const checkout = async ({
 
     await schema.validate(dataToSubmit);
 
-    await payment(setError, dataToSubmit);
+    // Payment function - returns stripe_charge, stripe_customer, phone
+    const paymentResponse = await payment(setError, dataToSubmit);
+
+    dataToSubmit.phone = paymentResponse.phone;
+    dataToSubmit.stripe_charge = paymentResponse.stripe_charge;
+    dataToSubmit.stripe_customer = paymentResponse.stripe_customer;
+    delete dataToSubmit.stripeToken;
+
+    // Email and Text
+    const emailAndTextResponse = await emailAndText(dataToSubmit);
+    setReceiptResponse(emailAndTextResponse.receiptResponse);
+    setTextResponse(emailAndTextResponse.textResponse);
+
+    dataToSubmit.receipt_sent = emailAndTextResponse.receiptResponse.success;
+    dataToSubmit.text_sent = emailAndTextResponse.textResponse.success;
+
+    // Save to Database
+    const dbResponse = await dbTransaction(dataToSubmit);
+    setDbResponse(dbResponse);
   } catch (e) {
     if (e.errors) {
       console.log('[Validation error]', e.errors);

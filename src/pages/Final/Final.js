@@ -22,9 +22,26 @@ import { CenterLoading } from '../../App';
 import { Redirect } from 'react-router-dom';
 
 const Final = props => {
+  // Is credit card complete
   const [cardComplete, setCardComplete] = React.useState(false);
+
+  // Error and loading states
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState({ type: '', message: '' });
+
+  // Responses
+  const [receiptResponse, setReceiptResponse] = React.useState({
+    success: '',
+    message: '',
+  });
+  const [textResponse, setTextResponse] = React.useState({
+    success: '',
+    message: '',
+  });
+  const [dbResponse, setDbResponse] = React.useState({
+    success: '',
+    message: '',
+  });
 
   const { schedule } = React.useContext(ScheduleContext);
   const { garments, totalPrice } = React.useContext(GarmentsContext);
@@ -51,7 +68,7 @@ const Final = props => {
 
         setLoading(true);
 
-        const response = await checkout({
+        await checkout({
           schedule,
           garments,
           totalPrice,
@@ -59,10 +76,12 @@ const Final = props => {
           customerDetails,
           token: token.id,
           setError,
-          setLoading,
+          setDbResponse,
+          setReceiptResponse,
+          setTextResponse,
         });
 
-        // props.history.push('/order/success', {state: response})
+        // Go to next page
       } catch (e) {
         console.log('[Checkout Error]', e.message);
       } finally {
@@ -96,6 +115,20 @@ const Final = props => {
   });
 
   if (loading) return <CenterLoading />;
+
+  if (dbResponse.success !== '')
+    return (
+      <Redirect
+        to={{
+          pathname: '/order/success',
+          state: {
+            database: dbResponse.success,
+            text: textResponse.success,
+            receipt: receiptResponse.success,
+          },
+        }}
+      />
+    );
 
   return (
     <>
