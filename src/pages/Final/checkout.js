@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import axios from 'axios';
 
 const checkout = async ({
   schedule,
@@ -7,7 +8,6 @@ const checkout = async ({
   options,
   customerDetails,
   token,
-  mutate,
 }) => {
   const { pickupHour, returnHour, hotel, room } = schedule;
   const { specialInstructions, starch, crease } = options;
@@ -73,10 +73,24 @@ const checkout = async ({
       console.log(e);
     }
 
-    const serverResponse = await mutate({ variables: dataToSubmit });
-    return serverResponse;
+    const { data } = await axios.post(
+      process.env.REACT_APP_API_URL,
+      dataToSubmit,
+    );
+    return data;
   } catch (e) {
-    throw new Error(e.message);
+    if (e.errors) {
+      console.log('[Validation error]', e.errors);
+      throw new Error('Validation error.');
+    } else if (e.response) {
+      console.log('[Server error]', e.response.data);
+      throw new Error('Server errror: ' + e.response.data);
+    } else if (e.request) {
+      throw new Error('No response from server.');
+    } else {
+      console.log(e);
+      throw new Error('Something strange happened when creating the request.');
+    }
   }
 };
 
