@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import axios from 'axios';
+import payment from './payment';
 
 const checkout = async ({
   schedule,
@@ -47,6 +47,8 @@ const checkout = async ({
     total_price = 3000;
   }
 
+  // Main function
+
   try {
     const dataToSubmit = {
       name,
@@ -66,20 +68,11 @@ const checkout = async ({
 
     console.log(dataToSubmit);
 
-    try {
-      await schema.validate(dataToSubmit);
-      console.log('validated');
-    } catch (e) {
-      if (e.errors) {
-        throw new Error(e.errors);
-      }
-    }
+    // Validate function
 
-    const { data } = await axios.post(
-      process.env.REACT_APP_API_URL,
-      dataToSubmit,
-    );
-    return data;
+    await schema.validate(dataToSubmit);
+
+    await payment(setError, dataToSubmit);
   } catch (e) {
     if (e.errors) {
       console.log('[Validation error]', e.errors);

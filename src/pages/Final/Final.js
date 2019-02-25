@@ -21,7 +21,7 @@ import { Notification } from '../../components/UI';
 import { CenterLoading } from '../../App';
 import { Redirect } from 'react-router-dom';
 
-const _Final = props => {
+const Final = props => {
   const [cardComplete, setCardComplete] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState({ type: '', message: '' });
@@ -50,6 +50,7 @@ const _Final = props => {
         }
 
         setLoading(true);
+
         const response = await checkout({
           schedule,
           garments,
@@ -60,7 +61,8 @@ const _Final = props => {
           setError,
           setLoading,
         });
-        console.log('[Data Returned]', response);
+
+        // props.history.push('/order/success', {state: response})
       } catch (e) {
         console.log('[Checkout Error]', e.message);
       } finally {
@@ -155,8 +157,7 @@ const _Final = props => {
   );
 };
 
-const Final = injectStripe(_Final);
-export default Final;
+export default injectStripe(Final);
 
 const StyledForm = styled(Form)`
   max-width: 450px;
