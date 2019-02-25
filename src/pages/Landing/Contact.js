@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import SectionTitle from './SectionTitle';
+// import SectionTitle from './SectionTitle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPhone,
