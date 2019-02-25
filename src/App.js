@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost';
 import React, { Suspense } from 'react';
 import { ApolloProvider } from 'react-apollo';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { StripeProvider } from 'react-stripe-elements';
 import styled, { ThemeProvider } from 'styled-components/macro';
 import Loading from './components/Loading';
@@ -16,7 +16,7 @@ export const client = new ApolloClient({
   uri: process.env.REACT_APP_API_URL,
 });
 
-const App = ({ location }) => {
+function _App({ location }) {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
@@ -39,8 +39,9 @@ const App = ({ location }) => {
       </ThemeProvider>
     </ApolloProvider>
   );
-};
+}
 
+const App = withRouter(_App);
 export default App;
 
 export const CenterLoading = styled(Loading)`

@@ -2,8 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import 'babel-polyfill';
+import ScrollToTop from './components/ScrollToTop';
 
 const rootElement = document.getElementById('root');
 
@@ -17,7 +18,9 @@ const rootElement = document.getElementById('root');
 // } else {
 render(
   <BrowserRouter>
-    <Route component={App} />
+    <ScrollToTop>
+      <App />
+    </ScrollToTop>
   </BrowserRouter>,
   rootElement,
 );
