@@ -14,7 +14,7 @@ const payment = async (setError, dataToSubmit) => {
       });
       throw new Error(paymentResponse.message);
     }
-
+    console.log('[Payment Response', paymentResponse.data);
     return paymentResponse.data;
   } catch (e) {
     if (e.response) {
