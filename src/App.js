@@ -12,7 +12,6 @@ const NotFound = React.lazy(() => import('./components/NotFound'));
 function _App({ location }) {
   return (
     <ThemeProvider theme={theme}>
-      {/* <StripeProvider stripe={stripe}> */}
       <>
         <GlobalStyle />
         <Suspense fallback={<CenterLoading />}>
