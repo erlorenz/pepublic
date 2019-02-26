@@ -12,52 +12,73 @@ import Review from '../Review/Review';
 import Schedule from '../Schedule/Schedule';
 import Success from '../Success/Success';
 import Topbar from './Topbar';
+import { StripeProvider } from 'react-stripe-elements';
 
 const Order = props => {
+  // Load stripe
+  const [stripe, setStripe] = React.useState(null);
+
+  React.useEffect(() => {
+    const stripeJs = document.createElement('script');
+    stripeJs.src = 'https://js.stripe.com/v3/';
+    stripeJs.async = true;
+    stripeJs.addEventListener('load', () => {
+      setStripe(window.Stripe(process.env.REACT_APP_STRIPE_KEY));
+    });
+    document.body && document.body.appendChild(stripeJs);
+  }, []);
+
   return (
-    <>
-      <ScheduleProvider history={props.history}>
-        <GarmentsProvider>
-          <OptionsProvider>
-            <Topbar location={props.location} />
-            <Main>
-              <Switch location={props.location}>
-                <Route
-                  exact
-                  path="/order/schedule"
-                  component={Schedule}
-                  key="1"
-                />
-                <Route
-                  exact
-                  path="/order/garments"
-                  component={Garments}
-                  key="2"
-                />
-                <Route exact path="/order/review" component={Review} key="3" />
-                <Route
-                  exact
-                  path="/order/final"
-                  render={props => (
-                    <Elements>
-                      <Final {...props} />
-                    </Elements>
-                  )}
-                  key="4"
-                />
-                <Route
-                  exact
-                  path="/order/success"
-                  component={Success}
-                  key="5"
-                />
-                <Route component={NotFound} key="6" />
-              </Switch>
-            </Main>
-          </OptionsProvider>
-        </GarmentsProvider>
-      </ScheduleProvider>
-    </>
+    <StripeProvider stripe={stripe}>
+      <>
+        <ScheduleProvider history={props.history}>
+          <GarmentsProvider>
+            <OptionsProvider>
+              <Topbar location={props.location} />
+              <Main>
+                <Switch location={props.location}>
+                  <Route
+                    exact
+                    path="/order/schedule"
+                    component={Schedule}
+                    key="1"
+                  />
+                  <Route
+                    exact
+                    path="/order/garments"
+                    component={Garments}
+                    key="2"
+                  />
+                  <Route
+                    exact
+                    path="/order/review"
+                    component={Review}
+                    key="3"
+                  />
+                  <Route
+                    exact
+                    path="/order/final"
+                    render={props => (
+                      <Elements>
+                        <Final {...props} />
+                      </Elements>
+                    )}
+                    key="4"
+                  />
+                  <Route
+                    exact
+                    path="/order/success"
+                    component={Success}
+                    key="5"
+                  />
+                  <Route component={NotFound} key="6" />
+                </Switch>
+              </Main>
+            </OptionsProvider>
+          </GarmentsProvider>
+        </ScheduleProvider>
+      </>
+    </StripeProvider>
   );
 };
 
