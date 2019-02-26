@@ -11,9 +11,22 @@ const Order = React.lazy(() => import('./pages/Order/Order'));
 const NotFound = React.lazy(() => import('./components/NotFound'));
 
 function _App({ location }) {
+  // Load Stripe async
+  const [stripe, setStripe] = React.useState(null);
+
+  React.useEffect(() => {
+    if (window.Stripe) {
+      setStripe(window.Stripe(process.env.REACT_APP_STRIPE_KEY));
+    } else {
+      document.querySelector('#stripe-js').addEventListener('load', () => {
+        setStripe(window.Stripe(process.env.REACT_APP_STRIPE_KEY));
+      });
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
-      <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
+      <StripeProvider stripe={stripe}>
         <>
           <GlobalStyle />
           <Suspense fallback={<CenterLoading />}>
