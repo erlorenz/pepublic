@@ -3,7 +3,7 @@ import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import fullSize from '../../assets/img/suitsfullsize.jpeg';
-import phoneSize from '../../assets/img/suitsphonesize.jpg';
+import phoneSize from '../../assets/img/suitsphonesize.jpeg';
 import { fadeToLeft, fadeToRight } from '../../styles/transitions';
 
 function Hero({ history }) {
