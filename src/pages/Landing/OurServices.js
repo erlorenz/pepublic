@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
 import { fadeInAndRightWhenInView } from '../../styles/transitions';
 import Image from '../../assets/img/ourservices.png';
+import LazyLoad from 'react-lazy-load';
 
 const description1 = `
 Press Express will refresh your clothing and return your garments beautifully finished, while eliminating 90% of odors, smoke, etc.
@@ -25,8 +26,8 @@ const description5 = `
 **We do not dryclean garments, they are steam pressed only.`;
 
 function OurServices() {
-  const [ref1, inView1] = useInView({ threshold: 0.3, triggerOnce: true });
-  const [ref2, inView2] = useInView({ threshold: 0.3, triggerOnce: true });
+  const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [ref2, inView2] = useInView({ threshold: 0.2, triggerOnce: true });
 
   const spring1 = useSpring(fadeInAndRightWhenInView(inView1));
   const spring2 = useSpring(fadeInAndRightWhenInView(inView2));
@@ -36,7 +37,9 @@ function OurServices() {
       <SectionTitle>Our Services</SectionTitle>
       <Container>
         <Images ref={ref1} style={spring1}>
-          <img src={Image} alt="Garments and buttons" />
+          <LazyLoad height={300} offsetVertical={500} debounce={false}>
+            <img src={Image} alt="Garments and buttons" />
+          </LazyLoad>
         </Images>
         <Description ref={ref2} style={spring2}>
           <P>{description1}</P>

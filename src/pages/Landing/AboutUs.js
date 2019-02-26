@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
 import { fadeInAndLeftWhenInView } from '../../styles/transitions';
 import vegasSign from '../../assets/img/vegassign.png';
+import LazyLoad from 'react-lazy-load';
 
 const description1 = `
 Press Express was founded in 2018 as a new concept with the goal of providing a much needed service for business travelers, groups, as well as anyone looking for a quick and easy way to get their garments looking good in Las Vegas.`;
@@ -15,11 +16,14 @@ const description2 = `
 `;
 
 function AboutUs() {
-  const [ref1, inView1] = useInView({ threshold: 0.3, triggerOnce: true });
-  const [ref2, inView2] = useInView({ threshold: 0.3, triggerOnce: true });
+  //Fade in view
+  const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [ref2, inView2] = useInView({ threshold: 0.2, triggerOnce: true });
 
   const spring1 = useSpring(fadeInAndLeftWhenInView(inView1));
   const spring2 = useSpring(fadeInAndLeftWhenInView(inView2));
+
+  // Lazy load
 
   return (
     <Section id="aboutus">
@@ -30,7 +34,9 @@ function AboutUs() {
           <P>{description2}</P>
         </Description>
         <Images ref={ref2} style={spring2}>
-          <img src={vegasSign} alt="Las Vegas sign" />
+          <LazyLoad height={300} offsetVertical={500} debounce={false}>
+            <img src={vegasSign} alt="Las Vegas sign" />
+          </LazyLoad>
         </Images>
       </Container>
     </Section>
@@ -81,4 +87,9 @@ const Description = styled(animated.div)`
 const P = styled.p`
   margin-top: 0;
   margin-bottom: 1rem;
+`;
+
+const LazyContainer = styled.div`
+  height: 100%;
+  width: 100%;
 `;
