@@ -31,20 +31,25 @@ const Success = ({ location }) => {
     clearOptions();
   }, []);
 
-  React.useEffect(async () => {
+  const sendErrorEmail = async () => {
+    try {
+      await axios.post(process.env.REACT_APP_API_URL + '/checkout/error', {
+        text,
+        receipt,
+        database,
+        name,
+        email,
+        phone,
+      });
+      console.log('Sent error email off successfully');
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  React.useEffect(() => {
     if (error) {
-      try {
-        await axios.post(process.env.REACT_APP_API_URL + '/checkout/error', {
-          text,
-          receipt,
-          database,
-          name,
-          email,
-          phone,
-        });
-      } catch (e) {
-        console.log(e);
-      }
+      sendErrorEmail();
     }
   }, []);
 
