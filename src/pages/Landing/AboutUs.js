@@ -88,8 +88,3 @@ const P = styled.p`
   margin-top: 0;
   margin-bottom: 1rem;
 `;
-
-const LazyContainer = styled.div`
-  height: 100%;
-  width: 100%;
-`;

@@ -43,12 +43,16 @@ const Final = props => {
     message: '',
   });
 
+  // Details to pass in error email
+  const [details, setDetails] = React.useState(null);
+
   const { schedule } = React.useContext(ScheduleContext);
   const { garments, totalPrice } = React.useContext(GarmentsContext);
   const { options } = React.useContext(OptionsContext);
 
   const handleSubmit = async (values, actions) => {
     const customerDetails = { ...values };
+    setDetails(customerDetails);
 
     if (props.stripe) {
       try {
@@ -125,6 +129,9 @@ const Final = props => {
             database: dbResponse.success,
             text: textResponse.success,
             receipt: receiptResponse.success,
+            name: details.name,
+            email: details.email,
+            phone: details.phone,
           },
         }}
       />

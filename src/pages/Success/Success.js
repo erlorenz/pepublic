@@ -10,9 +10,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ScheduleContext } from '../../contexts/Schedule';
 import { GarmentsContext } from '../../contexts/Garments';
 import { OptionsContext } from '../../contexts/Options';
+import axios from 'axios';
 
 const Success = ({ location }) => {
-  const { text, receipt, database } = location.state;
+  const { text, receipt, database, name, email, phone } = location.state;
 
   let error = false;
   if (!text || !receipt || !database) error = true;
@@ -30,6 +31,23 @@ const Success = ({ location }) => {
     clearOptions();
   }, []);
 
+  React.useEffect(async () => {
+    if (error) {
+      try {
+        await axios.post(process.env.REACT_APP_API_URL + '/checkout/error', {
+          text,
+          receipt,
+          database,
+          name,
+          email,
+          phone,
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }, []);
+
   return (
     <>
       <IconContainer>
@@ -45,14 +63,16 @@ const Success = ({ location }) => {
         <SuccessOrWarning>Success!</SuccessOrWarning>
       )}
       <Container>
-        {!error && (
+        {database && receipt && text && (
           <>
             <Instructions>
-              We have received your order and are working on it now.
+              We have received your order and are working on it now. Unless we
+              contact you with different instructions, make sure to have your
+              garments ready at the bell desk by the scheduled pickup time.
             </Instructions>
             <Instructions>
-              Be on the lookout for a receipt email with further instructions.
-              You will receive updates via text.
+              Be on the lookout for a receipt email and we'll keep you updated
+              via text.
             </Instructions>
             <Instructions>
               If you have any questions about your order please call us at
@@ -60,7 +80,25 @@ const Success = ({ location }) => {
             </Instructions>
           </>
         )}
-        {!database && (
+        {!database && receipt && (
+          <>
+            <Instructions>
+              We received your order but something is wrong with our text
+              updates. Rest assured we are looking at it now and if necessary
+              will contact you via email or phone.
+            </Instructions>
+            <Instructions>
+              Unless we contact you with different instructions, make sure to
+              have your garments ready at the bell desk by the scheduled pickup
+              time.
+            </Instructions>
+            <Instructions>
+              You can also reach out to us at 702-620-3315 or
+              support@pressexpresslv.com.
+            </Instructions>
+          </>
+        )}
+        {!database && !receipt && (
           <>
             <Instructions>
               Your order did not go through correctly but your card may have
@@ -82,12 +120,17 @@ const Success = ({ location }) => {
             </Instructions>
           </>
         )} */}
-        {!text && receipt && database && (
+        {database && !text && receipt && (
           <>
             <Instructions>
-              We received your order but there may be an issue with sending text
+              We received your order but something is wrong with our text
               updates. Rest assured we are looking at it now and if necessary
               will contact you via email or phone.
+            </Instructions>
+            <Instructions>
+              Unless we contact you with different instructions, make sure to
+              have your garments ready at the bell desk by the scheduled pickup
+              time.
             </Instructions>
             <Instructions>
               You can also reach out to us at 702-620-3315 or
@@ -99,9 +142,14 @@ const Success = ({ location }) => {
         {database && text && !receipt && (
           <>
             <Instructions>
-              We received your order but there may be an issue sending the email
-              receipt. Rest assured we are looking at it now and if necessary
+              We received your order but something is wrong with our email
+              receipts. Rest assured we are looking at it now and if necessary
               will contact you via email or phone.
+            </Instructions>
+            <Instructions>
+              Unless we contact you with different instructions, make sure to
+              have your garments ready at the bell desk by the scheduled pickup
+              time.
             </Instructions>
             <Instructions>
               You can also reach out to us at 702-620-3315 or
@@ -112,9 +160,14 @@ const Success = ({ location }) => {
         {database && !text && !receipt && (
           <>
             <Instructions>
-              We received your order but there was an issue sending the email
-              receipt and with text updates. Rest assured we are looking at it
-              now and if necessary will contact you.
+              We received your order but something went wrong with our text
+              updates and receipt email. Rest assured we are looking at it now
+              and if necessary will contact you.
+            </Instructions>
+            <Instructions>
+              Unless we contact you with different instructions, make sure to
+              have your garments ready at the bell desk by the scheduled pickup
+              time.
             </Instructions>
             <Instructions>
               You can also reach out to us at 702-620-3315 or
