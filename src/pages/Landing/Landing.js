@@ -36,6 +36,8 @@ const Main = styled.main`
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  overflow-x: hidden;
 `;
 
 // const Wrapper = styled.div`
