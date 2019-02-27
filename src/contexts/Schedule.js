@@ -18,7 +18,7 @@ export const ScheduleProvider = ({ children, history }) => {
     const storedSchedule = JSON.parse(localStorage.getItem('schedule'));
 
     // Check if there are values and not blank
-    if (storedSchedule.pickupHour) {
+    if (storedSchedule && storedSchedule.pickupHour) {
       // Check if it's a day old
       if (getNow().day > getTime(storedSchedule.pickupHour).day) {
         console.log('Schedule discarded, one day past.');
