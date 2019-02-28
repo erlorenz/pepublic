@@ -9,7 +9,7 @@ import {
 
 // Hours available for pickup and return
 const times = {
-  pickup: [14, 15, 16, 17, 18, 19],
+  pickup: [12, 13, 14, 15, 16, 17, 18, 19],
   return: [7, 16, 17, 18, 19, 20],
 };
 

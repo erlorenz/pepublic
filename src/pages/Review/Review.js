@@ -72,7 +72,7 @@ const Review = props => {
                 />
               )}
 
-              {includesDressShirt && (
+              {/* {includesDressShirt && (
                 <DoubleRadioYesNo
                   option1="Yes"
                   option2="No"
@@ -81,7 +81,7 @@ const Review = props => {
                   formikProps={formikProps}
                   name="crease"
                 />
-              )}
+              )} */}
 
               <Field
                 name="specialInstructions"
