@@ -10,8 +10,11 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 const description1 = `
 Press Express was founded in 2018 as a new concept with the goal of providing a much needed service for business travelers, groups, as well as anyone looking for a quick and easy way to get their garments looking good in Las Vegas.`;
 
-const description2 = `
-  Although this business is young, the owners have over 30 years of experience in the industry and the know how to provide the best possible service.
+const description2 = ` 
+We realized that many people don't need their clothing dry cleaned or washed, but simply pressed free of wrinkles and creases so they look sharp for events, business conferences, conventions, or anything else. `;
+
+const description3 = `
+  Although this business is young, the owners have over 30 years of experience in the industry and the know-how to provide expert and professional service.
   Our location only 1/2 a mile from The Strip and less than 1 mile from Downtown allows us to pickup and return garments faster than any other service in the city.
 `;
 
@@ -32,6 +35,7 @@ function AboutUs() {
         <Description ref={ref1} style={spring1}>
           <P>{description1}</P>
           <P>{description2}</P>
+          <P>{description3}</P>
         </Description>
         <Images ref={ref2} style={spring2}>
           <LazyLoadImage

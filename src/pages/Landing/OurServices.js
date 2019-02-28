@@ -8,7 +8,7 @@ import Image from '../../assets/img/ourservices.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const description1 = `
-Press Express will refresh your clothing and return your garments beautifully finished, while eliminating 90% of odors, smoke, etc.
+Press Express will refresh your clothing and return your garments professionally finished, while eliminating 90% of odors, smoke, etc.
 `;
 
 const description2 = `
@@ -20,10 +20,10 @@ Finally, we do all this with the quickest turnaround in the city, making sure yo
 `;
 
 const description4 = `
-Pickup and delivery is always included in the price and we aim to make everything as simple as possible for you.`;
+Pickup and delivery is always included in the price and we aim to make everything as simple as possible with our step-by-step online ordering.`;
 
 const description5 = `
-**We do not dryclean garments, they are steam pressed only.`;
+We do not dry clean garments, they are steam-pressed and hand-finished.`;
 
 function OurServices() {
   const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
