@@ -49,7 +49,7 @@ const GarmentChoice = () => {
           {garmentList}
         </Selected>
         <TotalPrice strike={belowMinPrice}>
-          <Span>TOTAL PRICE:</Span>
+          <Span>Total:</Span>
           <Price strike={belowMinPrice}>
             <span>$</span>
             {formatPrice(context.totalPrice())}
@@ -57,7 +57,7 @@ const GarmentChoice = () => {
         </TotalPrice>
         {belowMinPrice && (
           <MinPrice>
-            <Span>MIN PRICE:</Span>
+            <Span>Total (minimum price):</Span>
             <Price>
               <span>$</span> 30.00
             </Price>
