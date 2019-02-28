@@ -5,7 +5,7 @@ import HowItWorksItem from './HowItWorksItem';
 import SectionTitle from './SectionTitle';
 
 const step1 = `Simply create your order by walking through our interactive web app. Schedule your pickup and return, select the items you'll be giving us, and finalize your order in a few easy steps.`;
-const step2 = `Leave your garmenets at the pickup location before the chosen pickup time.`;
+const step2 = `Leave your garments at the pickup location before the chosen pickup time so they are ready for us to pick up.`;
 const step3 = `We do the rest! We will have it freshly pressed and returned by the selected return time at the same location. You will be updated via text each step of the way!`;
 
 function HowItWorks() {
