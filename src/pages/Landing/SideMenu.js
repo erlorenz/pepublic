@@ -19,7 +19,7 @@ function SideMenu({ handleClick, sideMenuIsOpen }) {
 
   return (
     <MobileMenu style={props}>
-      <CloseMenuButton onClick={handleClick}>
+      <CloseMenuButton onClick={handleClick} aria-label="close side menu">
         <FontAwesomeIcon icon={faTimes} />
       </CloseMenuButton>
       <Ul>

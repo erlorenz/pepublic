@@ -37,7 +37,10 @@ function Navbar({ handleClick }) {
 
   return (
     <Div style={fadeColor}>
-      <MenuButton onClick={handleClick} style={fade}>
+      <MenuButton
+        onClick={handleClick}
+        style={fade}
+        aria-label="open side menu">
         <MenuIcon />
       </MenuButton>
       <LogoContainer onClick={handleScrollToTop} style={fade}>
