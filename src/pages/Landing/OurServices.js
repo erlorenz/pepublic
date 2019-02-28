@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
 import { fadeInAndRightWhenInView } from '../../styles/transitions';
 import Image from '../../assets/img/ourservices.png';
-import LazyLoad from 'react-lazy-load';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const description1 = `
 Press Express will refresh your clothing and return your garments beautifully finished, while eliminating 90% of odors, smoke, etc.
@@ -37,9 +37,12 @@ function OurServices() {
       <SectionTitle>Our Services</SectionTitle>
       <Container>
         <Images ref={ref1} style={spring1}>
-          <LazyLoad height={300} offsetVertical={500} debounce={false}>
-            <img src={Image} alt="Garments and buttons" />
-          </LazyLoad>
+          <LazyLoadImage
+            alt="Suits, buttons, shirts"
+            height="300px"
+            src={Image}
+            threshold="500"
+          />
         </Images>
         <Description ref={ref2} style={spring2}>
           <P>{description1}</P>

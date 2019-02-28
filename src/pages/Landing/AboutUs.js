@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
 import { fadeInAndLeftWhenInView } from '../../styles/transitions';
 import vegasSign from '../../assets/img/vegassign.png';
-import LazyLoad from 'react-lazy-load';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const description1 = `
 Press Express was founded in 2018 as a new concept with the goal of providing a much needed service for business travelers, groups, as well as anyone looking for a quick and easy way to get their garments looking good in Las Vegas.`;
@@ -34,9 +34,12 @@ function AboutUs() {
           <P>{description2}</P>
         </Description>
         <Images ref={ref2} style={spring2}>
-          <LazyLoad height={300} offsetVertical={500} debounce={false}>
-            <img src={vegasSign} alt="Las Vegas sign" />
-          </LazyLoad>
+          <LazyLoadImage
+            alt="Las Vegas sign"
+            height="300px"
+            src={vegasSign}
+            threshold="500"
+          />
         </Images>
       </Container>
     </Section>
