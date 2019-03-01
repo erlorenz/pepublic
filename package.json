@@ -34,8 +34,7 @@
     "yup": "^0.26.10"
   },
   "scripts": {
-    "postbuild": "react-snap",
-    "start": "react-scripts start --stats",
+    "start": "react-scripts start",
     "build:production": "env-cmd .env.production react-scripts build && npx react-snap",
     "build:staging": "env-cmd .env.staging react-scripts build -- --stats && npx react-snap",
     "deploy:staging": "npm run build:staging && firebase use staging && firebase deploy",
