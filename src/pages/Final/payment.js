@@ -7,12 +7,12 @@ const payment = async (setError, dataToSubmit) => {
       dataToSubmit,
     );
     // If response says there was an error
-    if (paymentResponse.error) {
+    if (paymentResponse.data.error) {
       setError({
-        type: paymentResponse.error,
-        message: paymentResponse.message,
+        type: paymentResponse.data.error,
+        message: paymentResponse.data.message,
       });
-      throw new Error(paymentResponse.message);
+      throw new Error(paymentResponse.data.message);
     }
     console.log('[Payment Response', paymentResponse.data);
     return paymentResponse.data;
@@ -27,7 +27,7 @@ const payment = async (setError, dataToSubmit) => {
       throw new Error('There was an error reaching the server.');
     } else {
       console.log('[Payment/validation]', e);
-      throw new Error('There was an error with payment.');
+      throw new Error(e.message);
     }
   }
 };

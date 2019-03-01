@@ -1,7 +1,8 @@
-import * as Yup from 'yup';
+import schema from './checkoutSchema';
 import payment from './payment';
-import emailAndText from './emailAndText';
 import dbTransaction from './dbTransaction';
+import sendReceiptEmail from './sendReceiptEmail';
+import sendText from './sendText';
 
 const checkout = async ({
   schedule,
@@ -22,28 +23,6 @@ const checkout = async ({
   const customerOrderItems = garments.map(garment => {
     const { id, ...rest } = garment;
     return rest;
-  });
-
-  const schema = Yup.object().shape({
-    name: Yup.string().required('Please enter your name.'),
-    phone: Yup.number().required('Please enter a 10 digit phone number.'),
-    email: Yup.string().required('Please enter a valid email address.'),
-    pickup_date: Yup.string().required('Please choose a pickup time.'),
-    return_date: Yup.string().required('Please choose a return time.'),
-    hotel: Yup.string().required('Please choose a hotel.'),
-    room: Yup.string().required('Please choose a room.'),
-    total_price: Yup.number().required(
-      'The total price is calculating incorrectly.',
-    ),
-    starch: Yup.string().required('Choose light or no starch for your shirts.'),
-    crease: Yup.string().required(
-      'Choose if you would like your dress shirt sleeves creased.',
-    ),
-    special_instructions: Yup.string().nullable(),
-    stripeToken: Yup.string().required('Token missing.'),
-    customerOrderItems: Yup.array()
-      .min(1, '0 items selected.')
-      .required('No items selected.'),
   });
 
   // Make sure minimum price works
@@ -78,23 +57,24 @@ const checkout = async ({
     await schema.validate(dataToSubmit);
 
     // Payment function - returns stripe_charge, stripe_customer, phone
+    // Ends the transaction if there's an error and displays to customer
     const paymentResponse = await payment(setError, dataToSubmit);
 
+    // Add some properties for the rest
     dataToSubmit.phone = paymentResponse.phone;
     dataToSubmit.stripe_charge = paymentResponse.stripe_charge;
     dataToSubmit.stripe_customer = paymentResponse.stripe_customer;
     delete dataToSubmit.stripeToken;
 
-    // Email and Text
-    const emailAndTextResponse = await emailAndText(dataToSubmit);
-    setReceiptResponse(emailAndTextResponse.receiptResponse);
-    setTextResponse(emailAndTextResponse.textResponse);
-
-    dataToSubmit.receipt_sent = emailAndTextResponse.receiptResponse.success;
-    dataToSubmit.text_sent = emailAndTextResponse.textResponse.success;
-
-    // Save to Database
-    const dbResponse = await dbTransaction(dataToSubmit);
+    // Email, Database, and Text concurrent (all return success and message)
+    const [receiptResponse, textResponse, dbResponse] = await Promise.all([
+      sendReceiptEmail(dataToSubmit),
+      sendText(dataToSubmit),
+      dbTransaction(dataToSubmit),
+    ]);
+    // Set the states of each
+    setReceiptResponse(receiptResponse);
+    setTextResponse(textResponse);
     setDbResponse(dbResponse);
   } catch (e) {
     if (e.errors) {

@@ -21,6 +21,7 @@ import { Notification } from '../../components/UI';
 import { CenterLoading } from '../../App';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import Loading from '../../components/Loading';
 
 const Final = props => {
   // Is credit card complete
@@ -119,9 +120,7 @@ const Final = props => {
       .required('Please enter your email address.'),
   });
 
-  if (loading) return <CenterLoading />;
-
-  if (dbResponse.success !== '')
+  if (dbResponse.message && textResponse.message && receiptResponse.message)
     return (
       <Redirect
         to={{
@@ -140,6 +139,7 @@ const Final = props => {
 
   return (
     <>
+      {loading && <Submitting type="Ball-Triangle" color="#42c8e6" />}
       <Helmet>
         <title>Final</title>
       </Helmet>
@@ -245,3 +245,16 @@ const createOptions = () => {
     },
   };
 };
+
+const Submitting = styled(Loading)`
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #d4dce0c4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
