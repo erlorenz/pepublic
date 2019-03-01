@@ -14,7 +14,7 @@ const hotels = [
   'El Cortez',
   'Elara by Hilton',
   'Ellis Island',
-  'Embassy Suites',
+  'Embassy Suites (LV Convention Center)',
   'Encore',
   'Excalibur',
   'Flamingo',
