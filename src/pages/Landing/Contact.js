@@ -48,10 +48,18 @@ function Contact() {
           </ListItem>
         </List>
         <MediaIcons>
-          <MediaIcon icon={faFacebook} />
-          <MediaIcon icon={faTwitter} />
-          <MediaIcon icon={faYelp} />
-          <MediaIcon icon={faGoogle} />
+          <a href="https://www.facebook.com/Press-Express-Las-Vegas-306987010005902/">
+            <MediaIcon icon={faFacebook} />
+          </a>
+          <a href="https://twitter.com/pressexpresslv">
+            <MediaIcon icon={faTwitter} />
+          </a>
+          <a href="https://www.yelp.com/biz/press-express-las-vegas-las-vegas">
+            <MediaIcon icon={faYelp} />
+          </a>
+          <a href="https://www.google.com/search?q=press+express+las+vegas&oq=press+express+las+vegas">
+            <MediaIcon icon={faGoogle} />
+          </a>
         </MediaIcons>
       </Container>
       <Copyright>
