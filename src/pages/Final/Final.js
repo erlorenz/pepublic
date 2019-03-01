@@ -18,7 +18,6 @@ import theme from '../../styles/theme';
 import FinalBottombar from './FinalBottombar';
 import checkout from './checkout';
 import { Notification } from '../../components/UI';
-import { CenterLoading } from '../../App';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Loading from '../../components/Loading';
