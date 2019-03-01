@@ -54,10 +54,14 @@ const Section = styled.section`
 `;
 
 const H1 = styled(animated.h1)`
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 500;
   color: white;
   text-align: center;
+
+  @media (min-width: 330px) {
+    font-size: 2rem;
+  }
 
   @media (min-width: 1000px) {
     font-size: 3rem;
@@ -89,10 +93,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 35%;
+  transform: translateY(-20%);
   max-width: 600px;
 
   @media (min-width: 1000px) {
-    margin-bottom: 10%;
+    /* transform: translateY(0); */
   }
 `;

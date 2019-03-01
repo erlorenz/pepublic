@@ -15,6 +15,7 @@ const checkout = async ({
   setDbResponse,
   setReceiptResponse,
   setTextResponse,
+  setPaymentResponse,
 }) => {
   const { pickupHour, returnHour, hotel, room } = schedule;
   const { specialInstructions, starch, crease } = options;
@@ -59,6 +60,7 @@ const checkout = async ({
     // Payment function - returns stripe_charge, stripe_customer, phone
     // Ends the transaction if there's an error and displays to customer
     const paymentResponse = await payment(setError, dataToSubmit);
+    setPaymentResponse({ success: true });
 
     // Add some properties for the rest
     dataToSubmit.phone = paymentResponse.phone;

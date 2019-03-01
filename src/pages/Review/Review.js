@@ -40,7 +40,7 @@ const Review = props => {
   return (
     <>
       <Helmet>
-        <title>Select Your Garments</title>
+        <title>Review Your Order</title>
       </Helmet>
       <PageTitle>Does everything look good?</PageTitle>
       <PageInstructions>

@@ -21,6 +21,7 @@ import { Notification } from '../../components/UI';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Loading from '../../components/Loading';
+import Submitting from './Submitting';
 
 const Final = props => {
   // Is credit card complete
@@ -31,6 +32,7 @@ const Final = props => {
   const [error, setError] = React.useState({ type: '', message: '' });
 
   // Responses
+  const [paymentResponse, setPaymentResponse] = React.useState({ success: '' });
   const [receiptResponse, setReceiptResponse] = React.useState({
     success: '',
     message: '',
@@ -84,6 +86,7 @@ const Final = props => {
           setDbResponse,
           setReceiptResponse,
           setTextResponse,
+          setPaymentResponse,
         });
 
         // Go to next page
@@ -138,7 +141,13 @@ const Final = props => {
 
   return (
     <>
-      {loading && <Submitting type="Ball-Triangle" color="#42c8e6" />}
+      {loading && (
+        <Submitting
+          paymentResponse={paymentResponse}
+          receiptResponse={receiptResponse}
+          textResponse={textResponse}
+        />
+      )}
       <Helmet>
         <title>Final</title>
       </Helmet>
@@ -244,16 +253,3 @@ const createOptions = () => {
     },
   };
 };
-
-const Submitting = styled(Loading)`
-  position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #d4dce0c4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
