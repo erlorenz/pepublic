@@ -11,6 +11,7 @@ import { ScheduleContext } from '../../contexts/Schedule';
 import { GarmentsContext } from '../../contexts/Garments';
 import { OptionsContext } from '../../contexts/Options';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const Success = ({ location }) => {
   const { text, receipt, database, name, email, phone } = location.state;
@@ -55,6 +56,9 @@ const Success = ({ location }) => {
 
   return (
     <>
+      <Helmet>
+        <title>Making Order...</title>
+      </Helmet>
       <IconContainer>
         {error ? (
           <Icon warning="true" icon={faExclamationTriangle} />

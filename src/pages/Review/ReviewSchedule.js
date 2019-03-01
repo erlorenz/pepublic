@@ -14,9 +14,12 @@ const ReviewSchedule = ({ history }) => {
   const fadeIn = useSpring(fadeInSlow);
 
   const description = dt => {
-    if (dt.day === getNow().day) return 'Today';
-    if (dt.day - 1 === getNow().day) return 'Tomorrow';
-    if (dt.day - 2 === getNow().day) return dt.toFormat('EEEE');
+    // console.log(dt.day);
+    // if (dt.day === getNow().day) return 'Today';
+    // if (dt.day - 1 === getNow().day) return 'Tomorrow';
+    // if (dt.day - 2 === getNow().day) return dt.toFormat('EEEE');
+    // if (dt.day !== getNow().day && dt.day === 1) return dt.toFormat('EEEE');
+    if (dt.day) return dt.toFormat('EEEE');
     return '';
   };
 

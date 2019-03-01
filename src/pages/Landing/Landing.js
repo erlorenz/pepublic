@@ -7,6 +7,7 @@ import SideMenu from './SideMenu';
 import OurServices from './OurServices';
 import AboutUs from './AboutUs';
 import Contact from './Contact';
+import { Helmet } from 'react-helmet';
 
 const Landing = ({ history }) => {
   const [sideMenuOpen, setSideMenuOpen] = React.useState(false);
@@ -15,6 +16,9 @@ const Landing = ({ history }) => {
 
   return (
     <>
+      <Helmet>
+        <title>Press Express Las Vegas</title>
+      </Helmet>
       <SideMenu handleClick={handleClick} sideMenuIsOpen={sideMenuOpen} />
       <Main>
         <Navbar handleClick={handleClick} />

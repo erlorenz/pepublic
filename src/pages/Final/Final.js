@@ -20,6 +20,7 @@ import checkout from './checkout';
 import { Notification } from '../../components/UI';
 import { CenterLoading } from '../../App';
 import { Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Final = props => {
   // Is credit card complete
@@ -139,6 +140,9 @@ const Final = props => {
 
   return (
     <>
+      <Helmet>
+        <title>Final</title>
+      </Helmet>
       <PageTitle>Finalize your order</PageTitle>
       <PageInstructions>
         Fill out the remaining information and click "Finish". When it goes

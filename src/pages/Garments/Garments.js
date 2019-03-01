@@ -8,10 +8,14 @@ import GarmentChoice from './GarmentChoice';
 // import GET_GARMENTS from '../../queries/getGarments';
 // import Loading from '../../components/Loading';
 import GarmentList from './GarmentList';
+import { Helmet } from 'react-helmet';
 
 const Garments = props => {
   return (
     <>
+      <Helmet>
+        <title>Select Your Garments</title>
+      </Helmet>
       <PageTitle>What are we doing for you?</PageTitle>
       <PageInstructions>
         Each click on an item increases the quantity added to your cart. To

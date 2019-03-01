@@ -18,6 +18,7 @@ import {
   returnTimes,
 } from '../../utils/customerTimes';
 import hotels from './hotels';
+import { Helmet } from 'react-helmet';
 
 const schema = Yup.object().shape({
   pickupDate: Yup.string().required('Please choose a pickup date.'),
@@ -45,6 +46,9 @@ const Schedule = props => {
 
   return (
     <>
+      <Helmet>
+        <title>Schedule</title>
+      </Helmet>
       <PageTitle>Where are we going?</PageTitle>
       <PageInstructions>
         We will pick your garments up after the selected pickup time and return

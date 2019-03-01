@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
+import { Helmet } from 'react-helmet';
 
 const NotFound = ({ history }) => {
   useEffect(() => {
@@ -7,9 +8,14 @@ const NotFound = ({ history }) => {
   }, []);
 
   return (
-    <WholePage>
-      <h1>NOT FOUND</h1>
-    </WholePage>
+    <>
+      <Helmet>
+        <title>404 Not Found</title>
+      </Helmet>
+      <WholePage>
+        <h1>404 NOT FOUND</h1>
+      </WholePage>
+    </>
   );
 };
 

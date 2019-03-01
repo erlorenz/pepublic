@@ -12,6 +12,7 @@ import { OptionsContext } from '../../contexts/Options';
 import ReviewGarments from './ReviewGarments';
 import ReviewSchedule from './ReviewSchedule';
 import terms from './terms';
+import { Helmet } from 'react-helmet';
 
 const Review = props => {
   const garments = useContext(GarmentsContext);
@@ -38,6 +39,9 @@ const Review = props => {
 
   return (
     <>
+      <Helmet>
+        <title>Select Your Garments</title>
+      </Helmet>
       <PageTitle>Does everything look good?</PageTitle>
       <PageInstructions>
         Review the selected times and garments - you can always go back to edit
