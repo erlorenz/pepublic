@@ -135,6 +135,9 @@ const ForwardButton = styled(Button)`
   :hover {
     background-color: ${props => (props.disabled ? '#c0e3ea' : null)};
   }
+  :active {
+    background-color: #c0e3ea;
+  }
 `;
 
 const BackButton = styled(Button)`
