@@ -18,11 +18,11 @@ const lastPickup = times.pickup[times.pickup.length - 1];
 
 // From the rounded current hour to first allowed pickup time
 // From the selected pickup hour to first allowed return time
-const pickupDelta = 1;
+export const pickupDelta = 1;
 const returnDelta = 4;
 
 // When the minutes round to the next hour
-const roundingCutoff = 30;
+export const roundingCutoff = 30;
 
 // current rounded hour
 const roundedHour =

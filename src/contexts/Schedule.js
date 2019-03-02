@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { getTime, getNow } from '../utils/getDates';
+import { roundingCutoff } from '../utils/customerTimes';
 
 export const ScheduleContext = createContext();
 
@@ -23,7 +24,9 @@ export const ScheduleProvider = ({ children, history }) => {
       const nowMillis = getNow().valueOf();
       const pickupMillis = getTime(storedSchedule.pickupHour).valueOf();
       const pickupMinusNow = pickupMillis - nowMillis;
-      if (pickupMinusNow <= 3600000) {
+      const cutoffMinutesInMillis = (60 - roundingCutoff) * 60000;
+
+      if (pickupMinusNow <= cutoffMinutesInMillis) {
         console.log(
           'Schedule discarded, stored pickup time is too soon or passed.',
         );
