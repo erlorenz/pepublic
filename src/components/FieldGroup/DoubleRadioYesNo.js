@@ -2,8 +2,6 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { animated } from 'react-spring';
 import styled from 'styled-components/macro';
-import { ReactComponent as CheckedRadio } from '../../assets/img/checkedradio.svg';
-import { ReactComponent as UncheckedRadio } from '../../assets/img/uncheckedradio.svg';
 import {
   Control,
   Fieldset,
@@ -13,6 +11,7 @@ import {
   RadioInput,
   RadioLabel,
 } from './FieldGroupStyles';
+import RadioButton from './RadioButton';
 
 const DoubleRadioYesNo = ({
   children,
@@ -44,7 +43,7 @@ const DoubleRadioYesNo = ({
       <Control>
         <FlexContainer>
           <RadioLabel checked={checked1} left>
-            {checked1 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
+            <RadioButton checked={checked1} />
             {option1}
             <RadioInput
               name={name}
@@ -57,7 +56,7 @@ const DoubleRadioYesNo = ({
           </RadioLabel>
 
           <RadioLabel checked={checked2}>
-            {checked2 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
+            <RadioButton checked={checked2} />
             {option2}
             <RadioInput
               name={name}
@@ -92,11 +91,3 @@ const FlexContainer = styled(animated.div)`
 //   border: 1px solid ${borderColor};
 //   background-color: white;
 // `;
-
-const StyledCheckedRadio = styled(CheckedRadio)`
-  margin-right: 0.7rem;
-`;
-
-const StyledUncheckedRadio = styled(UncheckedRadio)`
-  margin-right: 0.7rem;
-`;

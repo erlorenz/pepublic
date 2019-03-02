@@ -13,6 +13,7 @@ import {
   RadioInput,
   RadioLabel,
 } from './FieldGroupStyles';
+import RadioButton from './RadioButton';
 
 const RadioGroup = ({
   children,
@@ -45,11 +46,7 @@ const RadioGroup = ({
             key={time.hour}
             checked={time.valueOf().toString() === selectedHour}
             left>
-            {time.valueOf().toString() === selectedHour ? (
-              <StyledCheckedRadio />
-            ) : (
-              <StyledUncheckedRadio />
-            )}
+            <RadioButton checked={time.valueOf().toString() === selectedHour} />
             {time.toFormat('h:mm a')}
             <RadioInput
               name={name}

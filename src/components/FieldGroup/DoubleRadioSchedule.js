@@ -2,8 +2,6 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
-import { ReactComponent as CheckedRadio } from '../../assets/img/checkedradio.svg';
-import { ReactComponent as UncheckedRadio } from '../../assets/img/uncheckedradio.svg';
 import { getNow } from '../../utils/getDates';
 import {
   borderColor,
@@ -15,6 +13,7 @@ import {
   RadioInput,
   RadioLabel,
 } from './FieldGroupStyles';
+import RadioButton from './RadioButton';
 
 const DoubleRadio = ({
   children,
@@ -53,19 +52,20 @@ const DoubleRadio = ({
     return '';
   };
 
-  const springProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+  // Fade in elements
+  const fadeIn = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   return (
     <Fieldset>
       {label && <Label>{label}</Label>}
       <Control>
         {!times.val2 ? (
-          <Placeholder style={springProps} />
+          <Placeholder style={fadeIn} />
         ) : (
-          <FlexContainer style={springProps}>
+          <FlexContainer style={fadeIn}>
             {times.val1 && (
-              <RadioLabel style={springProps} checked={checked1} left>
-                {checked1 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
+              <RadioLabel style={fadeIn} checked={checked1} left>
+                <RadioButton checked={checked1} />
                 <DayLong>{descriptionLong(times.val1)}</DayLong>
                 <DayShort>{descriptionShort(times.val1)}</DayShort>
                 {` ${times.val1.month}/${times.val1.day}`}
@@ -81,8 +81,8 @@ const DoubleRadio = ({
             )}
 
             {times.val2 && (
-              <RadioLabel style={springProps} checked={checked2}>
-                {checked2 ? <StyledCheckedRadio /> : <StyledUncheckedRadio />}
+              <RadioLabel style={fadeIn} checked={checked2}>
+                <RadioButton checked={checked2} />
                 <DayLong>{descriptionLong(times.val2)}</DayLong>
                 <DayShort>{descriptionShort(times.val2)}</DayShort>
                 {`${times.val2.month}/${times.val2.day}`}
@@ -122,21 +122,15 @@ const Placeholder = styled(FlexContainer)`
   background-color: white;
 `;
 
-const StyledCheckedRadio = styled(CheckedRadio)`
-  margin-right: 0.7rem;
-`;
-
-const StyledUncheckedRadio = styled(UncheckedRadio)`
-  margin-right: 0.7rem;
-`;
-
 const DayLong = styled.span`
+  margin-right: 0.2rem;
   @media (max-width: 374px) {
     display: none;
   }
 `;
 
 const DayShort = styled.span`
+  margin-right: 0.2rem;
   @media (min-width: 375px) {
     display: none;
   }

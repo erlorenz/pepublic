@@ -75,13 +75,14 @@ export const RadioLabel = styled.label`
   cursor: pointer;
   position: relative;
   height: 50px;
-  display: block;
+  display: flex;
+  align-items: center;
   border: ${borderSize} solid
     ${props => (props.checked ? props.theme.buttonColor : borderColor)};
   background-color: white;
   color: inherit;
   font-size: 0.8rem;
-  padding: calc(0.8rem - 1px) 1rem;
+  padding: 0 1rem 0 3rem;
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   font-family: inherit;
   width: 100%;
