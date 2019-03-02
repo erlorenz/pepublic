@@ -26,16 +26,10 @@ const GarmentListItem = ({ children, list, garment }) => {
     return null;
   };
 
-  const driftAway = useSpring({
-    from: { opacity: 0, transform: 'scale(0)' },
-    to: { opacity: 0.6, transform: 'scale(4.0)' },
-    config: config.molasses,
-  });
-
   return (
     <>
       <Div type="button" onClick={onClickHandler} disabled={disable}>
-        {showTooltip && <Quantity style={driftAway}>{showQuantity()}</Quantity>}
+        {showTooltip && <Quantity>{showQuantity()}</Quantity>}
         {children}
       </Div>
     </>
@@ -70,13 +64,15 @@ export const Div = styled.button`
 const Quantity = animated(styled.div`
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
-  padding: 0.2rem 0.6rem;
-  font-size: 0.7rem;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem 2.5rem;
+  font-size: 4rem;
   background: #788588;
   color: white;
-  border-radius: 4px;
+  border-radius: 10px;
   opacity: 0.6;
+
   @media (min-width: 1000px) {
     display: none;
   }

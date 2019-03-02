@@ -110,6 +110,7 @@ const Div1 = styled.div`
 
 const Div2 = styled.div`
   width: 70px;
+  text-align: center;
 `;
 
 const Div3 = styled.div`
