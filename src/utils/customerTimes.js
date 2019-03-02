@@ -10,19 +10,28 @@ import {
 // Hours available for pickup and return
 const times = {
   pickup: [12, 13, 14, 15, 16, 17, 18, 19],
-  return: [7, 16, 17, 18, 19, 20],
+  return: [7, 16, 17, 18, 19, 20, 21],
 };
 
-// From the current hour 0 minutes to first allowed pickup time
+// Last pickup time
+const lastPickup = times.pickup[times.pickup.length - 1];
+
+// From the rounded current hour to first allowed pickup time
 // From the selected pickup hour to first allowed return time
-const pickupDelta = 2;
+const pickupDelta = 1;
 const returnDelta = 4;
+
+// When the minutes round to the next hour
+const roundingCutoff = 30;
+
+// current rounded hour
+const roundedHour =
+  getNow().minute < roundingCutoff ? getNow().hour : getNow().hour + 1;
 
 /* PICKUP DATE (returns DateTime objects) */
 
 export const pickupDate = () => {
-  const now = getNow();
-  if (now.hour < 18)
+  if (roundedHour <= lastPickup - pickupDelta)
     return {
       val1: getZeroToday,
       val2: getZeroTomorrow,
@@ -39,11 +48,13 @@ export const pickupTimes = selectedPickupDateUnixString => {
 
   const pickupIsToday = getNow().day === selectedPickupDate.day;
 
+  // If pickup is tomorrow show all hours
   if (!pickupIsToday)
     return times.pickup.map(hour => getZeroTomorrow.set({ hour }));
 
+  // If pickup is today filter hours by current rounded hour
   const filteredTimes = times.pickup.filter(
-    time => time >= getNow().hour + pickupDelta,
+    time => time >= roundedHour + pickupDelta,
   );
   return filteredTimes.map(hour => getZeroToday.set({ hour }));
 };
@@ -55,7 +66,7 @@ export const returnDate = pickupHourUnixString => {
 
   const selectedPickupHour = getTime(pickupHourUnixString);
 
-  if (selectedPickupHour.hour > 16) {
+  if (selectedPickupHour.hour > 17) {
     return { val2: getZeroFollowing(selectedPickupHour) };
   }
 
@@ -78,11 +89,13 @@ export const returnTimes = (
 
   const returnIsSameDay = selectedPickupTime.day === selectedReturnDate.day;
 
+  // If return is next day show all
   if (!returnIsSameDay)
     return times.return.map(hour =>
       getZeroFollowing(selectedPickupTime).set({ hour }),
     );
 
+  // If return is same day filter
   const filteredTimes = times.return.filter(
     time => time >= selectedPickupTime.hour + returnDelta,
   );
