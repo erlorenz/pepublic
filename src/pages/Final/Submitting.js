@@ -53,7 +53,7 @@ const Container = styled.div`
   align-items: center;
   max-width: 500px;
   margin-top: 30vh;
-  padding: 0 3rem;
+  padding: 0 2rem;
 `;
 
 const Text = styled.h2`
