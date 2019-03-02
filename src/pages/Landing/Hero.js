@@ -93,10 +93,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: translateY(-20%);
+  transform: translateY(-30%);
   max-width: 600px;
 
   @media (min-width: 1000px) {
-    /* transform: translateY(0); */
+    transform: translateY(-15%);
   }
 `;
