@@ -52,7 +52,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 500px;
-  margin-top: 30vh;
+  margin-top: 20vh;
   padding: 0 2rem;
 `;
 
