@@ -47,7 +47,7 @@ const Row = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     flex-direction: row;
     align-items: flex-start;
   }
@@ -56,7 +56,7 @@ const Row = styled.div`
 const Spacer = styled.div`
   height: 5rem;
   width: 100%;
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     height: 6rem;
   }
 `;

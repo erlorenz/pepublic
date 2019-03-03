@@ -81,7 +81,7 @@ const Div = styled.div`
   align-items: center;
   z-index: 10;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     height: 5rem;
   }
 `;
@@ -110,7 +110,7 @@ const Spacer = styled.div`
   height: 4rem;
   background-color: white;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     height: 5rem;
   }
 `;

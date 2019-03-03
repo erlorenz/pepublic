@@ -62,7 +62,7 @@ const Bar = styled.div`
   border-top: 1px solid rgb(236, 239, 245);
   z-index: 10;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     height: 6rem;
   }
 `;
@@ -70,7 +70,7 @@ const Bar = styled.div`
 const Spacer = styled.div`
   height: 5rem;
   width: 100%;
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     height: 6rem;
   }
 `;
@@ -84,7 +84,7 @@ const Container = styled.div`
     width: 40%;
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     width: 25%;
   }
 `;

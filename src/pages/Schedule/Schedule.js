@@ -160,7 +160,7 @@ const Container = animated(styled.div`
 const Spacer = styled.div`
   height: 5rem;
   width: 100%;
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     height: 6rem;
   }
 `;

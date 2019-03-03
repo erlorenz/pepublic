@@ -90,7 +90,7 @@ const Main = styled.div`
   padding: 1rem;
   background-color: ${props => props.theme.backgroundColor};
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     padding: 1.8rem;
   }
 `;

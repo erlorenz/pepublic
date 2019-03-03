@@ -19,7 +19,7 @@ export const Card = styled.div`
   max-width: 100%;
   overflow-x: auto;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     padding: 1.8rem;
     margin-bottom: 1.8rem;
   }
@@ -59,7 +59,7 @@ export const CardRow = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     flex-direction: row;
   }
 `;

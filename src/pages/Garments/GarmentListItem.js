@@ -73,7 +73,7 @@ const Quantity = animated(styled.div`
   border-radius: 10px;
   opacity: 0.6;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     display: none;
   }
 `);

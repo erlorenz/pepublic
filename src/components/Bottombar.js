@@ -108,7 +108,7 @@ const ForwardAndBack = styled.div`
   z-index: 10;
   font-size: 0.8rem;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     height: 6rem;
   }
 `;
@@ -122,7 +122,7 @@ const Container = styled.div`
     width: 50%;
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     width: 30%;
   }
 `;

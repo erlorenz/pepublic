@@ -57,7 +57,7 @@ const MobileMenu = styled(animated.nav)`
   z-index: 10;
   padding: 1.3rem;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     display: none;
   }
 `;

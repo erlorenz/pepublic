@@ -1,19 +1,32 @@
 import { darken } from 'polished';
 import React from 'react';
-import { animated, useSpring } from 'react-spring';
+import { animated, useSpring, config } from 'react-spring';
 import styled from 'styled-components/macro';
 import fullSize from '../../assets/img/suitsfullsize.jpeg';
 import phoneSize from '../../assets/img/suitsphonesize.jpeg';
+import tabletSize from '../../assets/img/suitstabletsize.jpeg';
+
 import { fadeToLeft, fadeToRight } from '../../styles/transitions';
 
 function Hero({ history }) {
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+
   const handleClick = () => history.push('/order/schedule');
+
+  const handleImageLoaded = () => {
+    console.log('ImageLoaded!');
+    setImageLoaded(true);
+  };
 
   const fadeLeft = useSpring(fadeToLeft);
   const fadeRight = useSpring(fadeToRight);
+  const fadeIn = useSpring({
+    opacity: imageLoaded ? 1 : 0,
+    config: config.molasses,
+  });
 
   return (
-    <Section id="hero" phoneSize={phoneSize} fullSize={fullSize}>
+    <Section id="hero">
       <Wrapper>
         <H1 style={fadeLeft}>
           Professionally pressed clothing to look your best.
@@ -22,6 +35,18 @@ function Hero({ history }) {
           Let's Get Started
         </Button>
       </Wrapper>
+      <Image
+        style={fadeIn}
+        phoneSize={phoneSize}
+        fullSize={fullSize}
+        tabletSize={tabletSize}
+      />
+      <DummyPicture onLoad={handleImageLoaded}>
+        <source media="(min-width: 1025px)" srcSet={fullSize} />
+        <source media="(min-width: 500px)" srcSet={tabletSize} />
+        <source media="(min-width: 1px)" srcSet={phoneSize} />
+        <img src={fullSize} alt="Nicely dry cleaned suits." />
+      </DummyPicture>
     </Section>
   );
 }
@@ -29,7 +54,7 @@ function Hero({ history }) {
 export default Hero;
 
 const Section = styled.section`
-  background-color: ${props => props.theme.primaryColor};
+  background-color: #0e5361e8;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,16 +64,12 @@ const Section = styled.section`
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background-image: linear-gradient(#165f6dd9, #165f6dd9),
-    url(${props => props.phoneSize});
 
   @media (min-width: 450px) {
     height: 90vh;
-    background-image: linear-gradient(#165f6dd9, #165f6dd9),
-      url(${props => props.fullSize});
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     padding-top: 8rem;
   }
 `;
@@ -63,7 +84,7 @@ const H1 = styled(animated.h1)`
     font-size: 2rem;
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     font-size: 3rem;
   }
 `;
@@ -79,7 +100,7 @@ const Button = styled(animated.button)`
   font-size: 1.2rem;
   cursor: pointer;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     /* padding: 1.5rem 3rem; */
     font-size: 1.3rem;
   }
@@ -96,7 +117,32 @@ const Wrapper = styled.div`
   transform: translateY(-30%);
   max-width: 600px;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     transform: translateY(-15%);
   }
+`;
+
+const Image = styled(animated.div)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-size: cover;
+
+  background-image: url(${props => props.phoneSize});
+
+  @media (min-width: 500px) {
+    background-image: url(${props => props.tabletSize});
+  }
+
+  @media (min-width: 1025px) {
+    background-image: url(${props => props.fullSize});
+  }
+`;
+
+const DummyPicture = styled.picture`
+  visibility: hidden;
+  position: absolute;
 `;

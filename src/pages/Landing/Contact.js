@@ -76,10 +76,10 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #1d7a8c;
-  color: #ffffff6e;
+  background-color: #222;
+  color: #67727e;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     padding: 2.5rem 10%;
   }
 `;
@@ -92,7 +92,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 700px;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: flex-start;

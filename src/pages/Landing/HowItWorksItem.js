@@ -31,7 +31,7 @@ const Div = styled(animated.div)`
   max-width: 500px;
   margin-bottom: 4rem;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     max-width: 300px;
   }
 `;
@@ -52,7 +52,7 @@ const Description = styled.p`
   font-size: 1rem;
   margin: 0;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     font-size: 1.1rem;
   }
 `;

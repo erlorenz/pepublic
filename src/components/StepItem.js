@@ -41,7 +41,7 @@ const Div = animated(styled.div`
 const Icon = animated(styled.span`
   font-size: 1rem;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     margin-right: 0.8rem;
     font-size: 1.2rem;
   }
@@ -62,7 +62,7 @@ const Text = animated(styled.span`
   font-weight: 400;
   font-size: 0.9rem;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     display: block;
   }
 `);

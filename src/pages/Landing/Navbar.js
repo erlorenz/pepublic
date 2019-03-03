@@ -75,7 +75,7 @@ const Div = styled(animated.div)`
   background-color: white;
   z-index: 5;
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1025px) {
     height: 6rem;
     padding: 0 5%;
     justify-content: flex-end;
@@ -92,7 +92,7 @@ const MenuButton = styled(animated.button)`
     outline: none;
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     display: none;
   }
 
@@ -105,7 +105,7 @@ const Nav = styled(animated.nav)`
   display: none;
   align-items: center;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     display: flex;
   }
 `;
@@ -125,7 +125,7 @@ const LogoContainer = styled(animated.div)`
   transform: translate(-50%, -45%);
   cursor: pointer;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     width: 200px;
     left: 5%;
     top: 3rem;
@@ -150,7 +150,7 @@ const StyledLink = styled(Link)`
     font-size: 0.8rem;
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     line-height: inherit;
     background-color: ${props => props.theme.buttonColor};
     color: white;

@@ -38,7 +38,7 @@ const Container = animated(styled(Card)`
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 95px -30px;
   font-size: ${props => props.theme.listFontSize};
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     margin-right: 1.8rem;
   }
 `);

@@ -59,7 +59,7 @@ const Section = styled.section`
   align-items: center;
   background-color: white;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     padding: 2.5rem 10%;
   }
 `;
@@ -72,7 +72,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 1100px;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

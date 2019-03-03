@@ -22,7 +22,7 @@ const H1 = animated(styled.h1`
   color: #3e404d;
   font-weight: 700;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1025px) {
     font-size: 1.9rem;
   }
 `);
