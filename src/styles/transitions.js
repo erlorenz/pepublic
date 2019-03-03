@@ -42,14 +42,27 @@ export const fadeToRight = {
   },
 };
 
-export const fadeInAndLeftWhenInView = inView => ({
+export const fadeInAndUpWhenInView = inView => ({
   opacity: inView ? 1 : 0,
-  transform: inView ? 'translateX(0)' : 'translateX(20px)',
-  config: config.molasses,
+  transform: inView ? 'translateY(0)' : 'translateY(20px)',
+  config: config.slow,
 });
 
 export const fadeInAndRightWhenInView = inView => ({
   opacity: inView ? 1 : 0,
-  transform: inView ? 'translateX(0)' : 'translateX(-20px)',
-  config: config.molasses,
+  transform: inView ? 'translateY(0)' : 'translateX(-20px)',
+  config: config.slow,
+});
+
+export const fadeInAndUp = delay => ({
+  to: {
+    opacity: 1,
+    transform: 'translateY(0px)',
+  },
+  from: {
+    opacity: 0,
+    transform: 'translateY(10px)',
+  },
+  delay,
+  config: config.slow,
 });

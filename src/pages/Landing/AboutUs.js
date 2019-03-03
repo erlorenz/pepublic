@@ -3,7 +3,10 @@ import styled from 'styled-components/macro';
 import SectionTitle from './SectionTitle';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
-import { fadeInAndLeftWhenInView } from '../../styles/transitions';
+import {
+  fadeInAndLeftWhenInView,
+  fadeInAndUpWhenInView,
+} from '../../styles/transitions';
 import vegasSign from '../../assets/img/vegassign.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -23,8 +26,8 @@ function AboutUs() {
   const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
   const [ref2, inView2] = useInView({ threshold: 0.2, triggerOnce: true });
 
-  const spring1 = useSpring(fadeInAndLeftWhenInView(inView1));
-  const spring2 = useSpring(fadeInAndLeftWhenInView(inView2));
+  const spring1 = useSpring(fadeInAndUpWhenInView(inView1, 0));
+  const spring2 = useSpring(fadeInAndUpWhenInView(inView2, 100));
 
   // Lazy load
 

@@ -3,7 +3,10 @@ import styled from 'styled-components/macro';
 import SectionTitle from './SectionTitle';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
-import { fadeInAndRightWhenInView } from '../../styles/transitions';
+import {
+  fadeInAndRightWhenInView,
+  fadeInAndUpWhenInView,
+} from '../../styles/transitions';
 import Image from '../../assets/img/ourservices.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -29,8 +32,8 @@ function OurServices() {
   const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
   const [ref2, inView2] = useInView({ threshold: 0.2, triggerOnce: true });
 
-  const spring1 = useSpring(fadeInAndRightWhenInView(inView1));
-  const spring2 = useSpring(fadeInAndRightWhenInView(inView2));
+  const spring1 = useSpring(fadeInAndUpWhenInView(inView1, 0));
+  const spring2 = useSpring(fadeInAndUpWhenInView(inView2, 100));
 
   return (
     <Section id="ourservices">

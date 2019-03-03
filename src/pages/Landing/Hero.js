@@ -5,8 +5,7 @@ import styled from 'styled-components/macro';
 import fullSize from '../../assets/img/suitsfullsize.jpeg';
 import phoneSize from '../../assets/img/suitsphonesize.jpeg';
 import tabletSize from '../../assets/img/suitstabletsize.jpeg';
-
-import { fadeToLeft, fadeToRight } from '../../styles/transitions';
+import { fadeInAndUp } from '../../styles/transitions';
 
 function Hero({ history }) {
   const [imageLoaded, setImageLoaded] = React.useState(false);
@@ -18,8 +17,9 @@ function Hero({ history }) {
     setImageLoaded(true);
   };
 
-  const fadeLeft = useSpring(fadeToLeft);
-  const fadeRight = useSpring(fadeToRight);
+  const fadeUp1 = useSpring(fadeInAndUp(400));
+  const fadeUp2 = useSpring(fadeInAndUp(500));
+
   const fadeIn = useSpring({
     opacity: imageLoaded ? 1 : 0,
     config: config.molasses,
@@ -28,10 +28,10 @@ function Hero({ history }) {
   return (
     <Section id="hero">
       <Wrapper>
-        <H1 style={fadeLeft}>
+        <H1 style={fadeUp1}>
           Professionally pressed clothing to look your best.
         </H1>
-        <Button onClick={handleClick} style={fadeRight}>
+        <Button onClick={handleClick} style={fadeUp2}>
           Let's Get Started
         </Button>
       </Wrapper>
@@ -118,7 +118,6 @@ const Wrapper = styled.div`
   max-width: 600px;
 
   @media (min-width: 1025px) {
-    transform: translateY(-15%);
   }
 `;
 

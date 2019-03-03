@@ -3,28 +3,30 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
-import { fadeInAndLeftWhenInView } from '../../styles/transitions';
+import { fadeInAndUpWhenInView } from '../../styles/transitions';
 // import { ReactComponent as HangerIcon } from '../../assets/img/hanger.svg';
 
 function HowItWorksItem({ description, title, icon }) {
   const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true });
 
-  const spring = useSpring(fadeInAndLeftWhenInView(inView));
+  const spring1 = useSpring(fadeInAndUpWhenInView(inView));
 
   return (
-    <Div ref={ref} style={spring}>
-      <Icon>
+    <Div ref={ref}>
+      <Icon style={spring1}>
         <StyledFontAwesomeIcon icon={icon} />
       </Icon>
-      <Title>{title}</Title>
-      <Description>{description}</Description>
+      <Text style={spring1}>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+      </Text>
     </Div>
   );
 }
 
 export default HowItWorksItem;
 
-const Div = styled(animated.div)`
+const Div = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -36,7 +38,7 @@ const Div = styled(animated.div)`
   }
 `;
 
-const Icon = styled.div`
+const Icon = styled(animated.div)`
   display: flex;
   justify-content: center;
   color: ${props => props.theme.buttonColor};
@@ -61,8 +63,4 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   filter: drop-shadow(4px 4px 2px #0000003d);
 `;
 
-// const StyledHangerIcon = styled(HangerIcon)`
-//   svg {
-//     fill: blue;
-//   }
-// `;
+const Text = styled(animated.div)``;
