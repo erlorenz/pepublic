@@ -9,24 +9,35 @@ import { fadeInAndUp } from '../../styles/transitions';
 import { useInView } from 'react-intersection-observer';
 
 function Hero({ history }) {
-  // Load background image on mount
+  // Load background image on render
   const [loadImage, setLoadImage] = React.useState(false);
-  const [ref, inView] = useInView();
-
-  const handleClick = () => history.push('/order/schedule');
-
-  const fadeUp1 = useSpring(fadeInAndUp(400));
-  const fadeUp2 = useSpring(fadeInAndUp(500));
+  const [renderLoadedImage, setRenderLoadedImage] = React.useState(false);
 
   React.useEffect(() => {
     console.log('Load image now!');
     setLoadImage(true);
   }, []);
 
+  // Once image loaded render to screen
+  const handleImageLoaded = () => {
+    console.log('Image loaded, now render!');
+    setRenderLoadedImage(true);
+  };
+
+  // Use int observer to fade in when on screen
+  const [ref, inView] = useInView();
+
   const fadeIn = useSpring({
     opacity: inView ? 1 : 0,
     config: config.molasses,
   });
+
+  // Go to schedule page
+  const handleClick = () => history.push('/order/schedule');
+
+  // Fade text and button in
+  const fadeUp1 = useSpring(fadeInAndUp(400));
+  const fadeUp2 = useSpring(fadeInAndUp(500));
 
   return (
     <Section id="hero">
@@ -39,14 +50,16 @@ function Hero({ history }) {
         </Button>
       </Wrapper>
       <ImageWrapper>
-        {loadImage && <Image ref={ref} style={fadeIn} />}
+        {renderLoadedImage && <Image ref={ref} style={fadeIn} />}
       </ImageWrapper>
-      <DummyPicture id="heroimage">
-        <source media="(min-width: 1025px)" srcSet={fullSize} />
-        <source media="(min-width: 500px)" srcSet={tabletSize} />
-        <source media="(min-width: 1px)" srcSet={phoneSize} />
-        <img src={fullSize} alt="Nicely dry cleaned suits." />
-      </DummyPicture>
+      {loadImage && (
+        <DummyPicture id="heroimage" onLoad={handleImageLoaded}>
+          <source media="(min-width: 1025px)" srcSet={fullSize} />
+          <source media="(min-width: 500px)" srcSet={tabletSize} />
+          <source media="(min-width: 1px)" srcSet={phoneSize} />
+          <img src={fullSize} alt="Nicely dry cleaned suits." />
+        </DummyPicture>
+      )}
     </Section>
   );
 }
