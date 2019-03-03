@@ -38,13 +38,15 @@ function Contact() {
             <Icon>
               <FontAwesomeIcon icon={faScroll} />
             </Icon>
-            {`Terms & Conditions`}
+            Terms & Conditions
           </ListItem>
           <ListItem>
             <Icon>
               <FontAwesomeIcon icon={faLock} />
             </Icon>
-            Privacy Policy
+            <a href="https://app.termly.io/document/privacy-policy/4393ec3d-d915-4f59-ac46-965c889a6112">
+              Privacy Policy
+            </a>
           </ListItem>
         </List>
         <MediaIcons>
@@ -76,8 +78,7 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #222;
-  color: #67727e;
+  background-color: #0a3040;
 
   @media (min-width: 1025px) {
     padding: 2.5rem 10%;

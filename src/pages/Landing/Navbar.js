@@ -151,15 +151,15 @@ const StyledLink = styled(Link)`
   }
 
   @media (min-width: 1025px) {
+    border: 3px solid white;
     line-height: inherit;
-    background-color: ${props => props.theme.buttonColor};
     color: white;
-    padding: 1rem 2rem;
+    padding: 0.3rem 1rem;
     font-size: 1rem;
     font-weight: 500;
 
     :hover {
-      background-color: ${props => darken(0.1, props.theme.buttonColor)};
+      background-color: #91c7d242;
     }
   }
 `;
