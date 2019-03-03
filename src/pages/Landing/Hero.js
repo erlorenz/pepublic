@@ -6,30 +6,26 @@ import fullSize from '../../assets/img/suitsfullsize.jpeg';
 import phoneSize from '../../assets/img/suitsphonesize.jpeg';
 import tabletSize from '../../assets/img/suitstabletsize.jpeg';
 import { fadeInAndUp } from '../../styles/transitions';
-import { useInView } from 'react-intersection-observer';
 
 function Hero({ history }) {
   // Load background image on render
   const [loadImage, setLoadImage] = React.useState(false);
-  const [renderLoadedImage, setRenderLoadedImage] = React.useState(false);
 
   React.useEffect(() => {
     console.log('Load image now!');
     setLoadImage(true);
   }, []);
 
-  // Once image loaded render to screen
+  // Once image loaded fade in
+  const [imageIsLoaded, setImageIsLoaded] = React.useState(false);
+
   const handleImageLoaded = () => {
     console.log('Image loaded, now render!');
-    setRenderLoadedImage(true);
+    setImageIsLoaded(true);
   };
 
-  // Use int observer to fade in when on screen
-  const [ref, inView] = useInView();
-
   const fadeIn = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: inView ? 1 : 0 },
+    opacity: imageIsLoaded ? 1 : 0,
     config: config.molasses,
   });
 
@@ -50,17 +46,22 @@ function Hero({ history }) {
           Let's Get Started
         </Button>
       </Wrapper>
+
       <ImageWrapper>
-        {loadImage && renderLoadedImage && <Image style={fadeIn} ref={ref} />}
+        {loadImage && (
+          <picture>
+            <source media="(min-width: 1025px)" srcSet={fullSize} />
+            <source media="(min-width: 500px)" srcSet={tabletSize} />
+            <source srcSet={phoneSize} />
+            <FillImage
+              src={fullSize}
+              alt="Suits nicely pressed."
+              style={fadeIn}
+              onLoad={handleImageLoaded}
+            />
+          </picture>
+        )}
       </ImageWrapper>
-      {loadImage && (
-        <DummyPicture id="heroimage" onLoad={handleImageLoaded}>
-          <source media="(min-width: 1025px)" srcSet={fullSize} />
-          <source media="(min-width: 500px)" srcSet={tabletSize} />
-          <source media="(min-width: 1px)" srcSet={phoneSize} />
-          <img src={fullSize} alt="Nicely dry cleaned suits." />
-        </DummyPicture>
-      )}
     </Section>
   );
 }
@@ -147,30 +148,34 @@ const ImageWrapper = styled.div`
   right: 0;
   background-color: #072731;
   z-index: -15;
+  height: 100%;
+  width: 100%;
 `;
 
-const Image = styled(animated.div)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: -1;
-  background-size: cover;
+// const Image = styled(animated.div)`
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+//   z-index: -1;
+//   background-size: cover;
+//   opacity: 0;
+
+//   background-image: url(${phoneSize});
+
+//   @media (min-width: 500px) {
+//     background-image: url(${tabletSize});
+//   }
+
+//   @media (min-width: 1025px) {
+//     background-image: url(${fullSize});
+//   }
+// `;
+
+const FillImage = styled(animated.img)`
+  object-fit: fill;
+  height: 100%;
+  width: 100%;
   opacity: 0;
-
-  background-image: url(${phoneSize});
-
-  @media (min-width: 500px) {
-    background-image: url(${tabletSize});
-  }
-
-  @media (min-width: 1025px) {
-    background-image: url(${fullSize});
-  }
-`;
-
-const DummyPicture = styled.picture`
-  visibility: hidden;
-  position: absolute;
 `;
