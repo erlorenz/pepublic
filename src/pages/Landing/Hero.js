@@ -7,21 +7,18 @@ import phoneSize from '../../assets/img/suitsphonesize.jpeg';
 import tabletSize from '../../assets/img/suitstabletsize.jpeg';
 import { fadeInAndUp } from '../../styles/transitions';
 
+const test = 'test';
+
 function Hero({ history }) {
-  const [imageLoaded, setImageLoaded] = React.useState(false);
-
   const handleClick = () => history.push('/order/schedule');
-
-  const handleImageLoaded = () => {
-    console.log('ImageLoaded!');
-    setImageLoaded(true);
-  };
 
   const fadeUp1 = useSpring(fadeInAndUp(400));
   const fadeUp2 = useSpring(fadeInAndUp(500));
 
   const fadeIn = useSpring({
-    opacity: imageLoaded ? 1 : 0,
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    delay: 400,
     config: config.molasses,
   });
 
@@ -35,13 +32,8 @@ function Hero({ history }) {
           Let's Get Started
         </Button>
       </Wrapper>
-      <Image
-        style={fadeIn}
-        phoneSize={phoneSize}
-        fullSize={fullSize}
-        tabletSize={tabletSize}
-      />
-      <DummyPicture onLoad={handleImageLoaded}>
+      <Image style={fadeIn} />
+      <DummyPicture id="heroimage">
         <source media="(min-width: 1025px)" srcSet={fullSize} />
         <source media="(min-width: 500px)" srcSet={tabletSize} />
         <source media="(min-width: 1px)" srcSet={phoneSize} />
@@ -130,14 +122,14 @@ const Image = styled(animated.div)`
   z-index: -1;
   background-size: cover;
 
-  background-image: url(${props => props.phoneSize});
+  background-image: url(${phoneSize});
 
   @media (min-width: 500px) {
-    background-image: url(${props => props.tabletSize});
+    background-image: url(${tabletSize});
   }
 
   @media (min-width: 1025px) {
-    background-image: url(${props => props.fullSize});
+    background-image: url(${fullSize});
   }
 `;
 
