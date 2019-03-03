@@ -28,7 +28,8 @@ function Hero({ history }) {
   const [ref, inView] = useInView();
 
   const fadeIn = useSpring({
-    opacity: inView ? 1 : 0,
+    from: { opacity: 0 },
+    to: { opacity: inView ? 1 : 0 },
     config: config.molasses,
   });
 
@@ -36,8 +37,8 @@ function Hero({ history }) {
   const handleClick = () => history.push('/order/schedule');
 
   // Fade text and button in
-  const fadeUp1 = useSpring(fadeInAndUp(400));
-  const fadeUp2 = useSpring(fadeInAndUp(500));
+  const fadeUp1 = useSpring(fadeInAndUp(0));
+  const fadeUp2 = useSpring(fadeInAndUp(0));
 
   return (
     <Section id="hero">
@@ -50,7 +51,7 @@ function Hero({ history }) {
         </Button>
       </Wrapper>
       <ImageWrapper>
-        {renderLoadedImage && <Image ref={ref} style={fadeIn} />}
+        {renderLoadedImage && <Image style={fadeIn} ref={ref} />}
       </ImageWrapper>
       {loadImage && (
         <DummyPicture id="heroimage" onLoad={handleImageLoaded}>
@@ -92,6 +93,7 @@ const H1 = styled(animated.h1)`
   font-weight: 500;
   color: white;
   text-align: center;
+  opacity: 0;
 
   @media (min-width: 330px) {
     font-size: 2rem;
@@ -112,6 +114,7 @@ const Button = styled(animated.button)`
   margin-top: 1.5rem;
   font-size: 1.2rem;
   cursor: pointer;
+  opacity: 0;
 
   @media (min-width: 1025px) {
     /* padding: 1.5rem 3rem; */
