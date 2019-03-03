@@ -7,8 +7,7 @@ import {
   fadeInAndRightWhenInView,
   fadeInAndUpWhenInView,
 } from '../../styles/transitions';
-import Image from '../../assets/img/ourservices.png';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import image from '../../assets/img/ourservices.png';
 
 const description1 = `
 Press Express will refresh your clothing and return your garments professionally finished, while eliminating 90% of odors, smoke, etc.
@@ -29,8 +28,12 @@ const description5 = `
 We do not dry clean garments, they are steam-pressed and hand-finished.`;
 
 function OurServices() {
+  // Animate on scroll
   const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
   const [ref2, inView2] = useInView({ threshold: 0.2, triggerOnce: true });
+
+  // Lazy load image
+  const [ref3, inView3] = useInView({ rootMargin: '500px' });
 
   const spring1 = useSpring(fadeInAndUpWhenInView(inView1, 0));
   const spring2 = useSpring(fadeInAndUpWhenInView(inView2, 100));
@@ -40,12 +43,9 @@ function OurServices() {
       <SectionTitle>Our Services</SectionTitle>
       <Container>
         <Images ref={ref1} style={spring1}>
-          <LazyLoadImage
-            alt="Suits, buttons, shirts"
-            height="300px"
-            src={Image}
-            threshold="500"
-          />
+          <ImageWrapper ref={ref3}>
+            {inView3 && <img src={image} alt="Suits, buttons, shirts" />}
+          </ImageWrapper>
         </Images>
         <Description ref={ref2} style={spring2}>
           <P>{description1}</P>
@@ -92,6 +92,7 @@ const Images = styled(animated.div)`
   width: 100%;
   max-width: 500px;
   margin-bottom: 4rem;
+  min-height: 200px;
 `;
 
 const Description = styled(animated.div)`
@@ -103,4 +104,11 @@ const Description = styled(animated.div)`
 const P = styled.p`
   margin-top: 0;
   margin-bottom: 1rem;
+`;
+
+const ImageWrapper = styled.div`
+  min-height: 200px;
+  min-width: 200px;
+  border-radius: 50%;
+  background-color: lightgray;
 `;

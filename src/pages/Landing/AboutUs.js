@@ -3,12 +3,8 @@ import styled from 'styled-components/macro';
 import SectionTitle from './SectionTitle';
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
-import {
-  fadeInAndLeftWhenInView,
-  fadeInAndUpWhenInView,
-} from '../../styles/transitions';
-import vegasSign from '../../assets/img/vegassign.png';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { fadeInAndUpWhenInView } from '../../styles/transitions';
+import image from '../../assets/img/vegassign.png';
 
 const description1 = `
 Press Express was founded in 2018 as a new concept with the goal of providing a much needed service for business travelers, groups, as well as anyone looking for a quick and easy way to get their garments looking good in Las Vegas.`;
@@ -22,7 +18,7 @@ const description3 = `
 `;
 
 function AboutUs() {
-  //Fade in view
+  //Animate on scroll
   const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
   const [ref2, inView2] = useInView({ threshold: 0.2, triggerOnce: true });
 
@@ -30,6 +26,7 @@ function AboutUs() {
   const spring2 = useSpring(fadeInAndUpWhenInView(inView2, 100));
 
   // Lazy load
+  const [ref3, inView3] = useInView({ rootMargin: '500px' });
 
   return (
     <Section id="aboutus">
@@ -41,12 +38,9 @@ function AboutUs() {
           <P>{description3}</P>
         </Description>
         <Images ref={ref2} style={spring2}>
-          <LazyLoadImage
-            alt="Las Vegas sign"
-            height="300px"
-            src={vegasSign}
-            threshold="500"
-          />
+          <ImageWrapper ref={ref3}>
+            {inView3 && <img src={image} alt="Las Vegas sign" />}
+          </ImageWrapper>
         </Images>
       </Container>
     </Section>
@@ -97,4 +91,11 @@ const Description = styled(animated.div)`
 const P = styled.p`
   margin-top: 0;
   margin-bottom: 1rem;
+`;
+
+const ImageWrapper = styled.div`
+  min-height: 200px;
+  min-width: 200px;
+  background-color: lightgray;
+  border-radius: 50%;
 `;

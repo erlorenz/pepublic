@@ -6,19 +6,25 @@ import fullSize from '../../assets/img/suitsfullsize.jpeg';
 import phoneSize from '../../assets/img/suitsphonesize.jpeg';
 import tabletSize from '../../assets/img/suitstabletsize.jpeg';
 import { fadeInAndUp } from '../../styles/transitions';
-
-const test = 'test';
+import { useInView } from 'react-intersection-observer';
 
 function Hero({ history }) {
+  // Load background image on mount
+  const [loadImage, setLoadImage] = React.useState(false);
+  const [ref, inView] = useInView();
+
   const handleClick = () => history.push('/order/schedule');
 
   const fadeUp1 = useSpring(fadeInAndUp(400));
   const fadeUp2 = useSpring(fadeInAndUp(500));
 
+  React.useEffect(() => {
+    console.log('Load image now!');
+    setLoadImage(true);
+  }, []);
+
   const fadeIn = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    delay: 400,
+    opacity: inView ? 1 : 0,
     config: config.molasses,
   });
 
@@ -32,7 +38,9 @@ function Hero({ history }) {
           Let's Get Started
         </Button>
       </Wrapper>
-      <Image style={fadeIn} />
+      <ImageWrapper>
+        {loadImage && <Image ref={ref} style={fadeIn} />}
+      </ImageWrapper>
       <DummyPicture id="heroimage">
         <source media="(min-width: 1025px)" srcSet={fullSize} />
         <source media="(min-width: 500px)" srcSet={tabletSize} />
@@ -111,6 +119,16 @@ const Wrapper = styled.div`
 
   @media (min-width: 1025px) {
   }
+`;
+
+const ImageWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #072731;
+  z-index: -15;
 `;
 
 const Image = styled(animated.div)`
