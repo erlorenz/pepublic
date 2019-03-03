@@ -38,7 +38,7 @@ function Hero({ history }) {
 
   // Fade text and button in
   const fadeUp1 = useSpring(fadeInAndUp(0));
-  const fadeUp2 = useSpring(fadeInAndUp(0));
+  const fadeUp2 = useSpring(fadeInAndUp(100));
 
   return (
     <Section id="hero">
@@ -51,7 +51,7 @@ function Hero({ history }) {
         </Button>
       </Wrapper>
       <ImageWrapper>
-        {renderLoadedImage && <Image style={fadeIn} ref={ref} />}
+        {loadImage && renderLoadedImage && <Image style={fadeIn} ref={ref} />}
       </ImageWrapper>
       {loadImage && (
         <DummyPicture id="heroimage" onLoad={handleImageLoaded}>
@@ -94,6 +94,7 @@ const H1 = styled(animated.h1)`
   color: white;
   text-align: center;
   opacity: 0;
+  transform: translateY(10px);
 
   @media (min-width: 330px) {
     font-size: 2rem;
@@ -115,6 +116,7 @@ const Button = styled(animated.button)`
   font-size: 1.2rem;
   cursor: pointer;
   opacity: 0;
+  transform: translateY(10px);
 
   @media (min-width: 1025px) {
     /* padding: 1.5rem 3rem; */
