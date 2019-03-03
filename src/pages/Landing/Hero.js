@@ -152,6 +152,7 @@ const Image = styled(animated.div)`
   right: 0;
   z-index: -1;
   background-size: cover;
+  opacity: 0;
 
   background-image: url(${phoneSize});
 
