@@ -1,0 +1,34 @@
+[debug] [2019-03-04T03:22:05.872Z] ----------------------------------------------------------------------
+[debug] [2019-03-04T03:22:05.876Z] Command:       /home/erik/.nvm/versions/node/v10.15.1/bin/node /home/erik/.nvm/versions/node/v10.15.1/bin/firebase deploy
+[debug] [2019-03-04T03:22:05.876Z] CLI Version:   6.4.0
+[debug] [2019-03-04T03:22:05.876Z] Platform:      linux
+[debug] [2019-03-04T03:22:05.876Z] Node Version:  v10.15.1
+[debug] [2019-03-04T03:22:05.876Z] Time:          Sun Mar 03 2019 19:22:05 GMT-0800 (Pacific Standard Time)
+[debug] [2019-03-04T03:22:05.877Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-03-04T03:22:05.883Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-04T03:22:05.884Z] > authorizing via signed-in user
+[debug] [2019-03-04T03:22:05.884Z] [iam] checking project press-express-public-staging for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-03-04T03:22:05.888Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/press-express-public-staging:testIamPermissions  
+
+[debug] [2019-03-04T03:22:06.320Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-04T03:22:06.325Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/press-express-public-staging  
+ 
+[debug] [2019-03-04T03:22:06.635Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'press-express-public-staging'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-03-04T03:22:06.646Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/press-express-public-staging/versions  
+
+[debug] [2019-03-04T03:22:07.624Z] <<< HTTP RESPONSE 200
+[info] i  hosting[press-express-public-staging]: beginning deploy...
+[info] i  hosting[press-express-public-staging]: found 45 files in build
+[debug] [2019-03-04T03:22:07.678Z] [hosting] hash cache [YnVpbGQ] load error: lines is not defined
+[debug] [2019-03-04T03:22:08.706Z] [hosting] hash cache [YnVpbGQ] stored for 45 files
+[debug] [2019-03-04T03:22:08.706Z] [hosting][hash queue][FINAL]
+[debug] [2019-03-04T03:22:08.706Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/press-express-public-staging/versions/2cd5f438f9252cf1:populateFiles  
+ <request body omitted>
+[debug] [2019-03-04T03:22:11.028Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-04T03:22:11.053Z] [hosting][populate queue][FINAL]
+[debug] [2019-03-04T03:22:11.054Z] [hosting] uploads queued: 20

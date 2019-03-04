@@ -96,7 +96,9 @@ const Images = styled(animated.div)`
   max-width: 500px;
   margin-bottom: 4rem;
   min-height: 200px;
-  margin-right: 2rem;
+  @media (min-width: 1025px) {
+    margin-right: 2rem;
+  }
 `;
 
 const Description = styled(animated.div)`

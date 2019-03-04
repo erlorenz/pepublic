@@ -95,7 +95,10 @@ const Description = styled(animated.div)`
   width: 100%;
   max-width: 500px;
   margin-bottom: 4rem;
-  margin-right: 2rem;
+
+  @media (min-width: 1025px) {
+    margin-right: 2rem;
+  }
 `;
 
 const P = styled.p`
