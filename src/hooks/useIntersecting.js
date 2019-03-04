@@ -21,11 +21,9 @@ function useIntersecting({
     function handleIntersect(entries) {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          console.log('Its intersecting!');
           setIntersecting(true);
           if (triggerOnce) observer.unobserve(ref.current);
         } else {
-          console.log('Its not!');
           setIntersecting(false);
         }
       });

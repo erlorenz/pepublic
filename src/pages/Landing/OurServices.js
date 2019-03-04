@@ -5,6 +5,7 @@ import { useSpring, animated } from 'react-spring';
 import { fadeInAndUpWhenInView } from '../../styles/transitions';
 import image from '../../assets/img/ourservices.png';
 import useIntersecting from '../../hooks/useIntersecting';
+import LazyImage from '../../components/LazyImage';
 
 const description1 = `
 Press Express will refresh your clothing and return your garments professionally finished, while eliminating 90% of odors, smoke, etc.
@@ -26,31 +27,26 @@ We do not dry clean garments, they are steam-pressed and hand-finished.`;
 
 function OurServices() {
   // Animate on scroll
-  const [ref1, inView1] = useIntersecting({
-    threshold: 0.2,
-    triggerOnce: true,
-  });
-  const [ref2, inView2] = useIntersecting({
+  const [ref, inView] = useIntersecting({
     threshold: 0.2,
     triggerOnce: true,
   });
 
-  // Lazy load image
-  const [ref3, inView3] = useIntersecting({ rootMargin: '500px' });
-
-  const spring1 = useSpring(fadeInAndUpWhenInView(inView1, 0));
-  const spring2 = useSpring(fadeInAndUpWhenInView(inView2, 100));
+  const spring1 = useSpring(fadeInAndUpWhenInView(inView, 0));
+  const spring2 = useSpring(fadeInAndUpWhenInView(inView, 100));
 
   return (
     <Section id="ourservices">
       <SectionTitle>Our Services</SectionTitle>
       <Container>
-        <Images ref={ref1} style={spring1}>
-          <ImageWrapper ref={ref3}>
-            {inView3 && <img src={image} alt="Suits, buttons, shirts" />}
-          </ImageWrapper>
+        <Images ref={ref} style={spring1}>
+          <LazyImage
+            preDistance={400}
+            src={image}
+            alt="Suits, buttons, shirts"
+          />
         </Images>
-        <Description ref={ref2} style={spring2}>
+        <Description style={spring2}>
           <P>{description1}</P>
           <P>{description2}</P>
           <P>{description3}</P>

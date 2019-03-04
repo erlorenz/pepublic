@@ -5,6 +5,7 @@ import { useSpring, animated } from 'react-spring';
 import { fadeInAndUpWhenInView } from '../../styles/transitions';
 import image from '../../assets/img/vegassign.png';
 import useIntersecting from '../../hooks/useIntersecting';
+import LazyImage from '../../components/LazyImage';
 
 const description1 = `
 Press Express was founded in 2018 as a new concept with the goal of providing a much needed service for business travelers, groups, as well as anyone looking for a quick and easy way to get their garments looking good in Las Vegas.`;
@@ -18,38 +19,26 @@ const description3 = `
 `;
 
 function AboutUs() {
-  //Animate on scroll
-  const [ref1, inView1] = useIntersecting({
-    threshold: 0.2,
-    triggerOnce: true,
-  });
-  const [ref2, inView2] = useIntersecting({
+  // Animate on scroll
+  const [ref, inView] = useIntersecting({
     threshold: 0.2,
     triggerOnce: true,
   });
 
-  const spring1 = useSpring(fadeInAndUpWhenInView(inView1, 0));
-  const spring2 = useSpring(fadeInAndUpWhenInView(inView2, 100));
-
-  // Lazy load
-  const [ref3, inView3] = useIntersecting({
-    rootMargin: '500px',
-    triggerOnce: true,
-  });
+  const spring1 = useSpring(fadeInAndUpWhenInView(inView, 0));
+  const spring2 = useSpring(fadeInAndUpWhenInView(inView, 100));
 
   return (
     <Section id="aboutus">
       <SectionTitle>About Us</SectionTitle>
       <Container>
-        <Description ref={ref1} style={spring1}>
+        <Description style={spring2}>
           <P>{description1}</P>
           <P>{description2}</P>
           <P>{description3}</P>
         </Description>
-        <Images ref={ref2} style={spring2}>
-          <ImageWrapper ref={ref3}>
-            {inView3 && <img src={image} alt="Las Vegas sign" />}
-          </ImageWrapper>
+        <Images ref={ref} style={spring1}>
+          <LazyImage src={image} preDistance={600} alt="Las Vegas sign." />
         </Images>
       </Container>
     </Section>
@@ -89,6 +78,7 @@ const Images = styled(animated.div)`
   width: 100%;
   max-width: 500px;
   margin-bottom: 4rem;
+  min-height: 200px;
 `;
 
 const Description = styled(animated.div)`
@@ -104,9 +94,4 @@ const Description = styled(animated.div)`
 const P = styled.p`
   margin-top: 0;
   margin-bottom: 1rem;
-`;
-
-const ImageWrapper = styled.div`
-  min-height: 200px;
-  min-width: 200px;
 `;
