@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components/macro';
-import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
 import { fadeInAndUpWhenInView } from '../../styles/transitions';
+import useIntersecting from '../../hooks/useIntersecting';
 // import { ReactComponent as HangerIcon } from '../../assets/img/hanger.svg';
 
 function HowItWorksItem({ description, title, icon }) {
-  const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true });
+  const [ref, inView] = useIntersecting({ threshold: 0.3, triggerOnce: true });
 
   const spring1 = useSpring(fadeInAndUpWhenInView(inView));
 

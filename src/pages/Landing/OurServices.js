@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import SectionTitle from './SectionTitle';
-import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
-import {
-  fadeInAndRightWhenInView,
-  fadeInAndUpWhenInView,
-} from '../../styles/transitions';
+import { fadeInAndUpWhenInView } from '../../styles/transitions';
 import image from '../../assets/img/ourservices.png';
+import useIntersecting from '../../hooks/useIntersecting';
 
 const description1 = `
 Press Express will refresh your clothing and return your garments professionally finished, while eliminating 90% of odors, smoke, etc.
@@ -29,11 +26,17 @@ We do not dry clean garments, they are steam-pressed and hand-finished.`;
 
 function OurServices() {
   // Animate on scroll
-  const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
-  const [ref2, inView2] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [ref1, inView1] = useIntersecting({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+  const [ref2, inView2] = useIntersecting({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
 
   // Lazy load image
-  const [ref3, inView3] = useInView({ rootMargin: '500px' });
+  const [ref3, inView3] = useIntersecting({ rootMargin: '500px' });
 
   const spring1 = useSpring(fadeInAndUpWhenInView(inView1, 0));
   const spring2 = useSpring(fadeInAndUpWhenInView(inView2, 100));
@@ -84,7 +87,7 @@ const Container = styled.div`
   @media (min-width: 1025px) {
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
 `;
 
@@ -93,6 +96,7 @@ const Images = styled(animated.div)`
   max-width: 500px;
   margin-bottom: 4rem;
   min-height: 200px;
+  margin-right: 2rem;
 `;
 
 const Description = styled(animated.div)`
@@ -110,5 +114,5 @@ const ImageWrapper = styled.div`
   min-height: 200px;
   min-width: 200px;
   border-radius: 50%;
-  background-color: lightgray;
+  background-color: transparent;
 `;

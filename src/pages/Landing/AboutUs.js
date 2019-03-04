@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import SectionTitle from './SectionTitle';
-import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
 import { fadeInAndUpWhenInView } from '../../styles/transitions';
 import image from '../../assets/img/vegassign.png';
+import useIntersecting from '../../hooks/useIntersecting';
 
 const description1 = `
 Press Express was founded in 2018 as a new concept with the goal of providing a much needed service for business travelers, groups, as well as anyone looking for a quick and easy way to get their garments looking good in Las Vegas.`;
@@ -19,14 +19,23 @@ const description3 = `
 
 function AboutUs() {
   //Animate on scroll
-  const [ref1, inView1] = useInView({ threshold: 0.2, triggerOnce: true });
-  const [ref2, inView2] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [ref1, inView1] = useIntersecting({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+  const [ref2, inView2] = useIntersecting({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
 
   const spring1 = useSpring(fadeInAndUpWhenInView(inView1, 0));
   const spring2 = useSpring(fadeInAndUpWhenInView(inView2, 100));
 
   // Lazy load
-  const [ref3, inView3] = useInView({ rootMargin: '500px' });
+  const [ref3, inView3] = useIntersecting({
+    rootMargin: '500px',
+    triggerOnce: true,
+  });
 
   return (
     <Section id="aboutus">
@@ -72,7 +81,7 @@ const Container = styled.div`
   @media (min-width: 1025px) {
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
 `;
 
@@ -86,6 +95,7 @@ const Description = styled(animated.div)`
   width: 100%;
   max-width: 500px;
   margin-bottom: 4rem;
+  margin-right: 2rem;
 `;
 
 const P = styled.p`
@@ -96,6 +106,4 @@ const P = styled.p`
 const ImageWrapper = styled.div`
   min-height: 200px;
   min-width: 200px;
-  background-color: lightgray;
-  border-radius: 50%;
 `;

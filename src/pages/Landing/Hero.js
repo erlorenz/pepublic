@@ -11,14 +11,12 @@ function Hero({ history, scrollRef }) {
   const [imageIsLoaded, setImageIsLoaded] = React.useState(false);
 
   const handleImageLoaded = () => {
-    console.log('image is loaded');
     setImageIsLoaded(true);
   };
 
   const fadeInSlowly = useSpring({
     to: { opacity: imageIsLoaded ? 1 : 0 },
     from: { opacity: 0 },
-    config: { duration: 4000 },
   });
 
   // Go to schedule page
@@ -51,7 +49,7 @@ function Hero({ history, scrollRef }) {
 export default Hero;
 
 const Section = styled.section`
-  background-color: #0e5361e8;
+  background-color: #0e5361e6;
   display: flex;
   flex-direction: column;
   align-items: center;

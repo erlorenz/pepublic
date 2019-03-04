@@ -6,11 +6,13 @@ import styled from 'styled-components/macro';
 import { ReactComponent as Logo } from '../../assets/img/pressexpresslogo.svg';
 import { ReactComponent as MenuIcon } from '../../assets/img/menuicon.svg';
 import NavItem from './NavItem';
-import { useInView } from 'react-intersection-observer';
+import useIntersecting from '../../hooks/useIntersecting';
 
 function Navbar({ handleClick }) {
   // // Intersection observer with dummy div
-  const [dummyDiv, inView] = useInView({ threshold: 0 });
+  const [dummyDiv, inView] = useIntersecting({
+    threshold: 0,
+  });
 
   // Fading color change
   const fadeColor = useSpring({
@@ -161,5 +163,5 @@ const ObserverDummy = styled.div`
   position: absolute;
   top: 0;
   background-color: transparent;
-  z-index: 43525;
+  z-index: -10000;
 `;
