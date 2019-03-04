@@ -17,12 +17,12 @@ const GarmentChoice = () => {
     if (context.totalPrice() >= 3000) setBelowMinPrice(false);
   }, [context.totalPrice()]);
 
-  const removeGarmentHandler = garment => () => context.removeGarment(garment);
+  const removeGarmentHandler = payload => () => context.removeGarment(payload);
 
   const items = context.garments;
   // const transitions = useTransition(items, item => item.slug, listFadeAndSlide);
 
-  const garmentList = items.map(item => {
+  const garmentList = items.map((item, index) => {
     return (
       <Item key={item.slug} onClick={removeGarmentHandler(item)}>
         <Div1>{item.description}</Div1>
