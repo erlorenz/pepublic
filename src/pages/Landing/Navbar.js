@@ -9,12 +9,12 @@ import NavItem from './NavItem';
 import { useInView } from 'react-intersection-observer';
 
 function Navbar({ handleClick }) {
-  // Intersection observer vs scroll event
-  const [ref, notInView] = useInView({ threshold: 0 });
+  // // Intersection observer with dummy div
+  const [dummyDiv, inView] = useInView({ threshold: 0 });
 
   // Fading color change
   const fadeColor = useSpring({
-    backgroundColor: notInView
+    backgroundColor: inView
       ? 'rgba(29, 122, 140, 0.01)'
       : 'rgba(29, 122, 140, 0.91)',
     from: { backgroundColor: 'rgba(29, 122, 140, 0.01)' },
@@ -24,7 +24,7 @@ function Navbar({ handleClick }) {
 
   return (
     <>
-      <ObserverDummy ref={ref} />
+      <ObserverDummy ref={dummyDiv} />
       <Div style={fadeColor}>
         <MenuButton onClick={handleClick} aria-label="open side menu">
           <MenuIcon />
@@ -33,7 +33,7 @@ function Navbar({ handleClick }) {
           <Logo />
         </LogoContainer>
         <Nav>
-          <Ul transparent={notInView}>
+          <Ul>
             <NavItem section="howitworks">How It Works</NavItem>
             <NavItem section="ourservices">Our Services</NavItem>
             <NavItem section="aboutus">About Us</NavItem>
