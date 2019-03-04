@@ -10,8 +10,8 @@ import Contact from './Contact';
 import { Helmet } from 'react-helmet';
 
 const Landing = ({ history }) => {
+  // Open and close side menu
   const [sideMenuOpen, setSideMenuOpen] = React.useState(false);
-
   const handleClick = () => setSideMenuOpen(!sideMenuOpen);
 
   return (

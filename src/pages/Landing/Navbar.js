@@ -6,57 +6,45 @@ import styled from 'styled-components/macro';
 import { ReactComponent as Logo } from '../../assets/img/pressexpresslogo.svg';
 import { ReactComponent as MenuIcon } from '../../assets/img/menuicon.svg';
 import NavItem from './NavItem';
-import { fadeInSlow } from '../../styles/transitions';
+import { useInView } from 'react-intersection-observer';
 
 function Navbar({ handleClick }) {
-  const [transparent, setTransparent] = React.useState(true);
-
-  // Check if scrolled past 60px and remove/add transparency
-  const updateTransparent = () => {
-    if (window.scrollY > 60) setTransparent(false);
-
-    if (window.scrollY <= 60) setTransparent(true);
-  };
-
-  // Set event listener on mount and remove on unmount
-  React.useEffect(() => {
-    window.addEventListener('scroll', updateTransparent);
-    return () => window.removeEventListener('scroll', updateTransparent);
-  }, []);
+  // Intersection observer vs scroll event
+  const [ref, notInView] = useInView({ threshold: 0 });
 
   // Fading color change
   const fadeColor = useSpring({
-    backgroundColor: transparent ? '#1d7a8c00' : '#1d7a8ce6',
+    backgroundColor: notInView
+      ? 'rgba(29, 122, 140, 0.01)'
+      : 'rgba(29, 122, 140, 0.91)',
+    from: { backgroundColor: 'rgba(29, 122, 140, 0.01)' },
   });
-
-  //Fade In
-  const fade = useSpring(fadeInSlow);
 
   const handleScrollToTop = () => animateScroll.scrollToTop({ duration: 300 });
 
   return (
-    <Div style={fadeColor}>
-      <MenuButton
-        onClick={handleClick}
-        style={fade}
-        aria-label="open side menu">
-        <MenuIcon />
-      </MenuButton>
-      <LogoContainer onClick={handleScrollToTop} style={fade}>
-        <Logo />
-      </LogoContainer>
-      <Nav style={fade}>
-        <Ul transparent={transparent}>
-          <NavItem section="howitworks">How It Works</NavItem>
-          <NavItem section="ourservices">Our Services</NavItem>
-          <NavItem section="aboutus">About Us</NavItem>
-          <NavItem section="contact">Contact</NavItem>
-        </Ul>
-      </Nav>
-      <Schedule style={fade}>
-        <StyledLink to="/order/schedule">SCHEDULE</StyledLink>
-      </Schedule>
-    </Div>
+    <>
+      <ObserverDummy ref={ref} />
+      <Div style={fadeColor}>
+        <MenuButton onClick={handleClick} aria-label="open side menu">
+          <MenuIcon />
+        </MenuButton>
+        <LogoContainer onClick={handleScrollToTop}>
+          <Logo />
+        </LogoContainer>
+        <Nav>
+          <Ul transparent={notInView}>
+            <NavItem section="howitworks">How It Works</NavItem>
+            <NavItem section="ourservices">Our Services</NavItem>
+            <NavItem section="aboutus">About Us</NavItem>
+            <NavItem section="contact">Contact</NavItem>
+          </Ul>
+        </Nav>
+        <Schedule>
+          <StyledLink to="/order/schedule">SCHEDULE</StyledLink>
+        </Schedule>
+      </Div>
+    </>
   );
 }
 
@@ -71,7 +59,6 @@ const Div = styled(animated.div)`
   width: 100%;
   top: 0;
   left: 0;
-  background-color: white;
   z-index: 5;
 
   @media screen and (min-width: 1025px) {
@@ -166,4 +153,13 @@ const StyledLink = styled(Link)`
 const Ul = styled.ul`
   display: flex;
   align-items: center;
+`;
+
+const ObserverDummy = styled.div`
+  height: 60px;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  background-color: transparent;
+  z-index: 43525;
 `;

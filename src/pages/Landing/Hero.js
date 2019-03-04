@@ -1,66 +1,48 @@
 import { darken } from 'polished';
 import React from 'react';
-import { animated, useSpring, config } from 'react-spring';
+import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import fullSize from '../../assets/img/suitsfullsize.jpeg';
 import phoneSize from '../../assets/img/suitsphonesize.jpeg';
 import tabletSize from '../../assets/img/suitstabletsize.jpeg';
-import { fadeInAndUp } from '../../styles/transitions';
 
-function Hero({ history }) {
-  // Load background image on render
-  const [loadImage, setLoadImage] = React.useState(false);
-
-  React.useEffect(() => {
-    console.log('Load image now!');
-    setLoadImage(true);
-  }, []);
-
+function Hero({ history, scrollRef }) {
   // Once image loaded fade in
   const [imageIsLoaded, setImageIsLoaded] = React.useState(false);
 
   const handleImageLoaded = () => {
-    console.log('Image loaded, now render!');
+    console.log('image is loaded');
     setImageIsLoaded(true);
   };
 
-  const fadeIn = useSpring({
-    opacity: imageIsLoaded ? 1 : 0,
-    config: config.molasses,
+  const fadeInSlowly = useSpring({
+    to: { opacity: imageIsLoaded ? 1 : 0 },
+    from: { opacity: 0 },
+    config: { duration: 4000 },
   });
 
   // Go to schedule page
   const handleClick = () => history.push('/order/schedule');
 
-  // Fade text and button in
-  const fadeUp1 = useSpring(fadeInAndUp(0));
-  const fadeUp2 = useSpring(fadeInAndUp(100));
-
   return (
-    <Section id="hero">
+    <Section id="hero" ref={scrollRef}>
       <Wrapper>
-        <H1 style={fadeUp1}>
-          Professionally pressed clothing to look your best.
-        </H1>
-        <Button onClick={handleClick} style={fadeUp2}>
-          Let's Get Started
-        </Button>
+        <H1>Professionally pressed clothing to look your best.</H1>
+        <Button onClick={handleClick}>Let's Get Started</Button>
       </Wrapper>
 
       <ImageWrapper>
-        {loadImage && (
-          <picture>
-            <source media="(min-width: 1025px)" srcSet={fullSize} />
-            <source media="(min-width: 500px)" srcSet={tabletSize} />
-            <source srcSet={phoneSize} />
-            <FillImage
-              src={fullSize}
-              alt="Suits nicely pressed."
-              style={fadeIn}
-              onLoad={handleImageLoaded}
-            />
-          </picture>
-        )}
+        <picture>
+          <source media="(min-width: 1025px)" srcSet={fullSize} />
+          <source media="(min-width: 500px)" srcSet={tabletSize} />
+          <source srcSet={phoneSize} />
+          <FillImage
+            src={fullSize}
+            alt="Suits nicely pressed."
+            style={fadeInSlowly}
+            onLoad={handleImageLoaded}
+          />
+        </picture>
       </ImageWrapper>
     </Section>
   );
@@ -89,13 +71,11 @@ const Section = styled.section`
   }
 `;
 
-const H1 = styled(animated.h1)`
+const H1 = styled.h1`
   font-size: 1.8rem;
   font-weight: 500;
   color: white;
   text-align: center;
-  opacity: 0;
-  transform: translateY(10px);
 
   @media (min-width: 330px) {
     font-size: 2rem;
@@ -106,7 +86,7 @@ const H1 = styled(animated.h1)`
   }
 `;
 
-const Button = styled(animated.button)`
+const Button = styled.button`
   border: none;
   border-radius: 4px;
   background-color: ${props => props.theme.buttonColor};
@@ -116,8 +96,6 @@ const Button = styled(animated.button)`
   margin-top: 1.5rem;
   font-size: 1.2rem;
   cursor: pointer;
-  opacity: 0;
-  transform: translateY(10px);
 
   @media (min-width: 1025px) {
     /* padding: 1.5rem 3rem; */
@@ -129,7 +107,7 @@ const Button = styled(animated.button)`
   }
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled(animated.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
