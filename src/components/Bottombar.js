@@ -141,12 +141,11 @@ const ForwardButton = styled(Button)`
 `;
 
 const BackButton = styled(Button)`
-  background-color: transparent;
-  color: ${props => props.theme.buttonColor};
-  border: 1px solid ${props => props.theme.buttonColor};
+  background-color: #e7eced;
+  color: #9aa7a9;
 
   :hover {
-    background-color: #00000012;
+    background-color: #0000001a;
   }
 `;
 
