@@ -14,12 +14,13 @@ export const GarmentsProvider = ({ children }) => {
 
   // Add a new garment, check if it exists and quantity++ or add new garment into array
   const addGarment = payload => {
+    console.log('Adding ', payload);
     if (garments.find(g => g.id === payload.id)) {
       const newGarments = [...garments];
 
       const index = newGarments.findIndex(garment => garment.id === payload.id);
 
-      newGarments[index].quantity = newGarments[index].quantity++;
+      newGarments[index].quantity = newGarments[index].quantity + 1;
 
       setGarments(newGarments);
     } else {
