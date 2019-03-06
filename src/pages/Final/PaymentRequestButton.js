@@ -20,16 +20,15 @@ class PaymentRequestButton extends React.Component {
     });
 
     paymentRequest.on('token', ({ complete, token, ...data }) => {
+      complete('success');
       console.log('Received Stripe token: ', token);
       alert('Received token!');
       console.log('Received customer information: ', data);
       alert(
-        'Cutstomer info:',
-        data.payerName,
-        data.payerEmail,
-        data.payerPhone,
+        `Customer info: ${data.payerName} ${data.payerEmail} ${
+          data.payerPhone
+        }`,
       );
-      complete('success');
     });
 
     paymentRequest.canMakePayment().then(result => {
