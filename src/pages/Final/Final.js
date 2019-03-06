@@ -20,8 +20,8 @@ import checkout from './checkout';
 import { Notification } from '../../components/UI';
 import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import Loading from '../../components/Loading';
 import Submitting from './Submitting';
+import PaymentRequestButton from './PaymentRequestButton';
 
 const Final = props => {
   // Is credit card complete
@@ -156,6 +156,9 @@ const Final = props => {
         Fill out the remaining information and click "Finish". When it goes
         through you'll receive an email receipt as well as text/SMS updates.
       </PageInstructions>
+      {props.stripe && (
+        <PaymentRequestButton stripe={props.stripe} totalPrice={totalPrice} />
+      )}
       <Formik
         onSubmit={handleSubmit}
         initialValues={{ name: '', phone: '', email: '' }}
