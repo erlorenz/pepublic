@@ -1,6 +1,6 @@
 import { darken } from 'polished';
 import React, { useContext, useState } from 'react';
-import { animated, config, useSpring } from 'react-spring';
+import { animated } from 'react-spring';
 import styled from 'styled-components/macro';
 import { GarmentsContext } from '../../contexts/Garments';
 

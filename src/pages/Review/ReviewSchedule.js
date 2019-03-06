@@ -4,7 +4,7 @@ import styled from 'styled-components/macro';
 import { Card } from '../../components/UI';
 import { ScheduleContext } from '../../contexts/Schedule';
 import { fadeInSlow } from '../../styles/transitions';
-import { getNow, getTime } from '../../utils/getDates';
+import { getTime } from '../../utils/getDates';
 
 const ReviewSchedule = ({ history }) => {
   const context = React.useContext(ScheduleContext);

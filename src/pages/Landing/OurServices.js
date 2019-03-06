@@ -107,10 +107,3 @@ const P = styled.p`
   margin-top: 0;
   margin-bottom: 1rem;
 `;
-
-const ImageWrapper = styled.div`
-  min-height: 200px;
-  min-width: 200px;
-  border-radius: 50%;
-  background-color: transparent;
-`;

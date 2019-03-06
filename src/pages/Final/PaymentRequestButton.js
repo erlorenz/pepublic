@@ -7,7 +7,7 @@ class PaymentRequestButton extends React.Component {
 
     // For full documentation of the available paymentRequest options, see:
     // https://stripe.com/docs/stripe.js#the-payment-request-object
-    const paymentRequest = props.stripe.paymentRequest({
+    window.paymentRequest = props.stripe.paymentRequest({
       country: 'US',
       currency: 'usd',
       total: {
@@ -19,20 +19,27 @@ class PaymentRequestButton extends React.Component {
       requestPayerPhone: true,
     });
 
-    paymentRequest.on('token', ({ complete, token, ...data }) => {
+    window.paymentRequest.on('token', ({ complete, token, ...data }) => {
       console.log('Received Stripe token: ', token);
+      alert('Received token!');
       console.log('Received customer information: ', data);
+      alert(
+        'Cutstomer info:',
+        data.payerName,
+        data.payerEmail,
+        data.payerPhone,
+      );
       complete('success');
     });
 
-    paymentRequest.canMakePayment().then(result => {
-      console.log(result);
+    window.paymentRequest.canMakePayment().then(result => {
+      console.log('Result for payment request is', result);
       this.setState({ canMakePayment: !!result });
     });
 
     this.state = {
       canMakePayment: false,
-      paymentRequest,
+      paymentRequest: window.paymentRequest,
     };
   }
 
