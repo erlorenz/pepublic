@@ -13,6 +13,7 @@ import {
   faTwitter,
   faYelp,
   faGoogle,
+  faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 
 function Contact() {
@@ -58,6 +59,9 @@ function Contact() {
           </a>
           <a href="https://www.yelp.com/biz/press-express-las-vegas-las-vegas">
             <MediaIcon icon={faYelp} />
+          </a>
+          <a href="https://www.instagram.com/pressexpresslv/">
+            <MediaIcon icon={faInstagram} />
           </a>
           <a href="https://www.google.com/search?q=press+express+las+vegas&oq=press+express+las+vegas">
             <MediaIcon icon={faGoogle} />
