@@ -2,9 +2,13 @@ import { darken } from 'polished';
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
-import fullSize from '../../assets/img/suitsfullsize.jpeg';
-import phoneSize from '../../assets/img/suitsphonesize.jpeg';
-import tabletSize from '../../assets/img/suitstabletsize.jpeg';
+// import fullSize from '../../assets/img/suitsfullsize.jpeg';
+// import phoneSize from '../../assets/img/suitsphonesize.jpeg';
+// import tabletSize from '../../assets/img/suitstabletsize.jpeg';
+
+import phoneSize from '../../assets/img/shirtsinbags_phone_size.jpeg';
+import fullSize from '../../assets/img/ironing_full_size.jpeg';
+import tabletSize from '../../assets/img/ironing_tablet_size.jpeg';
 
 function Hero({ history, scrollRef }) {
   // Once image loaded fade in
@@ -49,7 +53,7 @@ function Hero({ history, scrollRef }) {
 export default Hero;
 
 const Section = styled.section`
-  background-color: #0e5361e6;
+  background-color: #0e5361cf;
   display: flex;
   flex-direction: column;
   align-items: center;
