@@ -1,10 +1,6 @@
 import { darken } from 'polished';
 import React from 'react';
-import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
-// import fullSize from '../../assets/img/suitsfullsize.jpeg';
-// import phoneSize from '../../assets/img/suitsphonesize.jpeg';
-// import tabletSize from '../../assets/img/suitstabletsize.jpeg';
 
 import phoneSize from '../../assets/img/shirtsinbags_phone_size.jpeg';
 import fullSize from '../../assets/img/ironing_full_size.jpeg';
@@ -92,7 +88,7 @@ const Button = styled.button`
   }
 `;
 
-const Wrapper = styled(animated.div)`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -136,7 +132,7 @@ const ImageWrapper = styled.div`
 //   }
 // `;
 
-const FillImage = styled(animated.img)`
+const FillImage = styled.img`
   object-fit: cover;
   height: 100%;
   width: 100%;
