@@ -1,10 +1,10 @@
 import { createGlobalStyle } from 'styled-components/macro';
-import styledSanitize from 'styled-sanitize';
+// import styledSanitize from 'styled-sanitize';
+// ${styledSanitize} */
 
 const GlobalStyle = createGlobalStyle`
 
 /* CSS Reset */
-${styledSanitize}
 
 /* Global Styles  */
 

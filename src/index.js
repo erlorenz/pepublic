@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import '@babel/polyfill';
 import 'intersection-observer';
 import ScrollToTop from './components/ScrollToTop';
+import 'sanitize.css';
 
 const rootElement = document.getElementById('root');
 

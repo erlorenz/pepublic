@@ -11,18 +11,6 @@ import fullSize from '../../assets/img/ironing_full_size.jpeg';
 import tabletSize from '../../assets/img/ironing_tablet_size.jpeg';
 
 function Hero({ history, scrollRef }) {
-  // Once image loaded fade in
-  const [imageIsLoaded, setImageIsLoaded] = React.useState(false);
-
-  const handleImageLoaded = () => {
-    setImageIsLoaded(true);
-  };
-
-  const fadeInSlowly = useSpring({
-    to: { opacity: imageIsLoaded ? 1 : 0 },
-    from: { opacity: 0 },
-  });
-
   // Go to schedule page
   const handleClick = () => history.push('/order/schedule');
 
@@ -38,12 +26,7 @@ function Hero({ history, scrollRef }) {
           <source media="(min-width: 1025px)" srcSet={fullSize} />
           <source media="(min-width: 500px)" srcSet={tabletSize} />
           <source srcSet={phoneSize} />
-          <FillImage
-            src={fullSize}
-            alt="Suits nicely pressed."
-            style={fadeInSlowly}
-            onLoad={handleImageLoaded}
-          />
+          <FillImage src={fullSize} alt="Suits nicely pressed." />
         </picture>
       </ImageWrapper>
     </Section>
@@ -157,5 +140,4 @@ const FillImage = styled(animated.img)`
   object-fit: cover;
   height: 100%;
   width: 100%;
-  opacity: 0;
 `;
