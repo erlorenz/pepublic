@@ -154,7 +154,7 @@ const ImageWrapper = styled.div`
 // `;
 
 const FillImage = styled(animated.img)`
-  object-fit: fill;
+  object-fit: cover;
   height: 100%;
   width: 100%;
   opacity: 0;
