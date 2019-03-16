@@ -8,7 +8,8 @@ import tabletSize from '../../assets/img/ironing_tablet_size.jpeg';
 
 function Hero({ history, scrollRef }) {
   // Go to schedule page
-  const handleClick = () => history.push('/order/schedule');
+  // const handleClick = () => history.push('/order/schedule');
+  const handleClick = () => alert('Press Express is closed on Saturday the 16th. We will reopen tomorrow!');
 
   return (
     <Section id="hero" ref={scrollRef}>
