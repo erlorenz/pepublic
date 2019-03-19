@@ -56,6 +56,7 @@ const unsortedHotels = [
   'Planet Hollywood',
   'Plaza',
   'PE Hotel',
+  'Platinum Hotel',
   'Rennaisance Las Vegas',
   'Residence Inn by Marriot (LV Convention Center)',
   'Residence Inn by Marriot (LV South)',
