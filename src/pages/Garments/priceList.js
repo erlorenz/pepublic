@@ -89,6 +89,11 @@ const priceListUnordered = [
     description: 'Coat/Raincoat',
     price: 2200,
   },
+  {
+    slug: 'weddingdress',
+    description: 'Wedding Dress (Regular)',
+    price: 6000,
+  },
 ];
 
 // Add an ID to each for calculations
