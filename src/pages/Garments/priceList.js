@@ -71,7 +71,7 @@ const priceListUnordered = [
   },
   {
     slug: 'tuxedo',
-    description: 'Tuxedo - 2 piece',
+    description: 'Tuxedo',
     price: 2500,
   },
   {
@@ -93,6 +93,11 @@ const priceListUnordered = [
     slug: 'weddingdress',
     description: 'Wedding Dress (Regular)',
     price: 6000,
+  },
+  {
+    slug: 'weddingdress3',
+    description: 'Wedding Dress (3 piece)',
+    price: 8000,
   },
 ];
 

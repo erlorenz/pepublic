@@ -8,7 +8,7 @@ import useIntersecting from '../../hooks/useIntersecting';
 import LazyImage from '../../components/LazyImage';
 
 const description1 = `
-Press Express was founded in 2018 as a new concept with the goal of providing a much needed service for business travelers, groups, as well as anyone looking for a quick and easy way to get their garments looking good in Las Vegas.`;
+Press Express was founded in 2018 as a new concept with the goal of providing a much needed service for business travelers, groups, weddings, as well as anyone looking for a quick and easy way to get their garments looking good in Las Vegas.`;
 
 const description2 = ` 
 We realized that many people don't need their clothing dry cleaned or washed, but simply pressed free of wrinkles and creases so they look sharp for events, business conferences, conventions, or anything else. `;
