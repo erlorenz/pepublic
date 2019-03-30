@@ -99,6 +99,11 @@ const priceListUnordered = [
     description: 'Wedding Dress (3 piece)',
     price: 8000,
   },
+  {
+    slug: 'uniform',
+    description: 'Uniform/Military Pleat',
+    price: 2300,
+  },
 ];
 
 // Add an ID to each for calculations
