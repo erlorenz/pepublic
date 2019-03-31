@@ -22,7 +22,7 @@ export const pickupDelta = 1;
 const returnDelta = 4;
 
 // When the minutes round to the next hour
-export const roundingCutoff = 30;
+export const roundingCutoff = 59;
 
 // current rounded hour
 const roundedHour =
