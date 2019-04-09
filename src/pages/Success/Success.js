@@ -84,7 +84,12 @@ const Success = ({ location }) => {
               via text.
             </Instructions>
             <Instructions>
-              If you have any questions about your order please call us at
+              If you are given a ticket when you leave your garments please send
+              a picture via email to support@pressexpresslv.com if possible, or
+              let us know.
+            </Instructions>
+            <Instructions>
+              If you have any other questions about your order please call us at
               702-620-3315 or email us at support@pressexpresslv.com.
             </Instructions>
           </>
