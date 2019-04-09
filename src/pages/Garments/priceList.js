@@ -107,6 +107,7 @@ const priceListUnordered = [
   {
     slug: 'jeanswestern',
     description: 'Jeans (Starched/Texas Press)',
+    price: 1250,
   },
 ];
 
