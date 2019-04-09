@@ -157,7 +157,9 @@ const Final = props => {
         through you'll receive an email receipt as well as text/SMS updates.
       </PageInstructions>
       {process.env.REACT_APP_STAGING && (
-        <h2>REPEAT "42424242...." IN CARD SECTION TO SUBMIT TEST CARD</h2>
+        <PageInstructions>
+          REPEAT "42424242...." IN CARD SECTION TO SUBMIT TEST CARD
+        </PageInstructions>
       )}
       {/* Dont use paymentrequest for now */}
       {/* {props.stripe && (

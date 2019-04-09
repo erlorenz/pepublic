@@ -104,6 +104,10 @@ const priceListUnordered = [
     description: 'Uniform/Military Pleat',
     price: 2300,
   },
+  {
+    slug: 'jeanswestern',
+    description: 'Jeans (Starched/Texas Press)',
+  },
 ];
 
 // Add an ID to each for calculations
